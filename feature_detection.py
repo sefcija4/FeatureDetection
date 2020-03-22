@@ -10,7 +10,7 @@ sift = cv2.xfeatures2d.SIFT_create()
 
 DISTANCE_THRESHOLD = 45.0
 NUM_OF_MATCHES = 50
-results = list()
+# results = list()
 
 
 def load_images(pth1, pth2):
@@ -164,10 +164,10 @@ def compare_descriptors(p1, p2):
     # check if there is more than 10 good matches
     if len(top_10) < 10:
         print("Less than 10 mathes found!")
-        return
+        return None
 
     # position of each matched keypoints (x,y)
-    list_keypoints1 = []
+    '''list_keypoints1 = []
     list_keypoints2 = []
 
     # Take four best matches and save their positions
@@ -199,22 +199,23 @@ def compare_descriptors(p1, p2):
 
     res_image = cv2.addWeighted(img1.copy(), 1, warped_img, 1, 0, img1.copy())
 
-    cv2.imwrite('warped.png', res_image)
+    cv2.imwrite('warped.png', res_image)'''
 
     # TODO: výše uvedenou funkcionalitu udělat pouze na výsledný obrázek, ten s nejlepší shodou
 
     # -- Print info
     get_filename(p2)  # print name of current file
     print(f'{len(keypoints1)} × {len(keypoints2)}')
-    print(f'ratio: {get_good_and_unused_keypoints_ration(keypoints1, keypoints2, len(good_matches)):.4f} : {len(keypoints1), len(keypoints2)}')
+    print(f'ratio: {get_good_and_unused_keypoints_ration(keypoints1, keypoints2, len(good_matches)):.4f} :,'
+          f'{len(keypoints1), len(keypoints2)}')
     print(f'number of "good" matches:{count}')
 
     # -- Results
-    distance_avg = 0
-    for n in good_matches:
-        distance_avg += n.distance
+    # distance_avg = 0
+    # for n in good_matches:
+    #    distance_avg += n.distance
 
-    results.append((count, distance_avg/count, p2, top_10[:4]))
+    # results.append((count, distance_avg/count, p2, top_10[:4]))
 
     # -- Draw matches
     img_matches = np.empty((max(img1.shape[0], img2.shape[0]), img1.shape[1] + img2.shape[1], 3), dtype=np.uint8)
@@ -222,10 +223,15 @@ def compare_descriptors(p1, p2):
                     flags=cv2.DrawMatchesFlags_NOT_DRAW_SINGLE_POINTS)
 
     # -- Show detected matches
-    cv2.imshow('Good Matches', img_matches)
-    cv2.waitKey(0)
-    cv2.destroyAllWindows()
+    # cv2.imshow('Good Matches', img_matches)
+    # cv2.waitKey(0)
+    # cv2.destroyAllWindows()
 
     # cv2.imwrite("C:\\Users\\Sefci\\Documents\\_FIT\\_Bakalarka\\data_staromak\\images\\"+img_name, img_matches)
     print('------------------------------')
 
+    total_distance = 0
+    for m in top_10[:4]:
+        total_distance += m.distance
+
+    return p2, img1, img2 , count, total_distance, keypoints1, keypoints2, top_10[:4]

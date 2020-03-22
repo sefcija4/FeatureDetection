@@ -1,6 +1,9 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 import os
+import cv2
+import numpy as np
+import operator
 # My imports
 import feature_detection
 import extract_gps
@@ -14,9 +17,13 @@ data = list()
 
 data.append("C:\\Users\\Sefci\\Documents\\_FIT\\_Bakalarka\\data_staromak\\b1")
 data.append("C:\\Users\\Sefci\\Documents\\_FIT\\_Bakalarka\\data_staromak\\b2")
-data.append("C:\\Users\\Sefci\\Documents\\_FIT\\_Bakalarka\\data_staromak\\b3")
-data.append("C:\\Users\\Sefci\\Documents\\_FIT\\_Bakalarka\\data_staromak\\b4")
-data.append("C:\\Users\\Sefci\\Documents\\_FIT\\_Bakalarka\\data_staromak\\b5")
+# data.append("C:\\Users\\Sefci\\Documents\\_FIT\\_Bakalarka\\data_staromak\\b3")
+# data.append("C:\\Users\\Sefci\\Documents\\_FIT\\_Bakalarka\\data_staromak\\b4")
+# data.append("C:\\Users\\Sefci\\Documents\\_FIT\\_Bakalarka\\data_staromak\\b5")
+
+result = []
+list_keypoints1 = []
+list_keypoints2 = []
 
 
 def by_count(value):
@@ -29,18 +36,77 @@ def compare_all_images_from_folder():
         for img in os.listdir(folder):
             path = str(f'{folder}\{img}')
             # print(path)
-            feature_detection.compare_descriptors(THE_CHOSEN_ONE, path)
+            result.append((feature_detection.compare_descriptors(THE_CHOSEN_ONE, path)))
+
+    return result
 
 
-compare_all_images_from_folder()
+def get_keypoints_coordinates(keypoints1, keypoints2, top_matches):
+    for match in top_matches:  # take best img and its 4 best matches
+        print(match.distance)
+        # Get the matching keypoints for each of the images
+        img1_idx = match.queryIdx
+        img2_idx = match.trainIdx
+
+        # x - columns
+        # y - rows
+        # Get the coordinates
+        (x1, y1) = keypoints1[img1_idx].pt
+        (x2, y2) = keypoints2[img2_idx].pt
+
+        print(x1, y1)
+        print(x2, y2)
+
+        list_keypoints1.append((x1, y1))
+        list_keypoints2.append((x2, y2))
 
 
-feature_detection.results.sort(reverse=True)
-for item in feature_detection.results:
-    if item[0] >= 10:
-        print(item)
+print(result)
+print(len(result))
+
+for item in result:
+    if item is not None:
+        print(item[0], item[1])
+
+
+# feature_detection.results.sort(reverse=True)
+# for item in feature_detection.results:
+#     if item[0] >= 10:
+#         print(item)
 
 # TODO: Projít všechny složky s obrázky k porovnání
 # TODO: Uložit nějaka data do složek (jako soubor) - název stavby, lokalita(GPS), ...
 # TODO: Ukládat data z výpočtu práznaků
 # TODO: Determinovat jaký obrázek je nejlepší match
+
+def main():
+    res = compare_all_images_from_folder()
+
+    result = list(filter(None, res))
+
+    result.sort(key=operator.itemgetter(4))
+
+    print("--------------------")
+    for x in result:
+        print(x[4])
+    print("--------------------")
+
+    img_path, img1, img2, count, total_distance, keypoints1, keypoints2, top_matches = result[0]
+
+    get_keypoints_coordinates(keypoints1, keypoints2, top_matches)
+
+    # print((img1.shape[0], img1.shape[1]))
+    H, mask = cv2.findHomography(np.array(list_keypoints2), np.array(list_keypoints1))
+
+    print(img_path)
+    print(H)
+
+    warped_img = cv2.warpPerspective(img2, H, dsize=(img1.shape[1], img1.shape[0]))
+
+    res_image = cv2.addWeighted(img1.copy(), 1, warped_img, 1, 0, img1.copy())
+
+    cv2.imwrite('warped.png', res_image)
+
+
+if __name__ == "__main__":
+    main()
