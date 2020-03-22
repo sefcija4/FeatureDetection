@@ -1,22 +1,17 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
-import os
 import cv2
 import numpy as np
 
-# My imports
-# import load_images
-
-# TODO: downgrade version of opencv to older version, to make SIFT and SURF working
 sift = cv2.xfeatures2d.SIFT_create()
-surf = cv2.xfeatures2d.SURF_create()
-orb = cv2.ORB_create(nfeatures=2500)
+# surf = cv2.xfeatures2d.SURF_create()
+# orb = cv2.ORB_create(nfeatures=2500)
 
 DISTANCE_THRESHOLD = 45.0
 NUM_OF_MATCHES = 50
+results = list()
 
-RESULT_PATH = "C:\\Users\Sefci\\Documents\\_FIT\\_Bakalarka\\1_FeatureDetecionResults"
 
 def load_images(pth1, pth2):
     img_1 = cv2.imread(pth1, cv2.IMREAD_GRAYSCALE)
@@ -25,18 +20,13 @@ def load_images(pth1, pth2):
     return img_1, img_2
 
 
+def equalize_histogram(img):
+    return cv2.equalizeHist(img)
+
+
 def detect_and_compute(img1, img2):
-    # SURF
     key_pt_orb1, desc1 = sift.detectAndCompute(img1, None)
     key_pt_orb2, desc2 = sift.detectAndCompute(img2, None)
-
-    # SURF
-    # key_pt_orb1, desc1 = surf.detectAndCompute(img1, None)
-    # key_pt_orb2, desc2 = surf.detectAndCompute(img2, None)
-
-    # ORB
-    # key_pt_orb1, desc1 = orb.detectAndCompute(img1, None)
-    # key_pt_orb2, desc2 = orb.detectAndCompute(img2, None)
 
     return key_pt_orb1, desc1, key_pt_orb2, desc2
 
@@ -53,7 +43,7 @@ def brute_force_matching(desc1, desc2):
     bf = cv2.BFMatcher()
 
     match = bf.match(desc1, desc2)
-    # Sort matches by distance low to height
+    # Sort matches by distance (ascending)
     return sorted(match, key=lambda x: x.distance)
 
 
@@ -86,9 +76,6 @@ def show_result(img_1, key_pts_orb1, img_2, key_pts_orb2, match):
 
 
 def get_smaller_img(img1, img2):
-    # print(f'size h,w: {img1.shape}')
-    # print(f'size h,w: {img2.shape}')
-
     # find minimal height
     min_height = img1.shape[0] if img1.shape[0] <= img2.shape[0] else img2.shape[0]
     # print(min_height)
@@ -105,9 +92,16 @@ def get_keypoints_ration(keypoints1, keypoints2):
 
     return min_value/max_value
 
+
+def get_good_and_unused_keypoints_ration(keypoints1, keypoints2, good_keypoints):
+    # min_value = len(keypoints1) if len(keypoints1) <= len(keypoints2) else len(keypoints2)
+    max_value = len(keypoints1) if len(keypoints1) > len(keypoints2) else len(keypoints2)
+    return good_keypoints/max_value
+
+
 def image_resize(image, width=None, height=None, inter=cv2.INTER_AREA):
     """
-
+    Resize an image
     :param image: image
     :param width: (int)
     :param height: (int)
@@ -139,30 +133,24 @@ def image_resize(image, width=None, height=None, inter=cv2.INTER_AREA):
 def compare_descriptors(p1, p2):
     img1, img2 = load_images(p1, p2)
 
-    # TODO: spočítat pravděpodobnost Match rate poměr mezi nalezenými body a počtem nalezených spojení
-
     new_height = get_smaller_img(img1, img2)
+
+    img1 = equalize_histogram(img1)
 
     img1 = image_resize(img1, height=new_height)
     img2 = image_resize(img2, height=new_height)
 
     keypoints1, descriptors1, keypoints2, descriptors2 = detect_and_compute(img1, img2)
 
-    print(f'{len(keypoints1)} × {len(keypoints2)}')
-    print(f'ratio: {get_keypoints_ration(keypoints1, keypoints2):.4f}')
-    # img1_ORB = draw_keypoints(img1, keypoints_orb1)
-    # img2_ORB = draw_keypoints(img2, keypoints_orb2)
-
-    # Brute force matching
-    # matches = brute_force_matching(descriptors1, descriptors2)
-
     # FLANN based matcher
-    # Since SURF is a floating-point descriptor NORM_L2 is used
-    matcher = cv2.DescriptorMatcher_create(cv2.DescriptorMatcher_FLANNBASED)
-    knn_matches = matcher.knnMatch(descriptors1, descriptors2, 2)
+    FLANN_INDEX_KDTREE = 1
+    index_params = dict(algorithm=FLANN_INDEX_KDTREE, trees=5)
+    search_params = dict(checks=100)   # or pass empty dictionary
+    flann = cv2.FlannBasedMatcher(index_params, search_params)
+    knn_matches = flann.knnMatch(descriptors1, descriptors2, k=2)
 
     # Filter matching using Lowe's ration test
-    ratio_thresh = 0.7  # recommended value is 0.7
+    ratio_thresh = 0.6  # recommended value is 0.7
     good_matches = []
     count = 0
     for m, n in knn_matches:
@@ -171,40 +159,73 @@ def compare_descriptors(p1, p2):
             good_matches.append(m)
             count += 1
 
+    top_10 = sorted(good_matches, key=lambda x: x.distance)[:10]
+
+    # check if there is more than 10 good matches
+    if len(top_10) < 10:
+        print("Less than 10 mathes found!")
+        return
+
+    # position of each matched keypoints (x,y)
+    list_keypoints1 = []
+    list_keypoints2 = []
+
+    # Take four best matches and save their positions
+    for m in top_10[:4]:
+        print(m.distance)
+        # Get the matching keypoints for each of the images
+        img1_idx = m.queryIdx
+        img2_idx = m.trainIdx
+
+        # x - columns
+        # y - rows
+        # Get the coordinates
+        (x1, y1) = keypoints1[img1_idx].pt
+        (x2, y2) = keypoints2[img2_idx].pt
+
+        print(x1, y1)
+        print(x2, y2)
+
+        # Append to each list
+        list_keypoints1.append((x1, y1))
+        list_keypoints2.append((x2, y2))
+
+    print((img1.shape[0], img1.shape[1]))
+    H, mask = cv2.findHomography(np.array(list_keypoints2), np.array(list_keypoints1))
+
+    print(H)
+
+    warped_img = cv2.warpPerspective(img2, H, dsize=(img1.shape[1], img1.shape[0]))
+
+    res_image = cv2.addWeighted(img1.copy(), 1, warped_img, 1, 0, img1.copy())
+
+    cv2.imwrite('warped.png', res_image)
+
+    # TODO: výše uvedenou funkcionalitu udělat pouze na výsledný obrázek, ten s nejlepší shodou
+
+    # -- Print info
     get_filename(p2)  # print name of current file
+    print(f'{len(keypoints1)} × {len(keypoints2)}')
+    print(f'ratio: {get_good_and_unused_keypoints_ration(keypoints1, keypoints2, len(good_matches)):.4f} : {len(keypoints1), len(keypoints2)}')
     print(f'number of "good" matches:{count}')
+
+    # -- Results
+    distance_avg = 0
+    for n in good_matches:
+        distance_avg += n.distance
+
+    results.append((count, distance_avg/count, p2, top_10[:4]))
 
     # -- Draw matches
     img_matches = np.empty((max(img1.shape[0], img2.shape[0]), img1.shape[1] + img2.shape[1], 3), dtype=np.uint8)
-    cv2.drawMatches(img1, keypoints1, img2, keypoints2, good_matches, img_matches, flags=cv2.DrawMatchesFlags_NOT_DRAW_SINGLE_POINTS)
+    cv2.drawMatches(img1, keypoints1, img2, keypoints2, top_10[:4], img_matches,
+                    flags=cv2.DrawMatchesFlags_NOT_DRAW_SINGLE_POINTS)
 
     # -- Show detected matches
     cv2.imshow('Good Matches', img_matches)
-    print('------------------------------')
-    # result_path = str(f'C:\\Users\\Sefci\\Documents\\_FIT\\_Bakalarka\\1_FeatureDetectionResults\\{get_filename(p2)}')
-    # cv2.imwrite(result_path, img_matches)
     cv2.waitKey(0)
     cv2.destroyAllWindows()
 
-    # Flags=2 -> hide unmatched keypoints
-    # show_result(img1, keypoints_orb1, img2, keypoints_orb2, matches)
+    # cv2.imwrite("C:\\Users\\Sefci\\Documents\\_FIT\\_Bakalarka\\data_staromak\\images\\"+img_name, img_matches)
+    print('------------------------------')
 
-
-
-
-path1 = "C:\\Users\Sefci\\Documents\\_FIT\\_Bakalarka\\1_FeatureDetecion\\vilaTegendhat1.jpg"
-path2 = "C:\\Users\Sefci\\Documents\\_FIT\\_Bakalarka\\1_FeatureDetecion\\vilaTegendhat2.jpg"
-path3 = "C:\\Users\Sefci\\Documents\\_FIT\\_Bakalarka\\1_FeatureDetecion\\vilaTegendhat3.jpg"
-
-path4 = "C:\\Users\Sefci\\Documents\\_FIT\\_Bakalarka\\1_FeatureDetecion\\house1.jpg"
-path5 = "C:\\Users\Sefci\\Documents\\_FIT\\_Bakalarka\\1_FeatureDetecion\\house2.jpg"
-path6 = "C:\\Users\Sefci\\Documents\\_FIT\\_Bakalarka\\1_FeatureDetecion\\house3.png"
-
-path7 = "C:\\Users\Sefci\\Documents\\_FIT\\_Bakalarka\\1_FeatureDetecion\\dogs1.jpg"
-
-#compare_descriptors(path1, path2)  # Same
-# compare_descriptors(path1, path3)  # Same
-# compare_descriptors(path1, path4)  # Different
-# compare_descriptors(path1, path5)  # Different
-# compare_descriptors(path1, path6)  # Different
-# compare_descriptors(path1, path7)  # Different
