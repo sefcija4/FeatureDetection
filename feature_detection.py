@@ -223,9 +223,9 @@ def compare_descriptors(p1, p2):
                     flags=cv2.DrawMatchesFlags_NOT_DRAW_SINGLE_POINTS)
 
     # -- Show detected matches
-    # cv2.imshow('Good Matches', img_matches)
-    # cv2.waitKey(0)
-    # cv2.destroyAllWindows()
+    cv2.imshow('Good Matches', img_matches)
+    cv2.waitKey(0)
+    cv2.destroyAllWindows()
 
     # cv2.imwrite("C:\\Users\\Sefci\\Documents\\_FIT\\_Bakalarka\\data_staromak\\images\\"+img_name, img_matches)
     print('------------------------------')
@@ -234,4 +234,4 @@ def compare_descriptors(p1, p2):
     for m in top_10[:4]:
         total_distance += m.distance
 
-    return p2, img1, img2 , count, total_distance, keypoints1, keypoints2, top_10[:4]
+    return p2, img1, img2, count, total_distance, keypoints1, keypoints2, top_10[:4]

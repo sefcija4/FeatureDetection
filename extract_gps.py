@@ -6,7 +6,6 @@
 from PIL import Image
 from PIL.ExifTags import TAGS, GPSTAGS
 
-
 class ImageMetaData(object):
     """
     Extract the exif data from any image. Data includes GPS coordinates,
