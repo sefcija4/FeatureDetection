@@ -3,27 +3,54 @@
 
 import json
 
-data = {}
-data['buildings'] = []
+from input_image import *
 
-# Dům u kameného zvonu
-data['buildings'].append({
-    'id': '0',
-    'name': 'Dům u kameného zvonu',
-    'path': 'C:\\Users\\Sefci\\Documents\\_FIT\\_Bakalarka\\data_staromak\\b1',
-    'latitude':   '50.0877694',
-    'longtitude': '14.4196813,',
-    'features': 'None'
-})
 
-data['buildings'].append({
-    'id': '1',
-    'name': 'Dům - Hard rock cafe',
-    'path': 'C:\\Users\\Sefci\\Documents\\_FIT\\_Bakalarka\\data_staromak\\b2',
-    'latitude':   '50.0923047',
-    'longtitude': '14.408226,',
-    'features': 'None'
-})
+class Building(dict):
 
-with open('data.txt', 'w') as file:
-    json.dump(data, file)
+    data = dict()
+
+    def __init__(self, data):
+        self.data = data
+
+    def extract_features(self):
+        pass
+
+
+class App(str):
+
+    img_in = None
+    buildings = list()
+    matches = None
+
+    sift = None
+    orb = None
+    surf = None
+
+    def __init__(self, path):
+        with open(path) as file:
+            data = json.load(file)
+
+        for x in data:
+            for y in data[x]:
+                self.buildings.append(Building(y))
+
+    def check_perimeter(self):
+        # are any buildings nearby?
+        pass
+
+    def compare_features(self):
+        # feature matching
+        pass
+
+    def print_buildings(self):
+        for x in self.buildings:
+            print(x.data['name'])
+
+
+app = App('data.txt')
+app.print_buildings()
+
+img = Image('C:\\Users\\Sefci\\Documents\\_FIT\\_Bakalarka\\data_staromak\\_p\\IMG_3481.jpg')
+img.preprocess()
+img.show()
