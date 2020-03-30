@@ -194,7 +194,7 @@ class App(str):
 app = App('data.txt')
 app.load_buildings()
 
-app.load_image('C:\\Users\\Sefci\\Documents\\_FIT\\_Bakalarka\\data_staromak\\_p\\IMG_3481.jpg')
+app.load_image('C:\\Users\\Sefci\\Documents\\_FIT\\_Bakalarka\\data_staromak\\_p\\test.jpg')
 app.img_in.preprocess()
 app.img_in.print()
 

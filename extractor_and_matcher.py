@@ -74,7 +74,8 @@ class Matcher(object):
             for img in dataset[building]:
                 print(img.path)
                 img.load_image(img.path)
-                img_matches = self.draw_matches(img_in.img, img.img, img_in.keypoints, img.keypoints, img.matches)
+                img_matches = self.draw_matches(img_in.img, img.img, img_in.keypoints, img.keypoints,
+                                                self.ratio_test(img.matches))
 
                 cv2.imshow('Matches', img_matches)
                 cv2.waitKey(0)
@@ -90,6 +91,6 @@ class Matcher(object):
         img_matches = np.empty((max(img1.shape[0], img2.shape[0]), img1.shape[1] + img2.shape[1], 3), dtype=np.uint8)
         #drawMatchesNkk for list
         #drawMatches for cv::DMatch
-        cv2.drawMatchesKnn(img1, keypoints1, img2, keypoints2, matches, img_matches,
+        cv2.drawMatches(img1, keypoints1, img2, keypoints2, matches, img_matches,
                         flags=flag)
         return img_matches
