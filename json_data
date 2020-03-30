@@ -12,7 +12,7 @@ data_b['buildings'].append({
     'name': 'Dům u kameného zvonu',
     'path': 'C:\\Users\\Sefci\\Documents\\_FIT\\_Bakalarka\\data_staromak\\b1',
     'latitude':   '50.0877694',
-    'longtitude': '14.4196813,',
+    'longtitude': '14.4196813',
     'features': 'None'
 })
 
@@ -21,7 +21,7 @@ data_b['buildings'].append({
     'name': 'Dům - Hard rock cafe',
     'path': 'C:\\Users\\Sefci\\Documents\\_FIT\\_Bakalarka\\data_staromak\\b2',
     'latitude':   '50.0923047',
-    'longtitude': '14.408226,',
+    'longtitude': '14.408226',
     'features': 'None'
 })
 

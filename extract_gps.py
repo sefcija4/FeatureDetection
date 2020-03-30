@@ -17,7 +17,6 @@ class ImageMetaData(object):
 
     def __init__(self, img_path):
         self.image = Image.open(img_path)
-        #print(self.image._getexif())
         self.get_exif_data()
         super(ImageMetaData, self).__init__()
 
@@ -73,7 +72,7 @@ class ImageMetaData(object):
         lat = None
         lng = None
         exif_data = self.get_exif_data()
-        #print(exif_data)
+        # print(exif_data)
         if "GPSInfo" in exif_data:
             gps_info = exif_data["GPSInfo"]
             gps_latitude = self.get_if_exist(gps_info, "GPSLatitude")
@@ -90,9 +89,9 @@ class ImageMetaData(object):
         return lat, lng
 
 
-path_name = "C:\\Users\\Sefci\\Documents\\_FIT\\_Bakalarka\\data_staromak\\b1_original\\01.jpg"
+'''path_name = "C:\\Users\\Sefci\\Documents\\_FIT\\_Bakalarka\\data_staromak\\b1_original\\01.jpg"
 meta_data = ImageMetaData(path_name)
 latlng = meta_data.get_lat_lng()
 print(latlng)
 exif_data = meta_data.get_exif_data()
-print(exif_data)
+print(exif_data)'''

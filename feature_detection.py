@@ -4,6 +4,10 @@
 import cv2
 import numpy as np
 
+import pickle
+
+from opencv_serializer import *
+
 sift = cv2.xfeatures2d.SIFT_create()
 # surf = cv2.xfeatures2d.SURF_create()
 # orb = cv2.ORB_create(nfeatures=2500)
@@ -142,6 +146,48 @@ def compare_descriptors(p1, p2):
 
     keypoints1, descriptors1, keypoints2, descriptors2 = detect_and_compute(img1, img2)
 
+    #####################################################################
+
+    to_save = list()
+
+    for kp in keypoints2:
+        to_save.append(CVSerializer.cv_keypoint_to_dict(kp))
+
+    file_name = 'features_data.txt'
+
+    print(file_name)
+
+    with open(file_name, 'wb') as file:
+        pickle.dump(to_save, file, protocol=pickle.HIGHEST_PROTOCOL)
+
+        file.close()
+
+    to_load = list()
+
+    kp_load = list()
+
+    with open('features_data.txt', 'rb') as file:
+        to_load = pickle.load(file, encoding='utf-8')
+
+    for kp in to_load:
+        kp_load.append(CVSerializer.dict_to_cv_keypoint(kp))
+
+    keypoints2 = kp_load
+
+    #####################################################################
+
+    with open('descriptor2.txt', 'wb') as file:
+        pickle.dump(descriptors2, file, protocol=pickle.HIGHEST_PROTOCOL)
+
+        file.close()
+
+    with open('descriptor2.txt', 'rb') as file:
+        descriptors2_load = pickle.load(file, encoding='utf-8')
+
+    descriptors2 = descriptors2_load
+
+    #####################################################################
+
     # FLANN based matcher
     FLANN_INDEX_KDTREE = 1
     index_params = dict(algorithm=FLANN_INDEX_KDTREE, trees=5)
@@ -158,6 +204,8 @@ def compare_descriptors(p1, p2):
             # print(m.distance)
             good_matches.append(m)
             count += 1
+
+    ##########################################x
 
     top_10 = sorted(good_matches, key=lambda x: x.distance)[:10]
 
