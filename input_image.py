@@ -79,6 +79,9 @@ class Image(object):
         self.keypoints, self.descriptor = FeatureExtractor.extract_sift(self.img)
         print("IMG fearues extracted")
 
+    def merge_image(self, img):
+        return cv2.addWeighted(self.img.copy(), 1, img, 1, 0, self.img.copy())
+
     def show(self):
         cv2.imshow('Input img', self.img)
         cv2.waitKey(0)

@@ -8,14 +8,7 @@ import pickle
 from opencv_serializer import *
 from input_image import *
 from extractor_and_matcher import *
-
-data = list()
-
-data.append("C:\\Users\\Sefci\\Documents\\_FIT\\_Bakalarka\\data_staromak\\b1")
-# data.append("C:\\Users\\Sefci\\Documents\\_FIT\\_Bakalarka\\data_staromak\\b2")
-# data.append("C:\\Users\\Sefci\\Documents\\_FIT\\_Bakalarka\\data_staromak\\b3")
-# data.append("C:\\Users\\Sefci\\Documents\\_FIT\\_Bakalarka\\data_staromak\\b4")
-# data.append("C:\\Users\\Sefci\\Documents\\_FIT\\_Bakalarka\\data_staromak\\b5")
+from homography import *
 
 
 class Building(object):
@@ -65,6 +58,18 @@ class BuildingFeature(object):
 
     def set_descriptor(self, desc):
         self.descriptor = desc
+
+    def update_matches(self, matches):
+        self.matches = matches
+
+    def get_num_of_matches(self):
+        return len(self.matches)
+
+    def sort_matches_by_distance(self):
+        self.matches.sort(key=lambda x: x.distance)
+
+        # for m in self.matches:
+        #     print(m.distance)
 
 
 class BuildingRepository(object):
@@ -129,7 +134,6 @@ class BuildingRepository(object):
 
         return buildings
 
-
 class App(str):
 
     def __init__(self, path):
@@ -139,19 +143,24 @@ class App(str):
         self.buildings_features = dict()
         self.matcher = None
         self.matches = None
+        self.warped_img = None
 
         self.sift = None
         self.orb = None
         self.surf = None
+
+        self.best_match = None
 
     def load_buildings(self):
         # load all buildings metadata
 
         self.buildings = BuildingRepository.get_all_buildings(self.db_path)
 
+        print("LOADED:")
+
         for x in self.buildings:
             x.print()
-
+        print("************************")
     def load_features(self, building):
         # load keypoints and descriptor for specific building
         self.buildings_features[building.id] = BuildingRepository.get_building_features(building.path)
@@ -179,11 +188,33 @@ class App(str):
 
         print("Done")
 
-    def show_matches(self):
-        self.matcher.show_matches(self.img_in, self.buildings_features)
+    def find_best_match(self):
+        self.best_match = self.matcher.best_match(self.buildings_features)
+        print("Best match img:", self.best_match.path)
+        self.best_match.sort_matches_by_distance()
 
-    def compare_features(self):
-        # feature matching
+    def show_matches(self):
+        matches = self.matcher.show_matches(self.img_in, self.buildings_features)
+
+        for m in matches:
+            cv2.imshow('Matches', m)
+            cv2.waitKey(0)
+            cv2.destroyAllWindows()
+
+    def warp_image(self):
+        homography = Homography()
+        homography.find_matrix(self.best_match.matches, self.img_in.keypoints, self.best_match.keypoints)
+        self.best_match.load_image(self.best_match.path)
+        warped_img = homography.warp_image(self.img_in.img, self.best_match.img.copy())
+
+        merged_img = self.img_in.merge_image(warped_img)
+
+        cv2.imshow('Warped', merged_img)
+        cv2.waitKey(0)
+        cv2.destroyAllWindows()
+
+        # get keypoints, matches and img1, im2 to Homography
+        # maybe try using Building_features?
         pass
 
     def print_buildings(self):
@@ -200,10 +231,17 @@ app.img_in.print()
 
 # app.img_in.show()
 
+# TODO img filtering by location
 app.load_features(app.buildings[0])  # take first building 0-ID
+app.load_features(app.buildings[1])
 
 app.match_features()
 
+app.find_best_match()
+
+app.warp_image()
+
 app.show_matches()
+
 
 # img.show()

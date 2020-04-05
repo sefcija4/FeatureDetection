@@ -246,7 +246,7 @@ def compare_descriptors(p1, p2):
     warped_img = cv2.warpPerspective(img2, H, dsize=(img1.shape[1], img1.shape[0]))
 
     res_image = cv2.addWeighted(img1.copy(), 1, warped_img, 1, 0, img1.copy())
-
+ 
     cv2.imwrite('warped.png', res_image)'''
 
     # TODO: výše uvedenou funkcionalitu udělat pouze na výsledný obrázek, ten s nejlepší shodou

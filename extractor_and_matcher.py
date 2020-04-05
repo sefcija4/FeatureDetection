@@ -3,6 +3,7 @@
 
 import cv2
 import numpy as np
+import operator
 
 
 class FeatureExtractor(object):
@@ -42,11 +43,13 @@ class Matcher(object):
     def match_sift(self, in_img_descriptor, dataset):
 
         for building in dataset:
-            print(type(dataset))
+            # print(type(dataset))
             for img in dataset[building]:
                 # TODO: získat jednu budovu, poronat, spočítat match a uložit do Building Features
 
                 img.matches = self.matcher.knnMatch(in_img_descriptor, img.descriptor, k=2)
+                img.update_matches(self.ratio_test(img.matches))
+                # print(len(img.matches))
                 print(f'Number of matches {img.id}: {len(img.matches)}')
 
     def match_surf(self):
@@ -69,28 +72,59 @@ class Matcher(object):
         return sorted(good_matches, key=lambda x: x.distance)
 
     def show_matches(self, img_in, dataset):
+        matches = list()
+
         for building in dataset:
-            print(type(dataset))
             for img in dataset[building]:
-                print(img.path)
+                # print(img.path)
                 img.load_image(img.path)
-                img_matches = self.draw_matches(img_in.img, img.img, img_in.keypoints, img.keypoints,
-                                                self.ratio_test(img.matches))
+                img_matches = self.draw_matches(img_in.img, img.img, img_in.keypoints, img.keypoints, img.matches)
 
-                cv2.imshow('Matches', img_matches)
-                cv2.waitKey(0)
-                cv2.destroyAllWindows()
+                matches.append(img_matches)
+        return matches
 
-    def draw_matches(self, img1, img2, keypoints1, keypoints2, matches,
+    @staticmethod
+    def draw_matches(img1, img2, keypoints1, keypoints2, matches,
                      flag=cv2.DrawMatchesFlags_NOT_DRAW_SINGLE_POINTS):
 
-        print(img1.shape[0], img1.shape[1])
-        print(img2.shape[0], img2.shape[1])
-        print(type(matches))
+        # print(img1.shape[0], img1.shape[1])
+        # print(img2.shape[0], img2.shape[1])
+        # print(type(matches))
 
         img_matches = np.empty((max(img1.shape[0], img2.shape[0]), img1.shape[1] + img2.shape[1], 3), dtype=np.uint8)
         #drawMatchesNkk for list
         #drawMatches for cv::DMatch
-        cv2.drawMatches(img1, keypoints1, img2, keypoints2, matches, img_matches,
-                        flags=flag)
+        cv2.drawMatches(img1, keypoints1, img2, keypoints2, matches[:4], img_matches, flags=flag)
         return img_matches
+
+    @staticmethod
+    def best_match(matches):
+
+        results = list()
+
+        for building in matches:
+            for img in matches[building]:
+                if img.get_num_of_matches() < 10:  # small threshold
+                    continue
+                else:
+                    results.append(img)
+
+        results = sorted(results, key=lambda x: x.get_num_of_matches(), reverse=True)
+
+        print(len(results))
+
+        print(len(results[0].matches))
+        print(len(results[1].matches))
+
+        for y in results:
+            print(y.path, y.get_num_of_matches())
+
+        if len(results) == 0:
+            print("No match!")
+            return None
+
+        print("BEST:", results[0].path)
+
+        return results[0]
+
+
