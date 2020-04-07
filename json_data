@@ -25,5 +25,32 @@ data_b['buildings'].append({
     'features': 'None'
 })
 
+data_b['buildings'].append({
+    'id': '2',
+    'name': 'U Zlaté konvice',
+    'path': 'C:\\Users\\Sefci\\Documents\\_FIT\\_Bakalarka\\data_staromak\\b3',
+    'latitude':   '50.0864621',
+    'longtitude': '14.4185757',
+    'features': 'None'
+})
+
+data_b['buildings'].append({
+    'id': '3',
+    'name': 'Štorchův dům, U Kamenné panny Marie',
+    'path': 'C:\\Users\\Sefci\\Documents\\_FIT\\_Bakalarka\\data_staromak\\b4',
+    'latitude':   '50.087185',
+    'longtitude': '14.4198699',
+    'features': 'None'
+})
+
+data_b['buildings'].append({
+    'id': '4',
+    'name': 'Pražská městská pojišťovna',
+    'path': 'C:\\Users\\Sefci\\Documents\\_FIT\\_Bakalarka\\data_staromak\\b5',
+    'latitude':   '50.087677',
+    'longtitude': '14.4213159',
+    'features': 'None'
+})
+
 with open('data.txt', 'w') as file:
     json.dump(data_b, file)

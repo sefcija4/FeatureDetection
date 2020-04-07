@@ -20,6 +20,24 @@ class GPSLocation(object):
         self.latitude = float(lat)
         self.longtitude = float(lng)
 
+    def get_latitude(self):
+        return self.latitude
+
+    def get_longtitude(self):
+        return self.longtitude
+
+    @staticmethod
+    def check_if_belongs(input_img, db_img):
+        radius = 0.002  # in degrees
+        # (x - center_x)^2 + (y - center_y)^2 < radius^2
+
+        if (pow(db_img.get_longtitude() - input_img.get_longtitude(), 2) +
+            pow(db_img.get_latitude() - input_img.get_latitude(), 2)) <= (radius**2):
+
+            return True
+        else:
+            return False
+
     def print(self):
         print((self.latitude, self.longtitude))
 
@@ -58,6 +76,12 @@ class Image(object):
         location = GPSLocation(coords[0], coords[1])
         # print(self.location)
         return location
+
+    def get_longtitude(self):
+        return self.location.get_longtitude()
+
+    def get_latitude(self):
+        return self.location.get_latitude()
 
     def preprocess(self):
         """

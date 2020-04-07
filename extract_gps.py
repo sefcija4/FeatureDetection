@@ -88,7 +88,6 @@ class ImageMetaData(object):
                     lng = 0 - lng
         return lat, lng
 
-
 '''path_name = "C:\\Users\\Sefci\\Documents\\_FIT\\_Bakalarka\\data_staromak\\b1_original\\01.jpg"
 meta_data = ImageMetaData(path_name)
 latlng = meta_data.get_lat_lng()

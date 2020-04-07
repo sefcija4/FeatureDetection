@@ -27,6 +27,12 @@ class Building(object):
 
         return None
 
+    def get_longtitude(self):
+        return self.location.get_longtitude()
+
+    def get_latitude(self):
+        return self.location.get_latitude()
+
     def print(self):
         print("---------------------------")
         print(self.id)
@@ -121,8 +127,6 @@ class BuildingRepository(object):
             for kp in to_load:
                 kp_load.append(CVSerializer.dict_to_cv_keypoint(kp))
 
-
-
             # DESCRIPTOR
             with open(str(f'{path}_descriptor.txt'), 'rb') as file:
                 desc_load = pickle.load(file, encoding='utf-8')
@@ -133,6 +137,7 @@ class BuildingRepository(object):
             buildings.append(tmp_b)
 
         return buildings
+
 
 class App(str):
 
@@ -161,6 +166,7 @@ class App(str):
         for x in self.buildings:
             x.print()
         print("************************")
+
     def load_features(self, building):
         # load keypoints and descriptor for specific building
         self.buildings_features[building.id] = BuildingRepository.get_building_features(building.path)
@@ -171,8 +177,16 @@ class App(str):
         self.img_in = Image(path)
 
     def check_perimeter(self):
-        # are any buildings nearby?
-        pass
+        '''
+        Check if buildings from dataset belongs in perimeter + load it's features
+        :return:
+        '''
+        for building in self.buildings:
+            if GPSLocation.check_if_belongs(self.img_in, building):
+                print(building.path, "Patří do okolí")
+                self.load_features(building)
+            else:
+                print(building.path, "Nepatří do okolí")
 
     def match_features(self):
         # Match features using Matcher.match_sift()
@@ -231,9 +245,7 @@ app.img_in.print()
 
 # app.img_in.show()
 
-# TODO img filtering by location
-app.load_features(app.buildings[0])  # take first building 0-ID
-app.load_features(app.buildings[1])
+app.check_perimeter()
 
 app.match_features()
 
