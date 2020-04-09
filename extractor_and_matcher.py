@@ -4,6 +4,7 @@
 import cv2
 import numpy as np
 import operator
+from scipy.spatial import distance
 
 
 class FeatureExtractor(object):
@@ -50,7 +51,7 @@ class Matcher(object):
                 img.matches = self.matcher.knnMatch(in_img_descriptor, img.descriptor, k=2)
                 img.update_matches(self.ratio_test(img.matches))
                 # print(len(img.matches))
-                print(f'Number of matches {img.id}: {len(img.matches)}')
+                # print(f'Number of matches {img.id}: {len(img.matches)}')
 
     def match_surf(self):
         pass
@@ -109,15 +110,7 @@ class Matcher(object):
                 else:
                     results.append(img)
 
-        results = sorted(results, key=lambda x: x.get_num_of_matches(), reverse=True)
-
-        print(len(results))
-
-        print(len(results[0].matches))
-        print(len(results[1].matches))
-
-        for y in results:
-            print(y.path, y.get_num_of_matches())
+        results = sorted(results, key=lambda x: x.get_sum_of_matches(), reverse=True)
 
         if len(results) == 0:
             print("No match!")
@@ -127,4 +120,43 @@ class Matcher(object):
 
         return results[0]
 
+    @staticmethod
+    def check_distance(kp, match1, match2):
+        # TODO: poslat sem keypoints vstupního obrazu + match1, match2
+        min_distance = 100  # pixels TODO: relative to img size
 
+        img1_idx = match1.queryIdx
+        img2_idx = match2.queryIdx
+
+        # x - columns
+        # y - rows
+        # Get the coordinates
+        (x1, y1) = keypoints1[img1_idx].pt
+        (x2, y2) = keypoints2[img2_idx].pt
+
+        if distance.euclidean((x1, y1), (x2, y2)) <= min_distance:
+            return False
+        else:
+            return True
+
+    @staticmethod
+    def filter_out_close_keypoints(matches):
+        # dostanu seřezné matches. Kontrola vzdálenosti mezi top 4mi.
+        # Pokud bude vzdálenst menší vezmese další match.
+
+        best_four = list()
+
+        start = matches[0]
+        best_four.append(start)
+        prev_m = start
+
+        for m in matches:
+            if len(best_four) >= 4:
+                break
+
+            if Matcher.check_distance(prev_m, m):
+                best_four.append(m)
+
+        print(best_four)
+
+        return best_four

@@ -13,8 +13,8 @@ class GPSLocation(object):
     GPS location data
 
     Parameters:
-        self.latitude (float)
-        self.longtitude (float)
+    :param self.latitude (float)
+    :param self.longtitude (float)
     """
     def __init__(self, lat, lng):
         self.latitude = float(lat)
@@ -27,12 +27,18 @@ class GPSLocation(object):
         return self.longtitude
 
     @staticmethod
-    def check_if_belongs(input_img, db_img):
+    def check_if_belongs(input_img, db_building):
+        """
+        Check if building (latitude, longtitude) belongs in perimeter of input image
+        :param input_img: (object) Image
+        :param db_building: (object) Building
+        :return: (boolean)
+        """
         radius = 0.002  # in degrees
         # (x - center_x)^2 + (y - center_y)^2 < radius^2
 
-        if (pow(db_img.get_longtitude() - input_img.get_longtitude(), 2) +
-            pow(db_img.get_latitude() - input_img.get_latitude(), 2)) <= (radius**2):
+        if (pow(db_building.get_longtitude() - input_img.get_longtitude(), 2) +
+            pow(db_building.get_latitude() - input_img.get_latitude(), 2)) <= (radius**2):
 
             return True
         else:
@@ -93,6 +99,11 @@ class Image(object):
         # resize, ekvalization of histogram
 
     def resize(self):
+        """
+        Resize image
+        # TODO: relative scale?
+        :return:
+        """
         (h, w) = self.img.shape[:2]
         width = 960
         r = width / float(w)
@@ -100,6 +111,10 @@ class Image(object):
         self.img = cv2.resize(self.img, dim)
 
     def extract_features(self):
+        """
+        Extract features, save keypoints and descriptors
+        :return:
+        """
         self.keypoints, self.descriptor = FeatureExtractor.extract_sift(self.img)
         print("IMG fearues extracted")
 

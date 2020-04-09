@@ -57,6 +57,7 @@ class BuildingFeature(object):
 
     def load_image(self, path):
         self.img = cv2.imread(path)
+        print(self.img.shape)
         self.img = cv2.cvtColor(self.img, cv2.COLOR_BGR2GRAY)
 
     def set_keypoints(self, kp):
@@ -71,6 +72,16 @@ class BuildingFeature(object):
     def get_num_of_matches(self):
         return len(self.matches)
 
+    def get_sum_of_matches(self):
+        self.matches.sort(key=lambda x: x.distance)
+
+        total_distance = 0
+
+        for m in self.matches:
+            total_distance += m.distance
+
+        return total_distance
+
     def sort_matches_by_distance(self):
         self.matches.sort(key=lambda x: x.distance)
 
@@ -82,6 +93,11 @@ class BuildingRepository(object):
 
     @staticmethod
     def get_all_buildings(path):
+        """
+        Load building data (in json format) from file
+        :param path: (string) path to json file
+        :return: (object) Building
+        """
         # loads metadata
         # returns dict with metadata
 
@@ -171,7 +187,7 @@ class App(str):
         # load keypoints and descriptor for specific building
         self.buildings_features[building.id] = BuildingRepository.get_building_features(building.path)
 
-        print(f'Number of images: {len(self.buildings_features[building.id])}')
+        # print(f'Number of images: {len(self.buildings_features[building.id])}')
 
     def load_image(self, path):
         self.img_in = Image(path)
@@ -200,12 +216,16 @@ class App(str):
 
         self.matcher.match_sift(self.img_in.get_descriptor(), self.buildings_features)
 
-        print("Done")
+        # print("Done")
 
     def find_best_match(self):
         self.best_match = self.matcher.best_match(self.buildings_features)
-        print("Best match img:", self.best_match.path)
+        # print("Best match img:", self.best_match.path)
         self.best_match.sort_matches_by_distance()
+
+    def find_best_keypoints(self):
+        # Find best 4 keypoints from best match
+        self.best_match.matches = Matcher.filter_out_close_keypoints(self.best_match.matches)
 
     def show_matches(self):
         matches = self.matcher.show_matches(self.img_in, self.buildings_features)
@@ -219,6 +239,9 @@ class App(str):
         homography = Homography()
         homography.find_matrix(self.best_match.matches, self.img_in.keypoints, self.best_match.keypoints)
         self.best_match.load_image(self.best_match.path)
+
+        print(self.best_match.img.shape)
+
         warped_img = homography.warp_image(self.img_in.img, self.best_match.img.copy())
 
         merged_img = self.img_in.merge_image(warped_img)
@@ -250,6 +273,7 @@ app.check_perimeter()
 app.match_features()
 
 app.find_best_match()
+app.find_best_keypoints()
 
 app.warp_image()
 

@@ -118,24 +118,25 @@ class Homography(object):
             (x1, y1) = kp1[img1_idx].pt
             (x2, y2) = kp2[img2_idx].pt
 
-            print(x1, y1)
-            print(x2, y2)
+            # print(x1, y1)
+            # print(x2, y2)
 
             # Append to each list
             self.keypoints1.append((x1, y1))
             self.keypoints2.append((x2, y2))
 
         # print("")
-        print(self.keypoints1)
-        print(self.keypoints2)
+        # print(self.keypoints1)
+        # print(self.keypoints2)
 
-        print("SORT")
+        # print("SORT")
 
-        self.sort_points()
+        # self.sort_points()
 
         self.H, mask = cv2.findHomography(np.array(self.keypoints2), np.array(self.keypoints1))
 
     def warp_image(self, img1, img2):
+        print(img1.shape, img2.shape)
         return cv2.warpPerspective(img2, self.H, dsize=(img1.shape[1], img1.shape[0]))
 
     @staticmethod
