@@ -225,7 +225,7 @@ class App(str):
 
     def find_best_keypoints(self):
         # Find best 4 keypoints from best match
-        self.best_match.matches = Matcher.filter_out_close_keypoints(self.best_match.matches)
+        self.best_match.matches = Matcher.filter_out_close_keypoints(self.best_match.matches, self.img_in.keypoints)
 
     def show_matches(self):
         matches = self.matcher.show_matches(self.img_in, self.buildings_features)
@@ -240,7 +240,7 @@ class App(str):
         homography.find_matrix(self.best_match.matches, self.img_in.keypoints, self.best_match.keypoints)
         self.best_match.load_image(self.best_match.path)
 
-        print(self.best_match.img.shape)
+        # print(self.best_match.img.shape)
 
         warped_img = homography.warp_image(self.img_in.img, self.best_match.img.copy())
 
@@ -263,6 +263,7 @@ app = App('data.txt')
 app.load_buildings()
 
 app.load_image('C:\\Users\\Sefci\\Documents\\_FIT\\_Bakalarka\\data_staromak\\_p\\test.jpg')
+# app.load_image('C:\\Users\\Sefci\\Documents\\_FIT\\_Bakalarka\\data_staromak\\_p\\IMG_3481.jpg')
 app.img_in.preprocess()
 app.img_in.print()
 

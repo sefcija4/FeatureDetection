@@ -121,26 +121,26 @@ class Matcher(object):
         return results[0]
 
     @staticmethod
-    def check_distance(kp, match1, match2):
-        # TODO: poslat sem keypoints vstupního obrazu + match1, match2
-        min_distance = 100  # pixels TODO: relative to img size
+    def check_distance(kp, prev_match, cur_match):
+        min_distance = 200  # pixels TODO: relative to img size
 
-        img1_idx = match1.queryIdx
-        img2_idx = match2.queryIdx
+        curr = cur_match.queryIdx
+        prev = prev_match.queryIdx
 
         # x - columns
         # y - rows
         # Get the coordinates
-        (x1, y1) = keypoints1[img1_idx].pt
-        (x2, y2) = keypoints2[img2_idx].pt
+        (x1, y1) = kp[curr].pt
+        (x2, y2) = kp[prev].pt
 
         if distance.euclidean((x1, y1), (x2, y2)) <= min_distance:
             return False
         else:
+            print("ADD:", (x2, y2))
             return True
 
     @staticmethod
-    def filter_out_close_keypoints(matches):
+    def filter_out_close_keypoints(matches, kp):
         # dostanu seřezné matches. Kontrola vzdálenosti mezi top 4mi.
         # Pokud bude vzdálenst menší vezmese další match.
 
@@ -151,12 +151,14 @@ class Matcher(object):
         prev_m = start
 
         for m in matches:
-            if len(best_four) >= 4:
+            if len(best_four) > 4:
                 break
 
-            if Matcher.check_distance(prev_m, m):
+            if Matcher.check_distance(kp, prev_m, m):
                 best_four.append(m)
 
-        print(best_four)
+            prev_m = m
+
+        # print(best_four)
 
         return best_four

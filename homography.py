@@ -136,7 +136,7 @@ class Homography(object):
         self.H, mask = cv2.findHomography(np.array(self.keypoints2), np.array(self.keypoints1))
 
     def warp_image(self, img1, img2):
-        print(img1.shape, img2.shape)
+        # print(img1.shape, img2.shape)
         return cv2.warpPerspective(img2, self.H, dsize=(img1.shape[1], img1.shape[0]))
 
     @staticmethod
