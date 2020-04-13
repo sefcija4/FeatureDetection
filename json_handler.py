@@ -20,12 +20,14 @@ class Building(object):
         self.path = None
 
     def set_from_json(self, data):
+        """
+        Initialize object Building parameters from json file
+        :param data: (dict)
+        """
         self.id = data['id']
         self.location = GPSLocation(data['latitude'], data['longtitude'])
         self.name = data['name']
         self.path = data['path']
-
-        return None
 
     def get_longtitude(self):
         return self.location.get_longtitude()
@@ -39,6 +41,11 @@ class Building(object):
         self.location.print()
         print(self.name)
         print(self.path)
+
+    def print_id_name(self):
+        print("---------------------------")
+        print(self.id, self.name)
+
 
 
 class BuildingFeature(object):
@@ -73,8 +80,10 @@ class BuildingFeature(object):
         return len(self.matches)
 
     def get_sum_of_matches(self):
-        self.matches.sort(key=lambda x: x.distance)
-
+        """
+        Sum distances of each match
+        :return: sum of all distances
+        """
         total_distance = 0
 
         for m in self.matches:
@@ -84,9 +93,6 @@ class BuildingFeature(object):
 
     def sort_matches_by_distance(self):
         self.matches.sort(key=lambda x: x.distance)
-
-        # for m in self.matches:
-        #     print(m.distance)
 
 
 class BuildingRepository(object):
@@ -98,9 +104,6 @@ class BuildingRepository(object):
         :param path: (string) path to json file
         :return: (object) Building
         """
-        # loads metadata
-        # returns dict with metadata
-
         buildings = list()
 
         with open(path) as file:
@@ -118,12 +121,10 @@ class BuildingRepository(object):
     @staticmethod
     def get_building_features(folder):
         """
-        Load keypoints and descriptors from to file and return them.
+        Load keypoints and descriptors from each image of building's file and return them.
         :param folder: (str) folder in db of specific building
-        :return: (object) list of BuildingFeatures (objects)
+        :return: (object) list of BuildingFeatures
         """
-        # return features for building
-
         buildings = list()
 
         for img in os.listdir(folder):
@@ -173,30 +174,36 @@ class App(str):
         self.best_match = None
 
     def load_buildings(self):
-        # load all buildings metadata
+        """
+        Load all buildings metadata
+        """
 
         self.buildings = BuildingRepository.get_all_buildings(self.db_path)
 
-        print("LOADED:")
+        print("Loaded buildings:")
 
         for x in self.buildings:
-            x.print()
+            x.print_id_name()
         print("************************")
 
     def load_features(self, building):
-        # load keypoints and descriptor for specific building
+        """
+        Load keypoints and descriptors from specific building
+        :param building: (object) Building
+        """
         self.buildings_features[building.id] = BuildingRepository.get_building_features(building.path)
 
-        # print(f'Number of images: {len(self.buildings_features[building.id])}')
-
     def load_image(self, path):
+        """
+        Load image from path
+        :param path: (str)
+        """
         self.img_in = Image(path)
 
     def check_perimeter(self):
-        '''
+        """
         Check if buildings from dataset belongs in perimeter + load it's features
-        :return:
-        '''
+        """
         for building in self.buildings:
             if GPSLocation.check_if_belongs(self.img_in, building):
                 print(building.path, "Patří do okolí")
@@ -205,9 +212,10 @@ class App(str):
                 print(building.path, "Nepatří do okolí")
 
     def match_features(self):
-        # Match features using Matcher.match_sift()
-
-        # TODO: zatím match pro všechny domy, později je budu muset filtrovat podle lokace
+        """
+        Match features using selected matcher #TODO: volba příznaku
+        :return:
+        """
 
         self.img_in.extract_features()
 
@@ -215,8 +223,6 @@ class App(str):
         self.matcher.set_sift_match()
 
         self.matcher.match_sift(self.img_in.get_descriptor(), self.buildings_features)
-
-        # print("Done")
 
     def find_best_match(self):
         self.best_match = self.matcher.best_match(self.buildings_features)
@@ -274,6 +280,7 @@ app.check_perimeter()
 app.match_features()
 
 app.find_best_match()
+
 app.find_best_keypoints()
 
 app.warp_image()

@@ -34,7 +34,7 @@ class GPSLocation(object):
         :param db_building: (object) Building
         :return: (boolean)
         """
-        radius = 0.002  # in degrees
+        radius = 0.002  # in degrees -> 200m
         # (x - center_x)^2 + (y - center_y)^2 < radius^2
 
         if (pow(db_building.get_longtitude() - input_img.get_longtitude(), 2) +

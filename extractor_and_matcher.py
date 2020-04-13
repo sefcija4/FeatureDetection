@@ -88,10 +88,6 @@ class Matcher(object):
     def draw_matches(img1, img2, keypoints1, keypoints2, matches,
                      flag=cv2.DrawMatchesFlags_NOT_DRAW_SINGLE_POINTS):
 
-        # print(img1.shape[0], img1.shape[1])
-        # print(img2.shape[0], img2.shape[1])
-        # print(type(matches))
-
         img_matches = np.empty((max(img1.shape[0], img2.shape[0]), img1.shape[1] + img2.shape[1], 3), dtype=np.uint8)
         #drawMatchesNkk for list
         #drawMatches for cv::DMatch
@@ -122,7 +118,7 @@ class Matcher(object):
 
     @staticmethod
     def check_distance(kp, prev_match, cur_match):
-        min_distance = 200  # pixels TODO: relative to img size
+        min_distance = 200 # pixels TODO: relative to img size
 
         curr = cur_match.queryIdx
         prev = prev_match.queryIdx
