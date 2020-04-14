@@ -47,12 +47,12 @@ class Building(object):
         print(self.id, self.name)
 
 
-
 class BuildingFeature(object):
 
-    def __init__(self, name, path):
+    def __init__(self, name, path, path_org):
         self.id = name
         self.path = path
+        self.original = path_org
         self.img = None
         self.keypoints = None
         self.descriptor = None
@@ -64,7 +64,7 @@ class BuildingFeature(object):
 
     def load_image(self, path):
         self.img = cv2.imread(path)
-        print(self.img.shape)
+        # print(self.img.shape)
         self.img = cv2.cvtColor(self.img, cv2.COLOR_BGR2GRAY)
 
     def set_keypoints(self, kp):
@@ -132,7 +132,7 @@ class BuildingRepository(object):
             if img.endswith('.txt'):
                 continue
 
-            tmp_b = BuildingFeature(img[:-4], str(f'{folder}\{img}'))
+            tmp_b = BuildingFeature(img[:-4], str(f'{folder}\{img}'), str(f'{folder}_original\{img[:-4]}_small.jpg'))
             path = str(f'{folder}\{img[:-4]}')
 
             # KEYPOINTS
@@ -250,6 +250,10 @@ class App(str):
 
         warped_img = homography.warp_image(self.img_in.img, self.best_match.img.copy())
 
+        # VISUALIZATION
+
+        self.visualization(homography)
+
         merged_img = self.img_in.merge_image(warped_img)
 
         cv2.imshow('Warped', merged_img)
@@ -259,6 +263,42 @@ class App(str):
         # get keypoints, matches and img1, im2 to Homography
         # maybe try using Building_features?
         pass
+
+    def visualization(self, homography):
+        # ORIGINAL IMAGE
+        original_img = cv2.imread(self.best_match.original)
+        original_img = cv2.cvtColor(original_img, cv2.COLOR_BGR2GRAY)
+        warped_original_img = homography.warp_image(self.img_in.img, original_img.copy())
+
+        save_to_path = "warped_original_img.png"
+        cv2.imwrite(save_to_path, warped_original_img)
+        merged_original = self.img_in.merge_image(warped_original_img)
+
+        cv2.imshow('Warped original', merged_original)
+        cv2.waitKey(0)
+
+        # MERGING
+        img_mask = Visualization.create_mask(self.best_match.img)
+        img_to_merge = cv2.imread(self.best_match.original)
+        building_rgba = cv2.bitwise_or(img_to_merge, img_to_merge, mask=img_mask)
+        building_rgba = homography.warp_image(self.img_in.img, building_rgba.copy())
+
+        # warp mask, etc.
+        bg_mask = homography.warp_image(self.img_in.img, img_mask.copy())
+        bg_mask = cv2.bitwise_not(bg_mask)
+
+        bk = cv2.bitwise_or(self.img_in.img, self.img_in.img, mask=bg_mask)
+
+        # combine foreground+background
+        bk = cv2.cvtColor(bk, cv2.COLOR_GRAY2BGR)
+
+        print(bk.shape, building_rgba.shape)
+
+        final = cv2.bitwise_or(building_rgba, bk)
+
+        cv2.imshow('Final', final)
+        cv2.waitKey(0)
+        cv2.destroyAllWindows()
 
     def print_buildings(self):
         for x in self.buildings:

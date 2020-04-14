@@ -44,7 +44,7 @@ class Homography(object):
 
     @staticmethod
     def merge_images(img1, img2):
-        return cv2.addWeighted(img1.copy(), 1, img2, 1, 0, img1.copy())
+        return cv2.addWeighted(img1.copy(), 0.5, img2, 0.5, 0, img1.copy())
 
 
 class Visualization(object):
@@ -52,8 +52,25 @@ class Visualization(object):
     def __init__(self):
         pass
 
-    def merge_images_red(self):
-        # aby warpnutá budova byla v černobílém obrazu červená
+    @staticmethod
+    def create_mask(img):
+        _, mask_bool = cv2.threshold(img, 1, 255, cv2.THRESH_BINARY)
+
+        # Morphology
+        kernel = np.ones((5, 5), np.uint8)
+        mask_bool = cv2.morphologyEx(img, cv2.MORPH_OPEN, kernel)
+
+        _, mask_bool = cv2.threshold(mask_bool, 1, 255, cv2.THRESH_BINARY)
+
+        return mask_bool
+
+    @staticmethod
+    def make_img_rgba(img, mask):
+
+        pass
+
+    @staticmethod
+    def merge_images_red(path1, path2):
         pass
 
     def warp_original_image(self):

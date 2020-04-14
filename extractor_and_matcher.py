@@ -118,7 +118,7 @@ class Matcher(object):
 
     @staticmethod
     def check_distance(kp, prev_match, cur_match):
-        min_distance = 200 # pixels TODO: relative to img size
+        min_distance = 200  # pixels TODO: relative to img size
 
         curr = cur_match.queryIdx
         prev = prev_match.queryIdx
