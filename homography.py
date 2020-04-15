@@ -66,7 +66,6 @@ class Visualization(object):
 
     @staticmethod
     def make_img_rgba(img, mask):
-
         pass
 
     @staticmethod

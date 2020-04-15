@@ -116,7 +116,7 @@ class Image(object):
         :return:
         """
         self.keypoints, self.descriptor = FeatureExtractor.extract_sift(self.img)
-        print("IMG fearues extracted")
+        print("IMG features extracted")
 
     def merge_image(self, img):
         return cv2.addWeighted(self.img.copy(), 1, img, 1, 0, self.img.copy())

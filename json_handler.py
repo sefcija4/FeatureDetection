@@ -81,12 +81,14 @@ class BuildingFeature(object):
 
     def get_sum_of_matches(self):
         """
-        Sum distances of each match
+        Sum distances of 10 best matches
         :return: sum of all distances
         """
         total_distance = 0
 
-        for m in self.matches:
+        self.sort_matches_by_distance()
+
+        for m in self.matches[:10]:
             total_distance += m.distance
 
         return total_distance
@@ -254,11 +256,11 @@ class App(str):
 
         self.visualization(homography)
 
-        merged_img = self.img_in.merge_image(warped_img)
+        #merged_img = self.img_in.merge_image(warped_img)
 
-        cv2.imshow('Warped', merged_img)
-        cv2.waitKey(0)
-        cv2.destroyAllWindows()
+        # cv2.imshow('Warped', merged_img)
+        # cv2.waitKey(0)
+        # cv2.destroyAllWindows()
 
         # get keypoints, matches and img1, im2 to Homography
         # maybe try using Building_features?
@@ -267,14 +269,24 @@ class App(str):
     def visualization(self, homography):
         # ORIGINAL IMAGE
         original_img = cv2.imread(self.best_match.original)
-        original_img = cv2.cvtColor(original_img, cv2.COLOR_BGR2GRAY)
+        # original_img = cv2.cvtColor(original_img, cv2.COLOR_BGR2GRAY)
         warped_original_img = homography.warp_image(self.img_in.img, original_img.copy())
+        original_bg = cv2.cvtColor(self.img_in.img, cv2.COLOR_GRAY2BGR)
 
-        save_to_path = "warped_original_img.png"
-        cv2.imwrite(save_to_path, warped_original_img)
-        merged_original = self.img_in.merge_image(warped_original_img)
+        # masks
+        original_mask = Visualization.create_mask(warped_original_img)
+        bg_original_mask = cv2.bitwise_not(original_mask)
 
-        cv2.imshow('Warped original', merged_original)
+        print(warped_original_img.shape, original_mask.shape)
+
+        original_img = cv2.bitwise_or(warped_original_img, warped_original_img, mask=original_mask[:, :, 0])
+        original_bg = cv2.bitwise_or(original_bg, original_bg, mask=bg_original_mask[:, :, 0])
+
+        print(original_bg.shape, original_img.shape)
+
+        original_final = cv2.bitwise_or(original_img, original_bg)
+
+        cv2.imshow('Warped original', original_final)
         cv2.waitKey(0)
 
         # MERGING
@@ -309,7 +321,7 @@ app = App('data.txt')
 app.load_buildings()
 
 app.load_image('C:\\Users\\Sefci\\Documents\\_FIT\\_Bakalarka\\data_staromak\\_p\\test.jpg')
-# app.load_image('C:\\Users\\Sefci\\Documents\\_FIT\\_Bakalarka\\data_staromak\\_p\\IMG_3481.jpg')
+# app.load_image('C:\\Users\\Sefci\\Documents\\_FIT\\_Bakalarka\\data_staromak\\_p\\IMG_3513.jpg')
 app.img_in.preprocess()
 app.img_in.print()
 

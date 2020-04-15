@@ -106,7 +106,10 @@ class Matcher(object):
                 else:
                     results.append(img)
 
-        results = sorted(results, key=lambda x: x.get_sum_of_matches(), reverse=True)
+        results = sorted(results, key=lambda x: x.get_sum_of_matches(), reverse=False)
+
+        for res in results:
+            print(res.get_sum_of_matches())
 
         if len(results) == 0:
             print("No match!")
@@ -136,6 +139,27 @@ class Matcher(object):
             return True
 
     @staticmethod
+    def check_distances(kp, prev_match, cur_match):
+        min_distance = 120  # pixels TODO: relative to img size
+
+        curr = cur_match.queryIdx
+        # prev = prev_match.queryIdx
+
+        for p_m in prev_match:
+            prev = p_m.queryIdx
+
+            # x - columns, y - rows
+            # Get the coordinates
+            (x1, y1) = kp[curr].pt
+            (x2, y2) = kp[prev].pt
+
+            if distance.euclidean((x1, y1), (x2, y2)) <= min_distance:
+                return False
+
+        print("ADD:", (x2, y2))
+        return True
+
+    @staticmethod
     def filter_out_close_keypoints(matches, kp):
         # dostanu seřezné matches. Kontrola vzdálenosti mezi top 4mi.
         # Pokud bude vzdálenst menší vezmese další match.
@@ -149,11 +173,18 @@ class Matcher(object):
         for m in matches:
             if len(best_four) > 4:
                 break
+            if Matcher.check_distances(kp, best_four, m):
+                best_four.append(m)
+
+        '''for m in matches:
+            if len(best_four) > 4:
+                break
 
             if Matcher.check_distance(kp, prev_m, m):
                 best_four.append(m)
+                prev_m = m'''
 
-            prev_m = m
+
 
         # print(best_four)
 
