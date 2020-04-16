@@ -106,22 +106,22 @@ class Matcher(object):
                 else:
                     results.append(img)
 
+        if len(results) == 0:
+            print("No match!")
+            return None
+
         results = sorted(results, key=lambda x: x.get_sum_of_matches(), reverse=False)
 
         for res in results:
             print(res.get_sum_of_matches())
 
-        if len(results) == 0:
-            print("No match!")
-            return None
-
-        print("BEST:", results[0].path)
+        print("Best match:", results[0].path)
 
         return results[0]
 
     @staticmethod
     def check_distance(kp, prev_match, cur_match):
-        min_distance = 200  # pixels TODO: relative to img size
+        min_distance = 1  # pixels TODO: relative to img size
 
         curr = cur_match.queryIdx
         prev = prev_match.queryIdx
@@ -131,6 +131,8 @@ class Matcher(object):
         # Get the coordinates
         (x1, y1) = kp[curr].pt
         (x2, y2) = kp[prev].pt
+
+        print(distance.euclidean((x1, y1), (x2, y2)))
 
         if distance.euclidean((x1, y1), (x2, y2)) <= min_distance:
             return False

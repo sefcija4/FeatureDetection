@@ -206,19 +206,26 @@ class App(str):
         """
         Check if buildings from dataset belongs in perimeter + load it's features
         """
+        num_of_loaded = 0
         for building in self.buildings:
             if GPSLocation.check_if_belongs(self.img_in, building):
                 print(building.path, "Patří do okolí")
                 self.load_features(building)
+                num_of_loaded += 1
             else:
                 print(building.path, "Nepatří do okolí")
+
+        if num_of_loaded == 0:
+            print("No building has been found in your perimeter")
+            return False
+        else:
+            return True
 
     def match_features(self):
         """
         Match features using selected matcher #TODO: volba příznaku
         :return:
         """
-
         self.img_in.extract_features()
 
         self.matcher = Matcher()
@@ -229,7 +236,14 @@ class App(str):
     def find_best_match(self):
         self.best_match = self.matcher.best_match(self.buildings_features)
         # print("Best match img:", self.best_match.path)
-        self.best_match.sort_matches_by_distance()
+
+        if self.best_match is None:
+            print("No building has good match. You should change your viewing angle and position")
+            return False
+
+        else:
+            self.best_match.sort_matches_by_distance()
+            return True
 
     def find_best_keypoints(self):
         # Find best 4 keypoints from best match
@@ -264,7 +278,6 @@ class App(str):
 
         # get keypoints, matches and img1, im2 to Homography
         # maybe try using Building_features?
-        pass
 
     def visualization(self, homography):
         # ORIGINAL IMAGE
@@ -327,17 +340,17 @@ app.img_in.print()
 
 # app.img_in.show()
 
-app.check_perimeter()
+if app.check_perimeter():
 
-app.match_features()
+    app.match_features()
 
-app.find_best_match()
+    if app.find_best_match():
 
-app.find_best_keypoints()
+        app.find_best_keypoints()
 
-app.warp_image()
+        app.warp_image()
 
-app.show_matches()
+        app.show_matches()
 
 
 # img.show()
