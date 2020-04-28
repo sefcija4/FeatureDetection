@@ -52,5 +52,32 @@ data_b['buildings'].append({
     'features': 'None'
 })
 
+data_b['buildings'].append({
+    'id': '6',
+    'name': 'Liberec - zelený domek',
+    'path': 'C:\\Users\\Sefci\\Documents\\_FIT\\_Bakalarka\\data_staromak\\b7',
+    'latitude':   '50.7608511',
+    'longtitude': '15.0634765',
+    'features': 'None'
+})
+
+data_b['buildings'].append({
+    'id': '7',
+    'name': 'Liberec - Radnice',
+    'path': 'C:\\Users\\Sefci\\Documents\\_FIT\\_Bakalarka\\data_staromak\\b8',
+    'latitude':   '50.7700012',
+    'longtitude': '15.0562721',
+    'features': 'None'
+})
+
+data_b['buildings'].append({
+    'id': '8',
+    'name': 'Liberec - CAFE Kristián',
+    'path': 'C:\\Users\\Sefci\\Documents\\_FIT\\_Bakalarka\\data_staromak\\b9',
+    'latitude':   '50.7779843',
+    'longtitude': '15.07934',
+    'features': 'None'
+})
+
 with open('data.txt', 'w') as file:
     json.dump(data_b, file)

@@ -142,7 +142,7 @@ class Matcher(object):
 
     @staticmethod
     def check_distances(kp, prev_match, cur_match):
-        min_distance = 120  # pixels TODO: relative to img size
+        min_distance = 100  # pixels TODO: relative to img size
 
         curr = cur_match.queryIdx
         # prev = prev_match.queryIdx
@@ -165,6 +165,8 @@ class Matcher(object):
     def filter_out_close_keypoints(matches, kp):
         # dostanu seřezné matches. Kontrola vzdálenosti mezi top 4mi.
         # Pokud bude vzdálenst menší vezmese další match.
+
+        # return matches[:4]
 
         best_four = list()
 

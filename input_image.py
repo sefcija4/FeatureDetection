@@ -34,7 +34,7 @@ class GPSLocation(object):
         :param db_building: (object) Building
         :return: (boolean)
         """
-        radius = 0.002  # in degrees -> 200m
+        radius = 0.003  # in degrees -> 200m
         # (x - center_x)^2 + (y - center_y)^2 < radius^2
 
         if (pow(db_building.get_longtitude() - input_img.get_longtitude(), 2) +
@@ -93,8 +93,14 @@ class Image(object):
         """
         Convert image to grayscale than equalize it's histogram.
         """
+        # self.resize()
         self.img = cv2.cvtColor(self.img, cv2.COLOR_BGR2GRAY)
-        self.img = cv2.equalizeHist(self.img)
+        #self.img = cv2.equalizeHist(self.img)
+
+        # CLAHE
+        clahe = cv2.createCLAHE(clipLimit=2, tileGridSize=(8, 8))
+        self.img = clahe.apply(self.img)
+
         self.resize()
         # resize, ekvalization of histogram
 
@@ -105,9 +111,15 @@ class Image(object):
         :return:
         """
         (h, w) = self.img.shape[:2]
-        width = 960
-        r = width / float(w)
-        dim = (width, int(h * r))
+
+        if h > w:
+            height = 960
+            r = height / float(h)
+            dim = (int(w * r), height)
+        else:
+            width = 960
+            r = width / float(w)
+            dim = (width, int(h * r))
         self.img = cv2.resize(self.img, dim)
 
     def extract_features(self):

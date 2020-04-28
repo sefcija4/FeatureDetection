@@ -15,6 +15,10 @@ data.append("C:\\Users\\Sefci\\Documents\\_FIT\\_Bakalarka\\data_staromak\\b2")
 data.append("C:\\Users\\Sefci\\Documents\\_FIT\\_Bakalarka\\data_staromak\\b3")
 data.append("C:\\Users\\Sefci\\Documents\\_FIT\\_Bakalarka\\data_staromak\\b4")
 data.append("C:\\Users\\Sefci\\Documents\\_FIT\\_Bakalarka\\data_staromak\\b5")
+# data.append("C:\\Users\\Sefci\\Documents\\_FIT\\_Bakalarka\\data_staromak\\b6")
+data.append("C:\\Users\\Sefci\\Documents\\_FIT\\_Bakalarka\\data_staromak\\b7")
+data.append("C:\\Users\\Sefci\\Documents\\_FIT\\_Bakalarka\\data_staromak\\b8")
+data.append("C:\\Users\\Sefci\\Documents\\_FIT\\_Bakalarka\\data_staromak\\b9")
 
 
 def main():
@@ -34,8 +38,14 @@ def main():
 
             path = str(f'{folder}\{img}')
 
+            # CLAHE
+            clahe = cv2.createCLAHE(clipLimit=2, tileGridSize=(8, 8))
+
             try:
-                tmp_img = cv2.imread(path, cv2.COLOR_BGR2GRAY)
+                tmp_img = cv2.imread(path)
+                tmp_img = cv2.cvtColor(tmp_img, cv2.COLOR_BGR2GRAY)
+                tmp_img = clahe.apply(tmp_img)
+
                 tmp_kp, tmp_des = extractor.extract_sift(tmp_img)
             except:
                 print("Something went wrong with:" + img)

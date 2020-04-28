@@ -264,7 +264,7 @@ class App(str):
 
         # print(self.best_match.img.shape)
 
-        warped_img = homography.warp_image(self.img_in.img, self.best_match.img.copy())
+        # warped_img = homography.warp_image(self.img_in.img, self.best_match.img.copy())
 
         # VISUALIZATION
 
@@ -281,8 +281,12 @@ class App(str):
 
     def visualization(self, homography):
         # ORIGINAL IMAGE
+        print(self.best_match.original)
         original_img = cv2.imread(self.best_match.original)
         # original_img = cv2.cvtColor(original_img, cv2.COLOR_BGR2GRAY)
+
+        print(original_img.shape)
+
         warped_original_img = homography.warp_image(self.img_in.img, original_img.copy())
         original_bg = cv2.cvtColor(self.img_in.img, cv2.COLOR_GRAY2BGR)
 
@@ -334,6 +338,11 @@ app = App('data.txt')
 app.load_buildings()
 
 app.load_image('C:\\Users\\Sefci\\Documents\\_FIT\\_Bakalarka\\data_staromak\\_p\\test.jpg')
+# app.load_image('C:\\Users\\Sefci\\Documents\\_FIT\\_Bakalarka\\data_staromak\\_p\\test_b_4.jpg') # lepší dataset
+# app.load_image('C:\\Users\\Sefci\\Documents\\_FIT\\_Bakalarka\\data_staromak\\_p\\test_b_5.jpg')
+# app.load_image('C:\\Users\\Sefci\\Documents\\_FIT\\_Bakalarka\\data_staromak\\_p\\test_b_7.jpg')
+# app.load_image('C:\\Users\\Sefci\\Documents\\_FIT\\_Bakalarka\\data_staromak\\_p\\test_b_8.jpg')
+# app.load_image('C:\\Users\\Sefci\\Documents\\_FIT\\_Bakalarka\\data_staromak\\_p\\test_b_9.jpg') # stíny/lampa atd.
 # app.load_image('C:\\Users\\Sefci\\Documents\\_FIT\\_Bakalarka\\data_staromak\\_p\\IMG_3513.jpg')
 app.img_in.preprocess()
 app.img_in.print()
