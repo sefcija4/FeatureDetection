@@ -8,17 +8,19 @@ from opencv_serializer import *
 import extractor_and_matcher
 import pickle
 
+PATH = 'data'
+
 data = list()
 
-data.append("C:\\Users\\Sefci\\Documents\\_FIT\\_Bakalarka\\data_staromak\\b1")
-data.append("C:\\Users\\Sefci\\Documents\\_FIT\\_Bakalarka\\data_staromak\\b2")
-data.append("C:\\Users\\Sefci\\Documents\\_FIT\\_Bakalarka\\data_staromak\\b3")
-data.append("C:\\Users\\Sefci\\Documents\\_FIT\\_Bakalarka\\data_staromak\\b4")
-data.append("C:\\Users\\Sefci\\Documents\\_FIT\\_Bakalarka\\data_staromak\\b5")
-# data.append("C:\\Users\\Sefci\\Documents\\_FIT\\_Bakalarka\\data_staromak\\b6")
-data.append("C:\\Users\\Sefci\\Documents\\_FIT\\_Bakalarka\\data_staromak\\b7")
-data.append("C:\\Users\\Sefci\\Documents\\_FIT\\_Bakalarka\\data_staromak\\b8")
-data.append("C:\\Users\\Sefci\\Documents\\_FIT\\_Bakalarka\\data_staromak\\b9")
+data.append("b1")
+data.append("b2")
+data.append("b3")
+data.append("b4")
+data.append("b5")
+# data.append("b6")
+data.append("b7")
+data.append("b8")
+data.append("b9")
 
 
 def main():
@@ -29,14 +31,17 @@ def main():
     print('Argument List:', str(sys.argv))
 
     extractor = extractor_and_matcher.FeatureExtractor()
+    dir_name = os.path.dirname(__file__)
 
     for folder in data:
-        for img in os.listdir(folder):
+        for img in os.listdir(str(f'{dir_name}\\{PATH}\\{folder}\\')):
             # Check if file has extension .jpg
             if not img.endswith('.jpg'):
                 continue
 
-            path = str(f'{folder}\{img}')
+            path = str(f'{dir_name}\\{PATH}\\{folder}\\{img}')
+
+            print(path)
 
             # CLAHE
             clahe = cv2.createCLAHE(clipLimit=2, tileGridSize=(8, 8))
@@ -59,7 +64,7 @@ def main():
             for kp in tmp_kp:
                 tmp_kp_dict.append(CVSerializer.cv_keypoint_to_dict(kp))
 
-            with open(str(folder+'\\'+img[:-4]+'_keypoints.txt'), 'wb+') as file:
+            with open(str(f'{dir_name}\\{PATH}\\{folder}\\{img[:-4]}_keypoints.txt'), 'wb+') as file:
                 pickle.dump(tmp_kp_dict, file, protocol=pickle.HIGHEST_PROTOCOL)
 
                 print("KP : Ok")
@@ -70,7 +75,7 @@ def main():
             # DESCRIPTORS #
             ###############
 
-            with open(str(folder+'\\'+img[:-4]+'_descriptor.txt'), 'wb+') as file:
+            with open(str(f'{dir_name}\\{PATH}\\{folder}\\{img[:-4]}_descriptor.txt'), 'wb+') as file:
                 pickle.dump(tmp_des, file, protocol=pickle.HIGHEST_PROTOCOL)
 
                 print("DES: Ok")

@@ -162,7 +162,8 @@ class App(str):
 
     def __init__(self, path):
         self.img_in = None
-        self.db_path = path
+        self.dir_name = os.path.dirname(__file__)
+        self.db_path = os.path.join(self.dir_name, path)
         self.buildings = list()
         self.buildings_features = dict()
         self.matcher = None
@@ -334,20 +335,16 @@ class App(str):
             print(x.data['name'])
 
 
-dir_name = os.path.dirname(__file__)
-print(dir_name)
-
-'''
 app = App('data.txt')
 app.load_buildings()
 
-app.load_image('C:\\Users\\Sefci\\Documents\\_FIT\\_Bakalarka\\data_staromak\\_p\\test.jpg')
-# app.load_image('C:\\Users\\Sefci\\Documents\\_FIT\\_Bakalarka\\data_staromak\\_p\\test_b_4.jpg') # lepší dataset
-# app.load_image('C:\\Users\\Sefci\\Documents\\_FIT\\_Bakalarka\\data_staromak\\_p\\test_b_5.jpg')
-# app.load_image('C:\\Users\\Sefci\\Documents\\_FIT\\_Bakalarka\\data_staromak\\_p\\test_b_7.jpg')
-# app.load_image('C:\\Users\\Sefci\\Documents\\_FIT\\_Bakalarka\\data_staromak\\_p\\test_b_8.jpg')
-# app.load_image('C:\\Users\\Sefci\\Documents\\_FIT\\_Bakalarka\\data_staromak\\_p\\test_b_9.jpg') # stíny/lampa atd.
-# app.load_image('C:\\Users\\Sefci\\Documents\\_FIT\\_Bakalarka\\data_staromak\\_p\\IMG_3513.jpg')
+app.load_image('data\\_p\\test.jpg')
+# app.load_image('data\\_p\\test_b_4.jpg') # lepší dataset
+# app.load_image('data\\_p\\test_b_5.jpg')
+# app.load_image('data\\_p\\test_b_7.jpg')
+# app.load_image('data\\_p\\test_b_8.jpg')
+# app.load_image('data\\_p\\test_b_9.jpg') # stíny/lampa atd.
+# app.load_image('data\\_p\\IMG_3513.jpg')
 app.img_in.preprocess()
 app.img_in.print()
 
@@ -366,4 +363,4 @@ if app.check_perimeter():
         app.show_matches()
 
 
-# img.show()'''
+# img.show()
