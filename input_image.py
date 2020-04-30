@@ -37,8 +37,8 @@ class GPSLocation(object):
         radius = 0.003  # in degrees -> 200m
         # (x - center_x)^2 + (y - center_y)^2 < radius^2
 
-        if (pow(db_building.get_longtitude() - input_img.get_longtitude(), 2) +
-            pow(db_building.get_latitude() - input_img.get_latitude(), 2)) <= (radius**2):
+        if (pow(db_building.get_longtitude() - input_img.get_longtitude(), 2) + pow(db_building.get_latitude()
+                                                                                    - input_img.get_latitude(), 2)) <= (radius**2):
 
             return True
         else:
@@ -59,7 +59,7 @@ class Image(object):
         self.path = path
 
         self.img = cv2.imread(self.path)
-        self.location = self.load_location()  # tuple (latitude, longtitude) in degrees
+        self.location = self.load_location()
 
         # self.img = cv2.imread(path, cv2.IMREAD_COLOR)
         # get GPS
@@ -75,7 +75,7 @@ class Image(object):
         """
         Load latitude and longtitude from image metadata (exif format)
         -
-        location (tuple) - (latitude, longtitude) in degrees
+        :return location (tuple) - (latitude, longtitude) in degrees
         """
         meta_data = gps.ImageMetaData(self.path)
         coords = meta_data.get_lat_lng()
@@ -91,7 +91,7 @@ class Image(object):
 
     def preprocess(self):
         """
-        Convert image to grayscale than equalize it's histogram.
+        Convert image to grayscale than equalize it's histogram and resize
         """
         # self.resize()
         self.img = cv2.cvtColor(self.img, cv2.COLOR_BGR2GRAY)
@@ -104,22 +104,22 @@ class Image(object):
         self.resize()
         # resize, ekvalization of histogram
 
-    def resize(self):
+    def resize(self, max_dimension=960):
         """
-        Resize image
-        # TODO: relative scale?
-        :return:
+        Resize image's larger dimension according to max_dimension value
+        and second dimension is relatively resized
         """
         (h, w) = self.img.shape[:2]
 
         if h > w:
-            height = 960
+            height = max_dimension
             r = height / float(h)
             dim = (int(w * r), height)
         else:
-            width = 960
+            width = max_dimension
             r = width / float(w)
             dim = (width, int(h * r))
+
         self.img = cv2.resize(self.img, dim)
 
     def extract_features(self):
@@ -131,10 +131,18 @@ class Image(object):
         print("IMG features extracted")
 
     def merge_image(self, img):
+        """
+        Merge image with other image
+        :param img: image
+        :return: merged image
+        """
         return cv2.addWeighted(self.img.copy(), 1, img, 1, 0, self.img.copy())
 
     def show(self):
-        cv2.imshow('Input img', self.img)
+        """
+        Show image in new window
+        """
+        cv2.imshow('Image', self.img)
         cv2.waitKey(0)
         cv2.destroyAllWindows()
 

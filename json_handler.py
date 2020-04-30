@@ -334,6 +334,10 @@ class App(str):
             print(x.data['name'])
 
 
+dir_name = os.path.dirname(__file__)
+print(dir_name)
+
+'''
 app = App('data.txt')
 app.load_buildings()
 
@@ -362,4 +366,4 @@ if app.check_perimeter():
         app.show_matches()
 
 
-# img.show()
+# img.show()'''
