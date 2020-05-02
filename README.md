@@ -10,8 +10,15 @@ Tento nástroj vznikl jako součást bakalářské práce. Jedná se o program, 
 
 Zdůvodu patentovaných metod SURF a SIFT je potřeba si naistalovat i OpenCV contribution verzi [link](https://pypi.org/project/opencv-contrib-python/). Případně je možné přejít na starší verzi OpenCV.
 
+# Config
+Soubor config.json obsahuje nastavitelné proměnné pro celou aplikaci. Je možné zde nastavit cesty vstupního obrazu, metadat a dalších parametrů. Soubor je generován skriptem [config.py](./config.py)
+
 # Dataset
 ## Tvorba
+Fotografie budov by měli být pořizovány za dobrých světelných podmínke s minimem stínů a rušivých elementů např. cedule, auta apod.
+
+**TODO obrázek dobrých  a špatných fotek**
+
 ## Struktura
 Ukázka složkové struktury pro uchování předpočítaných příznaků a snímků budov
 
@@ -29,12 +36,14 @@ Ukázka složkové struktury pro uchování předpočítaných příznaků a sn�
 
 
 ## Výpočet příznaků
+Pro výpočet příznaků je použit deskritor SIFT. Příznaky pro budovy v databázi jsou předpočítány pomocí skriptu [extract_features_db.py](./extract_features_db.py). Příznaky pro vstupní snímek jsou vypočítány v rámci běhu aplikace. O výpočet se stará třída **FeatureExtractor**
 
 ### JSON
 
 ### Skript
-Skript **JMÉNO** je určený pro výpočet příznaků všech budov v datasetu.
-Skript **JMÉNO** je určený pro přegenerování JSON metadat všech budov.
+Skript **config.py** je určený pro generování config souboru
+Skript **extract_features_db.py** je určený pro výpočet příznaků všech budov v datasetu.
+Skript **json_data.py** je určený pro přegenerování JSON metadat všech budov.
 
 # Dokumentace
 
@@ -86,51 +95,107 @@ Třída ``CVSerializer`` se stará o převod klíčových bodů z OpenCV třídy
 ##### merge_image()  
 ##### show()  
 ------------------------------------------------------------------------------------------------     
-### Visualization
+### Config
 #### Parametry
-**parametr**
+**path**
+**data**
 #### Metody
-##### metoda()
+##### load()
+##### get_metadata()
+##### get_input_image()
+##### get_gps_radius()
+##### get_flann_matching_setup()
+##### get_filter_features()
+------------------------------------------------------------------------------------------------     
+### Visualization
+#### Metody
+##### create_mask()
 ------------------------------------------------------------------------------------------------    
 ### Homography
 #### Parametry
-**parametr**
+**H**
+**keypoints1**
+**keypoints2**
 #### Metody
-##### metoda()
+##### add_keypoints()
+##### find_matrix()
+##### warp_image()
+##### merge_images()
 ------------------------------------------------------------------------------------------------   
 ### Building
 #### Parametry
-**parametr**
+**id**
+**location**
+**name**
+**path**
 #### Metody
-##### metoda()
+##### set_from_json()
+##### get_longtitude()
+##### get_latitude()
 ------------------------------------------------------------------------------------------------   
 ### BuildingFeature
 #### Parametry
-**parametr**
+**id**
+**path**
+**original**
+**img**
+**keypoints**
+**descriptor**
+**matches**
 #### Metody
-##### metoda()
+##### load_image()
+##### set_keypoints()
+##### set_descriptor()
+##### update_matches()
+##### get_num_of_matches()
+##### get_sum_of_matches()
+##### sort_matches_by_distance()
 ------------------------------------------------------------------------------------------------    
-### BuildingRepository
-#### Parametry
-**parametr**
+### BuildingRepository 
 #### Metody
-##### metoda()
+##### get_all_buildings()
+##### get_building_features()
 ------------------------------------------------------------------------------------------------    
 ### FeatureExtractor
-#### Parametry
-**parametr**
 #### Metody
-##### metoda()
+##### extract_sift(img)
 ------------------------------------------------------------------------------------------------   
 ### Matcher
 #### Parametry
-**parametr**
+**matcher**
 #### Metody
-##### metoda()
+##### set_sift_match()
+##### match_sift()
+##### ratio_test()
+##### show_matches()
+##### draw_matches()
+##### best_match()
+##### check_distances()
+##### filter_out_close_keypoints()
 ------------------------------------------------------------------------------------------------    
 ### App
 #### Parametry
-**parametr**
+**config**  
+**img_in**  
+**db_path**  
+**building**  
+**building_feature**  
+**matcher**  
+**matches**  
+**warped_img**  
+**sift** 
+**surf**
+**orb**
+**best_match**  
 #### Metody
-##### metoda()
+##### load_buildings()
+##### load_features()
+##### load_image()
+##### check_perimeter()
+##### match_features()
+##### find_best_match()
+##### find_best_keypoints()
+##### show_matches()
+##### warp_image()
+##### visualization()
 ------------------------------------------------------------------------------------------------   
