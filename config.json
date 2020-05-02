@@ -1,0 +1,1 @@
+{"metadata": [{"metadata_path": "data.txt"}], "input_img": [{"path": "data\\_p\\test.jpg"}], "gps": [{"radius": "0.003"}], "matching": [{"pixel_distance": "100", "min_number_of_matches": "10", "flann_index": "1", "flann_trees": "5", "flann_checks": "100"}]}

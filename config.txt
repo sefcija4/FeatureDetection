@@ -1,0 +1,12 @@
+{
+	"metadata_path": "data.txt",
+	"input_img_path": "data\_p\test.jpg",
+	"img_max_dimension": "960",
+	"radius_gps": "0.003",
+	"ratio_test": "0.6",
+	"pixel_distance": "100",
+	"min_number_of_matches": "10",
+	"flann_index": "1",
+	"flann_trees": "5",
+	"flann_checks": "100"
+}
