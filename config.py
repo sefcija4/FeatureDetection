@@ -27,14 +27,13 @@ data['gps'].append({
 })
 
 # MATCHING
-data['matching'].append({
+data['flann_matching'].append({
     'pixel_distance': '100',
     'min_number_of_matches': '10',
     'flann_index': '1',
     'flann_trees': '5',
     'flann_checks': '100'
 })
-
 
 with open(PATH, 'w+') as file:
     json.dump(data, file)

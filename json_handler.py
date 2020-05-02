@@ -5,6 +5,7 @@ import json
 import os
 import pickle
 
+from config_handler import *
 from opencv_serializer import *
 from input_image import *
 from extractor_and_matcher import *
@@ -161,9 +162,11 @@ class BuildingRepository(object):
 class App(str):
 
     def __init__(self, path):
+        self.config = Config(path)
+
         self.img_in = None
         self.dir_name = os.path.dirname(__file__)
-        self.db_path = os.path.join(self.dir_name, path)
+        self.db_path = os.path.join(self.dir_name, self.config.get_metadata())
         self.buildings = list()
         self.buildings_features = dict()
         self.matcher = None
@@ -196,12 +199,12 @@ class App(str):
         """
         self.buildings_features[building.id] = BuildingRepository.get_building_features(building.path)
 
-    def load_image(self, path):
+    def load_image(self):
         """
         Load image from path
         :param path: (str)
         """
-        self.img_in = Image(path)
+        self.img_in = Image(self.config.get_input_image())
 
     def check_perimeter(self):
         """
@@ -230,12 +233,12 @@ class App(str):
         self.img_in.extract_features()
 
         self.matcher = Matcher()
-        self.matcher.set_sift_match()
+        self.matcher.set_sift_match(self.config.get_flann_matching_setup())
 
         self.matcher.match_sift(self.img_in.get_descriptor(), self.buildings_features)
 
     def find_best_match(self):
-        self.best_match = self.matcher.best_match(self.buildings_features)
+        self.best_match = self.matcher.best_match(self.buildings_features, self.config.get_filter_features())
         # print("Best match img:", self.best_match.path)
 
         if self.best_match is None:
@@ -248,7 +251,8 @@ class App(str):
 
     def find_best_keypoints(self):
         # Find best 4 keypoints from best match
-        self.best_match.matches = Matcher.filter_out_close_keypoints(self.best_match.matches, self.img_in.keypoints)
+        self.best_match.matches = Matcher.filter_out_close_keypoints(self.best_match.matches, self.img_in.keypoints,
+                                                                     self.config.get_filter_features())
 
     def show_matches(self):
         matches = self.matcher.show_matches(self.img_in, self.buildings_features)
@@ -335,10 +339,12 @@ class App(str):
             print(x.data['name'])
 
 
-app = App('data.txt')
+app = App('config.json')
 app.load_buildings()
 
-app.load_image('data\\_p\\test.jpg')
+app.load_image()
+
+# app.load_image('data\\_p\\test.jpg')
 # app.load_image('data\\_p\\test_b_4.jpg') # lepší dataset
 # app.load_image('data\\_p\\test_b_5.jpg')
 # app.load_image('data\\_p\\test_b_7.jpg')

@@ -34,11 +34,10 @@ class Matcher(object):
     def __init__(self):
         self.matcher = None
 
-    def set_sift_match(self):
+    def set_sift_match(self, flann_data):
         # TODO: set flann param.
-        flann_index = 1
-        index_params = dict(algorithm=flann_index, trees=5)
-        search_params = dict(checks=100)   # or pass empty dictionary
+        index_params = dict(algorithm=flann_data['flann_index'], trees=flann_data['flann_trees'])
+        search_params = dict(checks=flann_data['flann_checks'])   # or pass empty dictionary
         self.matcher = cv2.FlannBasedMatcher(index_params, search_params)
 
     def match_sift(self, in_img_descriptor, dataset):
@@ -95,13 +94,18 @@ class Matcher(object):
         return img_matches
 
     @staticmethod
-    def best_match(matches):
+    def best_match(matches, threshold):
+        """
 
+        :param matches:
+        :param threshold:
+        :return:
+        """
         results = list()
 
         for building in matches:
             for img in matches[building]:
-                if img.get_num_of_matches() < 10:  # small threshold
+                if img.get_num_of_matches() < threshold['min_number_of_matches']:
                     continue
                 else:
                     results.append(img)
@@ -120,29 +124,8 @@ class Matcher(object):
         return results[0]
 
     @staticmethod
-    def check_distance(kp, prev_match, cur_match):
-        min_distance = 1  # pixels TODO: relative to img size
-
-        curr = cur_match.queryIdx
-        prev = prev_match.queryIdx
-
-        # x - columns
-        # y - rows
-        # Get the coordinates
-        (x1, y1) = kp[curr].pt
-        (x2, y2) = kp[prev].pt
-
-        print(distance.euclidean((x1, y1), (x2, y2)))
-
-        if distance.euclidean((x1, y1), (x2, y2)) <= min_distance:
-            return False
-        else:
-            print("ADD:", (x2, y2))
-            return True
-
-    @staticmethod
-    def check_distances(kp, prev_match, cur_match):
-        min_distance = 100  # pixels TODO: relative to img size
+    def check_distances(kp, prev_match, cur_match, threshold):
+        min_distance = threshold['pixel_distance']  # in pixels TODO: relative to img size
 
         curr = cur_match.queryIdx
         # prev = prev_match.queryIdx
@@ -150,6 +133,7 @@ class Matcher(object):
         for p_m in prev_match:
             prev = p_m.queryIdx
 
+            # x - columns, y - rows
             # x - columns, y - rows
             # Get the coordinates
             (x1, y1) = kp[curr].pt
@@ -162,7 +146,7 @@ class Matcher(object):
         return True
 
     @staticmethod
-    def filter_out_close_keypoints(matches, kp):
+    def filter_out_close_keypoints(matches, kp, threshold):
         # dostanu seřezné matches. Kontrola vzdálenosti mezi top 4mi.
         # Pokud bude vzdálenst menší vezmese další match.
 
@@ -177,7 +161,7 @@ class Matcher(object):
         for m in matches:
             if len(best_four) > 4:
                 break
-            if Matcher.check_distances(kp, best_four, m):
+            if Matcher.check_distances(kp, best_four, m, threshold):
                 best_four.append(m)
 
         '''for m in matches:
