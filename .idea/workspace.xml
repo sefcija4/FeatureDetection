@@ -2,10 +2,25 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="bef42cae-bb29-408b-9993-f3f98d0867f5" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/building.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/building_repository.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/extractor.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/venv/gps_location.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/dictionaries/Sefci.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dictionaries/Sefci.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/config.json" beforeDir="false" afterPath="$PROJECT_DIR$/config.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/config.py" beforeDir="false" afterPath="$PROJECT_DIR$/config.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/config.txt" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/config_handler.py" beforeDir="false" afterPath="$PROJECT_DIR$/config_handler.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/extractor_and_matcher.py" beforeDir="false" afterPath="$PROJECT_DIR$/extractor_and_matcher.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/json_handler.py" beforeDir="false" afterPath="$PROJECT_DIR$/json_handler.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/data.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/extract_features_db.py" beforeDir="false" afterPath="$PROJECT_DIR$/extract_features_db.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/extract_gps.py" beforeDir="false" afterPath="$PROJECT_DIR$/extract_gps.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/extractor_and_matcher.py" beforeDir="false" afterPath="$PROJECT_DIR$/matcher.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/homography.py" beforeDir="false" afterPath="$PROJECT_DIR$/homography.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/input_image.py" beforeDir="false" afterPath="$PROJECT_DIR$/input_image.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/json_data" beforeDir="false" afterPath="$PROJECT_DIR$/json_data" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/json_handler.py" beforeDir="false" afterPath="$PROJECT_DIR$/app.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/opencv_serializer.py" beforeDir="false" afterPath="$PROJECT_DIR$/opencv_serializer.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -13,72 +28,55 @@
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
-  <component name="DockManager">
-    <window id="1">
-      <content type="file-editors">
-        <state>
-          <leaf>
-            <file pinned="false" current-in-tab="true">
-              <entry file="file://$PROJECT_DIR$/config.py">
-                <provider selected="true" editor-type-id="text-editor">
-                  <state relative-caret-position="510">
-                    <caret line="30" column="19" selection-start-line="30" selection-start-column="5" selection-end-line="30" selection-end-column="19" />
-                  </state>
-                </provider>
-              </entry>
-            </file>
-          </leaf>
-        </state>
-      </content>
-    </window>
-  </component>
   <component name="FUSProjectUsageTrigger">
     <session id="-1677598718">
       <usages-collector id="statistics.lifecycle.project">
         <counts>
-          <entry key="project.closed" value="68" />
+          <entry key="project.closed" value="71" />
           <entry key="project.open.time.1" value="1" />
-          <entry key="project.open.time.10" value="3" />
+          <entry key="project.open.time.10" value="5" />
           <entry key="project.open.time.11" value="2" />
           <entry key="project.open.time.4" value="1" />
           <entry key="project.open.time.5" value="7" />
           <entry key="project.open.time.6" value="17" />
           <entry key="project.open.time.7" value="16" />
-          <entry key="project.open.time.8" value="13" />
+          <entry key="project.open.time.8" value="14" />
           <entry key="project.open.time.9" value="10" />
-          <entry key="project.opened" value="70" />
+          <entry key="project.opened" value="73" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.open">
         <counts>
           <entry key="jpg" value="1" />
-          <entry key="json" value="1" />
+          <entry key="json" value="4" />
           <entry key="json_data" value="1" />
           <entry key="png" value="1" />
-          <entry key="py" value="61" />
+          <entry key="py" value="73" />
           <entry key="txt" value="5" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.open">
         <counts>
           <entry key="Image" value="2" />
-          <entry key="JSON" value="1" />
+          <entry key="JSON" value="4" />
           <entry key="PLAIN_TEXT" value="5" />
-          <entry key="Python" value="62" />
+          <entry key="Python" value="74" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.edit">
         <counts>
-          <entry key="dummy" value="25" />
-          <entry key="json_data" value="229" />
-          <entry key="py" value="35424" />
+          <entry key="dummy" value="28" />
+          <entry key="json" value="4" />
+          <entry key="json_data" value="480" />
+          <entry key="py" value="38046" />
           <entry key="txt" value="40" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
         <counts>
-          <entry key="PLAIN_TEXT" value="65" />
-          <entry key="Python" value="35653" />
+          <entry key="JSON" value="4" />
+          <entry key="PLAIN_TEXT" value="68" />
+          <entry key="Python" value="38526" />
         </counts>
       </usages-collector>
     </session>
@@ -87,51 +85,52 @@
     <favorites_list name="FeatureDetection" />
   </component>
   <component name="FileEditorManager">
-    <splitter split-orientation="horizontal" split-proportion="0.50632244">
+    <splitter split-orientation="horizontal" split-proportion="0.52742857">
       <split-first>
         <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
           <file pinned="false" current-in-tab="false">
-            <entry file="file://$PROJECT_DIR$/json_data">
-              <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="323">
-                  <caret line="19" lean-forward="true" selection-start-line="19" selection-end-line="19" />
-                </state>
-              </provider>
-            </entry>
-          </file>
-          <file pinned="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/extract_features_db.py">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="263">
-                  <caret line="72" selection-start-line="72" selection-end-line="72" />
-                </state>
-              </provider>
-            </entry>
-          </file>
-          <file pinned="false" current-in-tab="false">
-            <entry file="file://$PROJECT_DIR$/config_handler.py">
-              <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="382">
-                  <caret line="86" column="21" lean-forward="true" selection-start-line="86" selection-start-column="21" selection-end-line="86" selection-end-column="21" />
+                <state relative-caret-position="782">
+                  <caret line="46" lean-forward="true" selection-start-line="46" selection-end-line="46" />
                   <folding>
-                    <marker date="1588432667487" expanded="true" signature="82:83" ph="..." />
-                    <marker date="1588432667487" expanded="true" signature="82:1903" ph="..." />
+                    <element signature="e#48#57#0" expanded="true" />
                   </folding>
                 </state>
               </provider>
             </entry>
           </file>
           <file pinned="false" current-in-tab="true">
-            <entry file="file://$PROJECT_DIR$/json_handler.py">
+            <entry file="file://$PROJECT_DIR$/app.py">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="190">
-                  <caret line="240" column="108" selection-start-line="240" selection-start-column="108" selection-end-line="240" selection-end-column="108" />
+                <state relative-caret-position="347">
+                  <caret line="231" lean-forward="true" selection-start-line="231" selection-end-line="231" />
+                  <folding>
+                    <element signature="e#48#76#0" expanded="true" />
+                  </folding>
+                </state>
+              </provider>
+            </entry>
+          </file>
+          <file pinned="false" current-in-tab="false">
+            <entry file="file://$PROJECT_DIR$/building_repository.py">
+              <provider selected="true" editor-type-id="text-editor">
+                <state relative-caret-position="136">
+                  <caret line="8" column="31" selection-start-line="8" selection-start-column="31" selection-end-line="8" selection-end-column="31" />
                   <folding>
                     <element signature="e#47#58#0" expanded="true" />
-                    <marker date="1588433154543" expanded="true" signature="808:858" ph="..." />
-                    <marker date="1588433154543" expanded="true" signature="1678:1684" ph="..." />
-                    <marker date="1588433154543" expanded="true" signature="1848:1885" ph="..." />
-                    <marker date="1588433154543" expanded="true" signature="2085:2090" ph="..." />
+                  </folding>
+                </state>
+              </provider>
+            </entry>
+          </file>
+          <file pinned="false" current-in-tab="false">
+            <entry file="file://$PROJECT_DIR$/building.py">
+              <provider selected="true" editor-type-id="text-editor">
+                <state relative-caret-position="68">
+                  <caret line="4" column="24" selection-start-line="4" selection-start-column="24" selection-end-line="4" selection-end-column="24" />
+                  <folding>
+                    <element signature="e#47#72#0" expanded="true" />
                   </folding>
                 </state>
               </provider>
@@ -144,57 +143,27 @@
           <file pinned="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/input_image.py">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="442">
-                  <caret line="26" column="25" lean-forward="true" selection-start-line="26" selection-start-column="25" selection-end-line="26" selection-end-column="25" />
+                <state relative-caret-position="850">
+                  <caret line="50" column="11" selection-start-line="50" selection-start-column="11" selection-end-line="50" selection-end-column="11" />
                   <folding>
-                    <element signature="e#47#57#0" expanded="true" />
-                    <marker date="1588253732993" expanded="true" signature="438:1237" ph="..." />
-                    <marker date="1588253732993" expanded="true" signature="1324:1326" ph="..." />
-                  </folding>
-                </state>
-              </provider>
-            </entry>
-          </file>
-          <file pinned="false" current-in-tab="false">
-            <entry file="file://$PROJECT_DIR$/extract_gps.py">
-              <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="1598">
-                  <caret line="95" column="19" selection-start-line="95" selection-start-column="19" selection-end-line="95" selection-end-column="19" />
-                  <folding>
-                    <element signature="e#134#155#0" expanded="true" />
+                    <marker date="1588517377913" expanded="true" signature="96:98" ph="..." />
                   </folding>
                 </state>
               </provider>
             </entry>
           </file>
           <file pinned="false" current-in-tab="true">
-            <entry file="file://$PROJECT_DIR$/extractor_and_matcher.py">
-              <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="1091">
-                  <caret line="155" lean-forward="true" selection-start-line="155" selection-end-line="155" />
-                  <folding>
-                    <element signature="e#47#57#0" expanded="true" />
-                    <marker date="1588433017755" expanded="true" signature="739:773" ph="..." />
-                    <marker date="1588433017755" expanded="true" signature="1108:1114" ph="..." />
-                    <marker date="1588433017755" expanded="true" signature="3064:3065" ph="..." />
-                    <marker date="1588433017755" expanded="true" signature="3751:3752" ph="..." />
-                  </folding>
-                </state>
-              </provider>
-            </entry>
-          </file>
-          <file pinned="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/homography.py">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="578">
-                  <caret line="35" column="25" selection-start-line="35" selection-start-column="25" selection-end-line="35" selection-end-column="25" />
+                <state relative-caret-position="89">
+                  <caret line="77" column="7" lean-forward="true" selection-start-line="77" selection-start-column="7" selection-end-line="77" selection-end-column="7" />
                   <folding>
                     <element signature="e#47#57#0" expanded="true" />
-                    <marker date="1588086486721" expanded="true" signature="104:105" ph="..." />
-                    <marker date="1588086486721" expanded="true" signature="129:418" ph="..." />
-                    <marker date="1588086486721" expanded="true" signature="464:469" ph="..." />
-                    <marker date="1588086486721" expanded="true" signature="2116:2122" ph="..." />
-                    <marker date="1588086486721" expanded="true" signature="2463:2469" ph="..." />
+                    <marker date="1588448054059" expanded="true" signature="104:105" ph="..." />
+                    <marker date="1588448054059" expanded="true" signature="129:418" ph="..." />
+                    <marker date="1588448054059" expanded="true" signature="464:469" ph="..." />
+                    <marker date="1588448054059" expanded="true" signature="2078:2084" ph="..." />
+                    <marker date="1588448054059" expanded="true" signature="2425:2431" ph="..." />
                   </folding>
                 </state>
               </provider>
@@ -231,6 +200,10 @@
       <find>check_if_</find>
       <find>filter_out_close_keypoints</find>
       <find>filter</find>
+      <find>data.txt</find>
+      <find>get_building_features</find>
+      <find>building.path</find>
+      <find>extract_</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -242,23 +215,30 @@
         <option value="$PROJECT_DIR$/feature_extractor.py" />
         <option value="$PROJECT_DIR$/feature_detection.py" />
         <option value="$PROJECT_DIR$/Homography.py" />
-        <option value="$PROJECT_DIR$/extract_gps.py" />
         <option value="$PROJECT_DIR$/load_images.py" />
         <option value="$PROJECT_DIR$/homography.py" />
-        <option value="$PROJECT_DIR$/opencv_serializer.py" />
-        <option value="$PROJECT_DIR$/input_image.py" />
-        <option value="$PROJECT_DIR$/json_data" />
         <option value="$PROJECT_DIR$/extract_features_db.py" />
+        <option value="$PROJECT_DIR$/config.json" />
         <option value="$PROJECT_DIR$/config.py" />
+        <option value="$PROJECT_DIR$/json_data" />
         <option value="$PROJECT_DIR$/config_handler.py" />
+        <option value="$PROJECT_DIR$/extract_gps.py" />
         <option value="$PROJECT_DIR$/extractor_and_matcher.py" />
+        <option value="$PROJECT_DIR$/extractor.py" />
+        <option value="$PROJECT_DIR$/matcher.py" />
+        <option value="$PROJECT_DIR$/venv/gps_location.py" />
+        <option value="$PROJECT_DIR$/input_image.py" />
+        <option value="$PROJECT_DIR$/opencv_serializer.py" />
+        <option value="$PROJECT_DIR$/building.py" />
+        <option value="$PROJECT_DIR$/building_repository.py" />
         <option value="$PROJECT_DIR$/json_handler.py" />
+        <option value="$PROJECT_DIR$/app.py" />
       </list>
     </option>
   </component>
-  <component name="ProjectFrameBounds" extendedState="6">
-    <option name="x" value="-8" />
-    <option name="y" value="-8" />
+  <component name="ProjectFrameBounds" extendedState="7">
+    <option name="x" value="131" />
+    <option name="y" value="-19" />
     <option name="width" value="1936" />
     <option name="height" value="1056" />
   </component>
@@ -298,7 +278,28 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="Python.json_handler">
+  <component name="RunManager" selected="Python.app">
+    <configuration name="app" type="PythonConfigurationType" factoryName="Python" temporary="true">
+      <module name="FeatureDetection" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/app.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
     <configuration name="config" type="PythonConfigurationType" factoryName="Python" temporary="true">
       <module name="FeatureDetection" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -341,27 +342,6 @@
       <option name="INPUT_FILE" value="" />
       <method v="2" />
     </configuration>
-    <configuration name="extract_features_db" type="PythonConfigurationType" factoryName="Python" temporary="true">
-      <module name="FeatureDetection" />
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <envs>
-        <env name="PYTHONUNBUFFERED" value="1" />
-      </envs>
-      <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
-      <option name="IS_MODULE_SDK" value="true" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/extract_features_db.py" />
-      <option name="PARAMETERS" value="" />
-      <option name="SHOW_COMMAND_LINE" value="false" />
-      <option name="EMULATE_TERMINAL" value="false" />
-      <option name="MODULE_MODE" value="false" />
-      <option name="REDIRECT_INPUT" value="false" />
-      <option name="INPUT_FILE" value="" />
-      <method v="2" />
-    </configuration>
     <configuration name="json_data" type="PythonConfigurationType" factoryName="Python" temporary="true">
       <module name="FeatureDetection" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -395,7 +375,7 @@
       <option name="IS_MODULE_SDK" value="true" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/json_handler.py" />
+      <option name="SCRIPT_NAME" value="C:\Users\Sefci\PycharmProjects\FeatureDetection\app.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
@@ -407,17 +387,17 @@
     <list>
       <item itemvalue="Python.json_handler" />
       <item itemvalue="Python.json_data" />
-      <item itemvalue="Python.extract_features_db" />
       <item itemvalue="Python.config" />
       <item itemvalue="Python.config_handler" />
+      <item itemvalue="Python.app" />
     </list>
     <recent_temporary>
       <list>
+        <item itemvalue="Python.app" />
         <item itemvalue="Python.json_handler" />
-        <item itemvalue="Python.config_handler" />
-        <item itemvalue="Python.config" />
-        <item itemvalue="Python.extract_features_db" />
         <item itemvalue="Python.json_data" />
+        <item itemvalue="Python.config" />
+        <item itemvalue="Python.config_handler" />
       </list>
     </recent_temporary>
   </component>
@@ -469,12 +449,12 @@
     <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.49838188" visible="true" weight="0.10115912" />
+      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.49838188" visible="true" weight="0.077976815" />
       <window_info id="Structure" order="1" sideWeight="0.50161815" side_tool="true" weight="0.115911484" />
       <window_info id="Favorites" order="2" sideWeight="0.50161815" side_tool="true" weight="0.115911484" />
       <window_info anchor="bottom" id="Message" order="0" />
-      <window_info anchor="bottom" id="Find" order="1" />
-      <window_info active="true" anchor="bottom" id="Run" order="2" sideWeight="0.9072708" visible="true" weight="0.29392624" />
+      <window_info anchor="bottom" id="Find" order="1" weight="0.329718" />
+      <window_info active="true" anchor="bottom" id="Run" order="2" sideWeight="0.9072708" visible="true" weight="0.20607375" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.3991323" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
@@ -542,127 +522,167 @@
     <entry file="file://$PROJECT_DIR$/warped_original_img.png">
       <provider selected="true" editor-type-id="images" />
     </entry>
-    <entry file="file://$PROJECT_DIR$/feature_detection.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="734">
-          <caret line="281" column="13" selection-start-line="281" selection-start-column="13" selection-end-line="281" selection-end-column="13" />
-        </state>
-      </provider>
+    <entry file="file://$PROJECT_DIR$/data.json">
+      <provider selected="true" editor-type-id="text-editor" />
     </entry>
-    <entry file="file://$PROJECT_DIR$/load_images.py">
+    <entry file="file://$PROJECT_DIR$/json_data">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="323">
-          <caret line="25" column="13" selection-start-line="25" selection-start-column="13" selection-end-line="25" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/opencv_serializer.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="289">
-          <caret line="17" column="11" selection-start-line="17" selection-start-column="11" selection-end-line="17" selection-end-column="11" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/input_image.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="442">
-          <caret line="26" column="25" lean-forward="true" selection-start-line="26" selection-start-column="25" selection-end-line="26" selection-end-column="25" />
-          <folding>
-            <element signature="e#47#57#0" expanded="true" />
-            <marker date="1588253732993" expanded="true" signature="438:1237" ph="..." />
-            <marker date="1588253732993" expanded="true" signature="1324:1326" ph="..." />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/extract_gps.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1598">
-          <caret line="95" column="19" selection-start-line="95" selection-start-column="19" selection-end-line="95" selection-end-column="19" />
-          <folding>
-            <element signature="e#134#155#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/homography.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="578">
-          <caret line="35" column="25" selection-start-line="35" selection-start-column="25" selection-end-line="35" selection-end-column="25" />
-          <folding>
-            <element signature="e#47#57#0" expanded="true" />
-            <marker date="1588086486721" expanded="true" signature="104:105" ph="..." />
-            <marker date="1588086486721" expanded="true" signature="129:418" ph="..." />
-            <marker date="1588086486721" expanded="true" signature="464:469" ph="..." />
-            <marker date="1588086486721" expanded="true" signature="2116:2122" ph="..." />
-            <marker date="1588086486721" expanded="true" signature="2463:2469" ph="..." />
-          </folding>
+        <state relative-caret-position="-982">
+          <caret line="3" column="11" lean-forward="true" selection-start-line="3" selection-start-column="11" selection-end-line="3" selection-end-column="11" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/config.json">
       <provider selected="true" editor-type-id="text-editor">
         <state>
-          <caret column="27" selection-start-column="27" selection-end-column="27" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/extract_features_db.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="263">
-          <caret line="72" selection-start-line="72" selection-end-line="72" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/json_data">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="323">
-          <caret line="19" lean-forward="true" selection-start-line="19" selection-end-line="19" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/config.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="510">
-          <caret line="30" column="19" selection-start-line="30" selection-start-column="5" selection-end-line="30" selection-end-column="19" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/extractor_and_matcher.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1091">
-          <caret line="155" lean-forward="true" selection-start-line="155" selection-end-line="155" />
-          <folding>
-            <element signature="e#47#57#0" expanded="true" />
-            <marker date="1588433017755" expanded="true" signature="739:773" ph="..." />
-            <marker date="1588433017755" expanded="true" signature="1108:1114" ph="..." />
-            <marker date="1588433017755" expanded="true" signature="3064:3065" ph="..." />
-            <marker date="1588433017755" expanded="true" signature="3751:3752" ph="..." />
-          </folding>
+          <caret column="42" selection-start-column="42" selection-end-column="42" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/config_handler.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="382">
-          <caret line="86" column="21" lean-forward="true" selection-start-line="86" selection-start-column="21" selection-end-line="86" selection-end-column="21" />
+        <state relative-caret-position="-880">
+          <caret line="10" lean-forward="true" selection-start-line="10" selection-end-line="10" />
           <folding>
-            <marker date="1588432667487" expanded="true" signature="82:83" ph="..." />
-            <marker date="1588432667487" expanded="true" signature="82:1903" ph="..." />
+            <marker date="1588515481443" expanded="true" signature="82:83" ph="..." />
+            <marker date="1588515481443" expanded="true" signature="82:1984" ph="..." />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/json_handler.py">
+    <entry file="file://$PROJECT_DIR$/config.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="190">
-          <caret line="240" column="108" selection-start-line="240" selection-start-column="108" selection-end-line="240" selection-end-column="108" />
+        <state relative-caret-position="221">
+          <caret line="13" column="20" selection-start-line="13" selection-start-column="20" selection-end-line="13" selection-end-column="20" />
+          <folding>
+            <marker date="1588514731545" expanded="true" signature="107:108" ph="..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/extract_gps.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="85">
+          <caret line="5" column="3" lean-forward="true" selection-start-line="5" selection-start-column="3" selection-end-line="5" selection-end-column="3" />
+          <folding>
+            <element signature="e#134#155#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/extractor.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="153">
+          <caret line="9" lean-forward="true" selection-start-line="9" selection-end-line="9" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/matcher.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="2584">
+          <caret line="152" lean-forward="true" selection-start-line="152" selection-end-line="152" />
+          <folding>
+            <element signature="e#47#57#0" expanded="true" />
+            <marker date="1588517192863" expanded="true" signature="220:254" ph="..." />
+            <marker date="1588517192863" expanded="true" signature="666:672" ph="..." />
+            <marker date="1588517192863" expanded="true" signature="3452:3453" ph="..." />
+            <marker date="1588517192863" expanded="true" signature="4293:4294" ph="..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/venv/gps_location.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="170">
+          <caret line="10" lean-forward="true" selection-start-line="10" selection-end-line="10" />
+          <folding>
+            <element signature="e#47#72#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/input_image.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="850">
+          <caret line="50" column="11" selection-start-line="50" selection-start-column="11" selection-end-line="50" selection-end-column="11" />
+          <folding>
+            <marker date="1588517377913" expanded="true" signature="96:98" ph="..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/load_images.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="238">
+          <caret line="24" lean-forward="true" selection-start-line="24" selection-end-line="24" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/feature_detection.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="673">
+          <caret line="281" column="13" selection-start-line="281" selection-start-column="13" selection-end-line="281" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/opencv_serializer.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="170">
+          <caret line="10" lean-forward="true" selection-start-line="10" selection-end-line="10" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/homography.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="89">
+          <caret line="77" column="7" lean-forward="true" selection-start-line="77" selection-start-column="7" selection-end-line="77" selection-end-column="7" />
+          <folding>
+            <element signature="e#47#57#0" expanded="true" />
+            <marker date="1588448054059" expanded="true" signature="104:105" ph="..." />
+            <marker date="1588448054059" expanded="true" signature="129:418" ph="..." />
+            <marker date="1588448054059" expanded="true" signature="464:469" ph="..." />
+            <marker date="1588448054059" expanded="true" signature="2078:2084" ph="..." />
+            <marker date="1588448054059" expanded="true" signature="2425:2431" ph="..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/building.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="68">
+          <caret line="4" column="24" selection-start-line="4" selection-start-column="24" selection-end-line="4" selection-end-column="24" />
+          <folding>
+            <element signature="e#47#72#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/building_repository.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="136">
+          <caret line="8" column="31" selection-start-line="8" selection-start-column="31" selection-end-line="8" selection-end-column="31" />
           <folding>
             <element signature="e#47#58#0" expanded="true" />
-            <marker date="1588433154543" expanded="true" signature="808:858" ph="..." />
-            <marker date="1588433154543" expanded="true" signature="1678:1684" ph="..." />
-            <marker date="1588433154543" expanded="true" signature="1848:1885" ph="..." />
-            <marker date="1588433154543" expanded="true" signature="2085:2090" ph="..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/extract_features_db.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="782">
+          <caret line="46" lean-forward="true" selection-start-line="46" selection-end-line="46" />
+          <folding>
+            <element signature="e#48#57#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="347">
+          <caret line="231" lean-forward="true" selection-start-line="231" selection-end-line="231" />
+          <folding>
+            <element signature="e#48#76#0" expanded="true" />
           </folding>
         </state>
       </provider>

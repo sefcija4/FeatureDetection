@@ -1,7 +1,9 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
-# source: https://www.codingforentrepreneurs.com/blog/extract-gps-exif-images-python/
+"""
+source: https://www.codingforentrepreneurs.com/blog/extract-gps-exif-images-python/
+"""
 
 from PIL import Image
 from PIL.ExifTags import TAGS, GPSTAGS
@@ -88,9 +90,3 @@ class ImageMetaData(object):
                     lng = 0 - lng
         return lat, lng
 
-'''path_name = "C:\\Users\\Sefci\\Documents\\_FIT\\_Bakalarka\\data_staromak\\b1_original\\01.jpg"
-meta_data = ImageMetaData(path_name)
-latlng = meta_data.get_lat_lng()
-print(latlng)
-exif_data = meta_data.get_exif_data()
-print(exif_data)'''

@@ -1,167 +1,20 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
-import json
-import os
-import pickle
-
 from config_handler import *
-from opencv_serializer import *
+from building_repository import *
 from input_image import *
-from extractor_and_matcher import *
+from matcher import *
 from homography import *
-
-
-class Building(object):
-
-    def __init__(self):
-        self.id = None
-        self.location = None
-        self.name = None
-        self.path = None
-
-    def set_from_json(self, data):
-        """
-        Initialize object Building parameters from json file
-        :param data: (dict)
-        """
-        self.id = data['id']
-        self.location = GPSLocation(data['latitude'], data['longtitude'])
-        self.name = data['name']
-        self.path = data['path']
-
-    def get_longtitude(self):
-        return self.location.get_longtitude()
-
-    def get_latitude(self):
-        return self.location.get_latitude()
-
-    def print(self):
-        print("---------------------------")
-        print(self.id)
-        self.location.print()
-        print(self.name)
-        print(self.path)
-
-    def print_id_name(self):
-        print("---------------------------")
-        print(self.id, self.name)
-
-
-class BuildingFeature(object):
-
-    def __init__(self, name, path, path_org):
-        self.id = name
-        self.path = path
-        self.original = path_org
-        self.img = None
-        self.keypoints = None
-        self.descriptor = None
-        self.matches = None
-
-    def set_from_dict_file(self, data):
-        # TODO: load kp a desc using BuildingRepository
-        pass
-
-    def load_image(self, path):
-        self.img = cv2.imread(path)
-        # print(self.img.shape)
-        self.img = cv2.cvtColor(self.img, cv2.COLOR_BGR2GRAY)
-
-    def set_keypoints(self, kp):
-        self.keypoints = kp
-
-    def set_descriptor(self, desc):
-        self.descriptor = desc
-
-    def update_matches(self, matches):
-        self.matches = matches
-
-    def get_num_of_matches(self):
-        return len(self.matches)
-
-    def get_sum_of_matches(self):
-        """
-        Sum distances of 10 best matches
-        :return: sum of all distances
-        """
-        total_distance = 0
-
-        self.sort_matches_by_distance()
-
-        for m in self.matches[:10]:
-            total_distance += m.distance
-
-        return total_distance
-
-    def sort_matches_by_distance(self):
-        self.matches.sort(key=lambda x: x.distance)
-
-
-class BuildingRepository(object):
-
-    @staticmethod
-    def get_all_buildings(path):
-        """
-        Load building data (in json format) from file
-        :param path: (string) path to json file
-        :return: (object) Building
-        """
-        buildings = list()
-
-        with open(path) as file:
-            data = json.load(file)
-
-            for x in data:
-                for y in data[x]:
-                    b = Building()
-                    b.set_from_json(y)
-                    buildings.append(b)
-            file.close()
-
-        return buildings
-
-    @staticmethod
-    def get_building_features(folder):
-        """
-        Load keypoints and descriptors from each image of building's file and return them.
-        :param folder: (str) folder in db of specific building
-        :return: (object) list of BuildingFeatures
-        """
-        buildings = list()
-
-        for img in os.listdir(folder):
-
-            if img.endswith('.txt'):
-                continue
-
-            tmp_b = BuildingFeature(img[:-4], str(f'{folder}\{img}'), str(f'{folder}_original\{img[:-4]}_small.jpg'))
-            path = str(f'{folder}\{img[:-4]}')
-
-            # KEYPOINTS
-            kp_load = list()
-
-            with open(str(f'{path}_keypoints.txt'), 'rb') as file:
-                to_load = pickle.load(file, encoding='utf-8')
-
-            for kp in to_load:
-                kp_load.append(CVSerializer.dict_to_cv_keypoint(kp))
-
-            # DESCRIPTOR
-            with open(str(f'{path}_descriptor.txt'), 'rb') as file:
-                desc_load = pickle.load(file, encoding='utf-8')
-
-            tmp_b.set_keypoints(kp_load)
-            tmp_b.set_descriptor(desc_load)
-
-            buildings.append(tmp_b)
-
-        return buildings
 
 
 class App(str):
 
     def __init__(self, path):
+        """
+        App constructor
+        :param path: path to config json file
+        """
         self.config = Config(path)
 
         self.img_in = None
@@ -190,7 +43,7 @@ class App(str):
 
         for x in self.buildings:
             x.print_id_name()
-        print("************************")
+        print("-----------------------")
 
     def load_features(self, building):
         """
@@ -238,6 +91,10 @@ class App(str):
         self.matcher.match_sift(self.img_in.get_descriptor(), self.buildings_features)
 
     def find_best_match(self):
+        """
+
+        :return:
+        """
         self.best_match = self.matcher.best_match(self.buildings_features, self.config.get_filter_features())
         # print("Best match img:", self.best_match.path)
 
@@ -250,11 +107,19 @@ class App(str):
             return True
 
     def find_best_keypoints(self):
+        """
+
+        :return:
+        """
         # Find best 4 keypoints from best match
         self.best_match.matches = Matcher.filter_out_close_keypoints(self.best_match.matches, self.img_in.keypoints,
                                                                      self.config.get_filter_features())
 
     def show_matches(self):
+        """
+
+        :return:
+        """
         matches = self.matcher.show_matches(self.img_in, self.buildings_features)
 
         for m in matches:
@@ -263,6 +128,10 @@ class App(str):
             cv2.destroyAllWindows()
 
     def warp_image(self):
+        """
+
+        :return:
+        """
         homography = Homography()
         homography.find_matrix(self.best_match.matches, self.img_in.keypoints, self.best_match.keypoints)
         self.best_match.load_image(self.best_match.path)
@@ -285,6 +154,11 @@ class App(str):
         # maybe try using Building_features?
 
     def visualization(self, homography):
+        """
+
+        :param homography:
+        :return:
+        """
         # ORIGINAL IMAGE
         print(self.best_match.original)
         original_img = cv2.imread(self.best_match.original)
@@ -339,34 +213,31 @@ class App(str):
             print(x.data['name'])
 
 
-app = App('config.json')
-app.load_buildings()
+if __name__ == "__main__":
 
-app.load_image()
+    app = App('config.json')
+    app.load_buildings()
 
-# app.load_image('data\\_p\\test.jpg')
-# app.load_image('data\\_p\\test_b_4.jpg') # lepší dataset
-# app.load_image('data\\_p\\test_b_5.jpg')
-# app.load_image('data\\_p\\test_b_7.jpg')
-# app.load_image('data\\_p\\test_b_8.jpg')
-# app.load_image('data\\_p\\test_b_9.jpg') # stíny/lampa atd.
-# app.load_image('data\\_p\\IMG_3513.jpg')
-app.img_in.preprocess()
-app.img_in.print()
+    app.load_image()
 
-# app.img_in.show()
+    # app.load_image('data\\_p\\test.jpg')
+    # app.load_image('data\\_p\\test_b_4.jpg') # lepší dataset
+    # app.load_image('data\\_p\\test_b_5.jpg')
+    # app.load_image('data\\_p\\test_b_7.jpg')
+    # app.load_image('data\\_p\\test_b_8.jpg')
+    # app.load_image('data\\_p\\test_b_9.jpg') # stíny/lampa atd.
+    # app.load_image('data\\_p\\IMG_3513.jpg')
+    app.img_in.preprocess()
+    app.img_in.print()
 
-if app.check_perimeter():
+    if app.check_perimeter():
 
-    app.match_features()
+        app.match_features()
 
-    if app.find_best_match():
+        if app.find_best_match():
 
-        app.find_best_keypoints()
+            app.find_best_keypoints()
 
-        app.warp_image()
+            app.warp_image()
 
-        app.show_matches()
-
-
-# img.show()
+            app.show_matches()

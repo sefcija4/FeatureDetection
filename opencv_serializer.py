@@ -5,6 +5,9 @@ import cv2
 
 
 class CVSerializer(object):
+    """
+    Preparation of openCV object for serialization
+    """
 
     def __init__(self):
         pass

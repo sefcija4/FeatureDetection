@@ -4,6 +4,7 @@
       <w>dataset</w>
       <w>euclidian</w>
       <w>flann</w>
+      <w>grayscale</w>
       <w>homography</w>
       <w>imgs</w>
       <w>keypoint</w>

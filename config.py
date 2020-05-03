@@ -3,17 +3,21 @@
 
 import json
 
+"""
+Script for generating json config file
+"""
+
 data = dict()
 data['metadata'] = []
 data['input_img'] = []
 data['gps'] = []
-data['matching'] = []
+data['flann_matching'] = []
 
 PATH = 'config.json'
 
 # METADATA
 data['metadata'].append({
-    'metadata_path': 'data.txt'
+    'metadata_path': 'data.json'
 })
 
 # INPUT IMAGE

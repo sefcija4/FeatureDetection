@@ -3,49 +3,38 @@
 
 import cv2
 import numpy as np
-import operator
 from scipy.spatial import distance
 
 
-class FeatureExtractor(object):
-
-    '''def __init__(self):
-        self.sift = cv2.xfeatures2d.SIFT_create()
-        # self.surf = cv2.xfeatures2d.SURF_create()
-        # self.orb = cv2.ORB_create(nfeatures=number_of_features)'''
-
-    # TODO: pick feature descriptor (SIFT, ORB, SURF)
-
-    @staticmethod
-    def extract_sift(img):
-        sift = cv2.xfeatures2d.SIFT_create()
-        keypoint, descriptor = sift.detectAndCompute(img, None)
-        return keypoint, descriptor
-
-    def extract_surf(self):
-        pass
-
-    def extract_orb(self):
-        pass
-
-
 class Matcher(object):
+    """
+    Methods for feature and image matching
+    """
 
     def __init__(self):
         self.matcher = None
 
     def set_sift_match(self, flann_data):
-        # TODO: set flann param.
+        """
+        Set FLANN matcher for SIFT
+        :param flann_data: (dict) flann parameters
+        """
         index_params = dict(algorithm=flann_data['flann_index'], trees=flann_data['flann_trees'])
         search_params = dict(checks=flann_data['flann_checks'])   # or pass empty dictionary
         self.matcher = cv2.FlannBasedMatcher(index_params, search_params)
 
     def match_sift(self, in_img_descriptor, dataset):
+        """
 
+        :param in_img_descriptor:
+        :param dataset:
+        :return:
+        """
+
+        # Match each building (in surroundings) witch input image
         for building in dataset:
             # print(type(dataset))
             for img in dataset[building]:
-                # TODO: získat jednu budovu, poronat, spočítat match a uložit do Building Features
 
                 img.matches = self.matcher.knnMatch(in_img_descriptor, img.descriptor, k=2)
                 img.update_matches(self.ratio_test(img.matches))
@@ -53,12 +42,21 @@ class Matcher(object):
                 # print(f'Number of matches {img.id}: {len(img.matches)}')
 
     def match_surf(self):
+        # TODO
         pass
 
     def match_orb(self):
+        # TODO
         pass
 
-    def ratio_test(self, matches, ratio=0.6):
+    @staticmethod
+    def ratio_test(matches, ratio=0.6):
+        """
+        Filter out bad matches using Lowe's ratio test
+        :param matches: (list) matches
+        :param ratio: default value 0.6
+        :return: sorted list of good matches
+        """
         good_matches = list()
         count = 0
 
@@ -72,6 +70,12 @@ class Matcher(object):
         return sorted(good_matches, key=lambda x: x.distance)
 
     def show_matches(self, img_in, dataset):
+        """
+        Show mathes
+        :param img_in: input image
+        :param dataset: dataset of buildings
+        :return: list of images
+        """
         matches = list()
 
         for building in dataset:
@@ -86,20 +90,30 @@ class Matcher(object):
     @staticmethod
     def draw_matches(img1, img2, keypoints1, keypoints2, matches,
                      flag=cv2.DrawMatchesFlags_NOT_DRAW_SINGLE_POINTS):
+        """
+
+        :param img1: input_image
+        :param img2: building (dataset) image
+        :param keypoints1: input_image keypoints
+        :param keypoints2: building's keypoints
+        :param matches: matched features for img1 and image2
+        :param flag: cv2.flag for cv2.drawMatches()
+        :return: image with visualized mathes
+        """
 
         img_matches = np.empty((max(img1.shape[0], img2.shape[0]), img1.shape[1] + img2.shape[1], 3), dtype=np.uint8)
-        #drawMatchesNkk for list
-        #drawMatches for cv::DMatch
+        # drawMatchesNkk for list
+        # drawMatches for cv::DMatch
         cv2.drawMatches(img1, keypoints1, img2, keypoints2, matches[:4], img_matches, flags=flag)
         return img_matches
 
     @staticmethod
     def best_match(matches, threshold):
         """
-
-        :param matches:
-        :param threshold:
-        :return:
+        Find best matching image to input image
+        :param matches: matches
+        :param threshold: minimal number of good matches to be consider as successful recognition
+        :return: best matching image / None
         """
         results = list()
 
@@ -125,10 +139,17 @@ class Matcher(object):
 
     @staticmethod
     def check_distances(kp, prev_match, cur_match, threshold):
+        """
+        Check distance between two keypoints in input image
+        :param kp: current keypoint
+        :param prev_match:
+        :param cur_match:
+        :param threshold: minimal distance between two keypoints
+        :return: (boolean) if keypoints are further than threshold value
+        """
         min_distance = threshold['pixel_distance']  # in pixels TODO: relative to img size
 
         curr = cur_match.queryIdx
-        # prev = prev_match.queryIdx
 
         for p_m in prev_match:
             prev = p_m.queryIdx
@@ -142,38 +163,28 @@ class Matcher(object):
             if distance.euclidean((x1, y1), (x2, y2)) <= min_distance:
                 return False
 
-        print("ADD:", (x2, y2))
+        print("Add keypoint:", (x2, y2))
         return True
 
     @staticmethod
     def filter_out_close_keypoints(matches, kp, threshold):
-        # dostanu seřezné matches. Kontrola vzdálenosti mezi top 4mi.
-        # Pokud bude vzdálenst menší vezmese další match.
-
-        # return matches[:4]
+        """
+        Find best four keypoints. Start from best keypoint and than check every other keypoint is far enough
+        :param matches:
+        :param kp: keypoints
+        :param threshold: minimal distance between two points
+        :return: best four keypoints
+        """
 
         best_four = list()
 
         start = matches[0]
         best_four.append(start)
-        prev_m = start
 
         for m in matches:
             if len(best_four) > 4:
                 break
             if Matcher.check_distances(kp, best_four, m, threshold):
                 best_four.append(m)
-
-        '''for m in matches:
-            if len(best_four) > 4:
-                break
-
-            if Matcher.check_distance(kp, prev_m, m):
-                best_four.append(m)
-                prev_m = m'''
-
-
-
-        # print(best_four)
 
         return best_four

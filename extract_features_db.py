@@ -1,11 +1,11 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
-import sys
+
 import os
-from extract_gps import *
+from config_handler import *
 from opencv_serializer import *
-import extractor_and_matcher
+import matcher
 import pickle
 
 PATH = 'data'
@@ -22,15 +22,21 @@ data.append("b7")
 data.append("b8")
 data.append("b9")
 
+"""
+Script for pre-compute features for dataset images
+"""
+
 
 def main():
 
     # TODO: tak folder path as parameter
 
-    print('Number of arguments:', len(sys.argv), 'arguments.')
-    print('Argument List:', str(sys.argv))
+    config = Config('config.json')
 
-    extractor = extractor_and_matcher.FeatureExtractor()
+    # Load building files from metadata
+    # TODO: load folders from metadata!
+
+    extractor = matcher.FeatureExtractor()
     dir_name = os.path.dirname(__file__)
 
     for folder in data:
@@ -56,9 +62,7 @@ def main():
                 print("Something went wrong with:" + img)
                 continue
 
-            #############
-            # KEYPOINTS #
-            #############
+            # KEYPOINTS
             tmp_kp_dict = list()
 
             for kp in tmp_kp:
@@ -71,16 +75,14 @@ def main():
 
                 file.close()
 
-            ###############
-            # DESCRIPTORS #
-            ###############
-
+            # DESCRIPTORS
             with open(str(f'{dir_name}\\{PATH}\\{folder}\\{img[:-4]}_descriptor.txt'), 'wb+') as file:
                 pickle.dump(tmp_des, file, protocol=pickle.HIGHEST_PROTOCOL)
 
                 print("DES: Ok")
 
                 file.close()
+
 
 if __name__ == "__main__":
     main()

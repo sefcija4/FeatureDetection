@@ -77,9 +77,6 @@ class Visualization(object):
     This class has no use in future app development
     """
 
-    def __init__(self):
-        pass
-
     @staticmethod
     def create_mask(img):
         _, mask_bool = cv2.threshold(img, 1, 255, cv2.THRESH_BINARY)

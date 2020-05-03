@@ -5,6 +5,9 @@ import json
 
 
 class Config(object):
+    """
+    Config class implements loading of data from json file
+    """
 
     def __init__(self, path):
 
@@ -65,7 +68,7 @@ class Config(object):
         """
         data = dict()
 
-        for p in self.data['matching']:
+        for p in self.data['flann_matching']:
             data['flann_index'] = int(p['flann_index'])
             data['flann_trees'] = int(p['flann_trees'])
             data['flann_checks'] = int(p['flann_checks'])
@@ -86,8 +89,8 @@ class Config(object):
         """
         data = dict()
 
-        for p in self.data['matching']:
+        for p in self.data['flann_matching']:
             data['pixel_distance'] = int(p['pixel_distance'])
             data['min_number_of_matches'] = int(p['min_number_of_matches'])
 
-        return  data
+        return data
