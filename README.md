@@ -40,10 +40,15 @@ Pro výpočet příznaků je použit deskritor SIFT. Příznaky pro budovy v dat
 
 ### JSON
 
-### Skript
+### Skripty
 Skript **config.py** je určený pro generování config souboru
 Skript **extract_features_db.py** je určený pro výpočet příznaků všech budov v datasetu.
 Skript **json_data.py** je určený pro přegenerování JSON metadat všech budov.
+
+# FAQ
+## Jak přidat novou budovu do databáze?  
+
+**TODO: další možné otázky**  
 
 # Dokumentace
 
@@ -75,7 +80,10 @@ def check_if_belongs(input_img, db_building):
 Třída ``CVSerializer`` se stará o převod klíčových bodů z OpenCV třídy ``cv2.Keypoint`` na slovník (a zpět), který může být serializován např. pomocí knihovny pickle.
 #### Metody
 ##### cv_keypoint_to_dict(keypoints)
+Keypoints (cv2.Keypoint) jsou serializovány/převedeny na slovník. Tato metoda se používá při exportu přepočítaných příznaků. Serializér Pickle ummí serializovat jen klasické objekty Pythonu.  
 ##### dict_to_cv_keypoint(keypoints)
+Parametr Keypoints (dict) je načtený slovník ze souboru předpočítaných klíčových bodů. Pro další použití klíčových bodů je potřeba pravovat s objekty OpenCV (cv2.Keypoint).  
+
 ------------------------------------------------------------------------------------------------   
 ### Image
 #### Parametry
@@ -83,29 +91,45 @@ Třída ``CVSerializer`` se stará o převod klíčových bodů z OpenCV třídy
 **img** - načtený obraz pomocí ``cv2.imread``  
 **location** - gps lokace (GPSLocation)  
 **keypoints** - klíčové body 
-**descriptors** - příznaky
+**descriptors** - vektor příznaků
 #### Metody
 ##### get_descriptor()
 ##### load_location()
+Načte gps data (zeměpisná šířka a délka) z metadat snímku. Metadata musí být ve formátu exif format. Pozor při práci se vstupním snímkem aby se zachovali metedata. Ty se mouhou ztratit např. při exportu z různých editorů.
 ##### get_longtitude()
 ##### get_latitude()
 ##### preprocess()
+Provede předzpracování vstupního obrazu: ekvalizace histogramu (CLAHE) a změnšení snímku.  
 ##### resize(max_dimension=960)
+Zmenší vstupní snímek, tak aby největší rozměr obrazu měl 960 pixelů.  
 ##### extract_features()  
-##### merge_image()  
+Provede výpočet příznaků (SIFT) pro vstupní obraz.
+##### merge_image(image)  
+Spojí vstupní obraz s obrazem v parametru. Je nutné dodržet aby obě matice měli stejný rozměr. Metoda vrací nový spojený obraz, kde jsou snímky přes sebe překryté s 50% alfa kanálem.
 ##### show()  
+Ukáže načtený vstupní obraz v novém okně.
+
 ------------------------------------------------------------------------------------------------     
 ### Config
 #### Parametry
-**path**
-**data**
+**path** - cesta k souboru (config.json)  
+**data** - načtená data ze souboru ve formátu json  
 #### Metody
+##### __init__(path)
+Konstruktor potřebuje cestu k souboru config.json a poté z něj načte danná data.
 ##### load()
+Načte data ze souboru
 ##### get_metadata()
+Metoda vrací cestu k souboru s metadaty budov (data.json)
 ##### get_input_image()
+Metoda vrací cestu ke vtupnímu snímku  
 ##### get_gps_radius()
+Metoda vrací velikost radiusu okolí, ve kterém budou budovy následně rozpoznávány. Velikost je ve stupních. Hodnota 0.003 znamená, že radius má velikost 300m.
 ##### get_flann_matching_setup()
+Metoda vrací slovník, který obsaje data pro nastavení FLANN matcher.
 ##### get_filter_features()
+Metoda vrací slovník, který obsahuje prahy pro nalezení nejlepší shody a 4 bodů pro tvorbu transformační matice.
+
 ------------------------------------------------------------------------------------------------     
 ### Visualization
 #### Metody
@@ -113,21 +137,23 @@ Třída ``CVSerializer`` se stará o převod klíčových bodů z OpenCV třídy
 ------------------------------------------------------------------------------------------------    
 ### Homography
 #### Parametry
-**H**
-**keypoints1**
-**keypoints2**
+**H** - Transformační matice
+**keypoints1** - (list) souřadnice klíčových bodů obrázku 1
+**keypoints2** - (list) souřadnice klíčových body obrázku 2
 #### Metody
 ##### add_keypoints()
 ##### find_matrix()
-##### warp_image()
-##### merge_images()
+Výpočet transformační matice pomocí ``cv2.fingHomography``
+##### warp_image(img1, img2)
+Transformace obrázku2 do obrázku1. Výsledný obrázek má rozměry obrázku1 ale obsahuje transformovaný snímek2 a přípdané černé pozadí.
+
 ------------------------------------------------------------------------------------------------   
 ### Building
 #### Parametry
-**id**
-**location**
-**name**
-**path**
+**id** - (int) id budovy
+**location** - (GPSLocation) umístění budovy (gps souřadnice)
+**name** - název budovy
+**path** - cesta ke složce budovy, kde jsou uložené jednotlivé snímky dané budovy
 #### Metody
 ##### set_from_json()
 ##### get_longtitude()
@@ -135,13 +161,13 @@ Třída ``CVSerializer`` se stará o převod klíčových bodů z OpenCV třídy
 ------------------------------------------------------------------------------------------------   
 ### BuildingFeature
 #### Parametry
-**id**
-**path**
-**original**
-**img**
-**keypoints**
-**descriptor**
-**matches**
+**id** - Název budovy
+**path** - cesta ke snímku v databázi  
+**original** - cesta k originálnímu snímku před úpravou a přidáním do databáze pro rozpoznání. Snímek je používaný pouze pro vizualici transfomace.  
+**img** - obrázek   
+**keypoints** - klíčové body  
+**descriptor** - vektor příznaků  
+**matches** - 
 #### Metody
 ##### load_image()
 ##### set_keypoints()
@@ -175,18 +201,18 @@ Třída ``CVSerializer`` se stará o převod klíčových bodů z OpenCV třídy
 ------------------------------------------------------------------------------------------------    
 ### App
 #### Parametry
-**config**  
-**img_in**  
-**db_path**  
-**building**  
-**building_feature**  
-**matcher**  
-**matches**  
-**warped_img**  
-**sift** 
-**surf**
-**orb**
-**best_match**  
+**config** - (Config)  
+**img_in** - (Image)
+**db_path** -  
+**building**  -  
+**building_feature** -  
+**matcher** -  
+**matches** -  
+**warped_img** -  
+**sift** -  
+**surf** - 
+**orb** -
+**best_match** -  
 #### Metody
 ##### load_buildings()
 ##### load_features()
