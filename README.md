@@ -51,7 +51,7 @@ Skript **json_data.py** je určený pro přegenerování JSON metadat všech bud
 **TODO: další možné otázky**  
 
 # Dokumentace
-
+**@** - u názvu metody značí, že se jedná o statickou metodu
 ## Třídy
 ------------------------------------------------------------------------------------------------  
 ### GPSLocation
@@ -61,7 +61,7 @@ Skript **json_data.py** je určený pro přegenerování JSON metadat všech bud
 #### Metody
 ##### get_latitude()  
 ##### get_longtitude()  
-##### check_if_belongs(Image, Building)
+##### @ check_if_belongs(Image, Building)
 Statická metoda, která zjistí, zda jde budova z databáze v okolí od místa pořízení fotografie. Návratová hodnota je boolean.
 Proměnná ``radius=0.003`` je velikost radiusu.
 ```python
@@ -79,9 +79,9 @@ def check_if_belongs(input_img, db_building):
 ### CVSerializer
 Třída ``CVSerializer`` se stará o převod klíčových bodů z OpenCV třídy ``cv2.Keypoint`` na slovník (a zpět), který může být serializován např. pomocí knihovny pickle.
 #### Metody
-##### cv_keypoint_to_dict(keypoints)
+##### @ cv_keypoint_to_dict(keypoints)
 Keypoints (cv2.Keypoint) jsou serializovány/převedeny na slovník. Tato metoda se používá při exportu přepočítaných příznaků. Serializér Pickle ummí serializovat jen klasické objekty Pythonu.  
-##### dict_to_cv_keypoint(keypoints)
+##### @ dict_to_cv_keypoint(keypoints)
 Parametr Keypoints (dict) je načtený slovník ze souboru předpočítaných klíčových bodů. Pro další použití klíčových bodů je potřeba pravovat s objekty OpenCV (cv2.Keypoint).  
 
 ------------------------------------------------------------------------------------------------   
@@ -178,50 +178,67 @@ Transformace obrázku2 do obrázku1. Výsledný obrázek má rozměry obrázku1 
 ##### sort_matches_by_distance()
 ------------------------------------------------------------------------------------------------    
 ### BuildingRepository 
+Třída obsahuje metody pro načítání dat budov např. metadat a jejich předpočítaných příznaků
 #### Metody
-##### get_all_buildings()
-##### get_building_features()
+##### @ get_all_buildings()
+
+##### @ get_building_features()
+
+
 ------------------------------------------------------------------------------------------------    
 ### FeatureExtractor
+Třída se stará o výpočet příznaků. Momentálně je možné vypočítávat pouze SIFT příznaky.
 #### Metody
-##### extract_sift(img)
+##### @ extract_sift(img)
+Vypočítá SIFT příznaky obrazu (img). Používá se pro výpočet příznaků vstupního obrazu.
+
 ------------------------------------------------------------------------------------------------   
 ### Matcher
+Třída implementuje všechny metody, které se týkají párování příznaků a následné práce s nimi. Momentálně je možné párovat pouze SIFT příznaky.
 #### Parametry
 **matcher**
 #### Metody
 ##### set_sift_match()
 ##### match_sift()
-##### ratio_test()
 ##### show_matches()
-##### draw_matches()
-##### best_match()
-##### check_distances()
-##### filter_out_close_keypoints()
+##### @ ratio_test()
+##### @ draw_matches()
+##### @ best_match()
+##### @ check_distances()
+##### @ filter_out_close_keypoints()
 ------------------------------------------------------------------------------------------------    
 ### App
+Třída představuje jeden běh výsledné aplikace
 #### Parametry
 **config** - (Config)  
-**img_in** - (Image)
-**db_path** -  
-**building**  -  
-**building_feature** -  
-**matcher** -  
-**matches** -  
-**warped_img** -  
-**sift** -  
-**surf** - 
-**orb** -
-**best_match** -  
+**img_in** - (Image) vstupní obraz  
+**db_path** - aktuální cesta umístění tohoto skriptu   
+**building**  -  (list) list načtených metadat budov (Buildings)  
+**building_feature** - (dict) slovník vypočítaných příznaků budov (BuildingsFeatures)  
+**matcher** - (Matcher)       
+**best_match** - (BuldingFeature) budova, která měla nejlepší shodu 
 #### Metody
+##### __init__(path)
+Konstruktor načte konfigurační soubor z cesty (path), nastaví cestu k aktuálnímu pracovnímu adresáři a nastaví cestu do adresáře s budovami.
 ##### load_buildings()
-##### load_features()
+Načte metadata budov ze souboru. Cesta k souboru je definovaná v *config.json*
+##### load_features(building)
+Načte předpočítané příznaky pro danou budovu
 ##### load_image()
+Načte vstupní obraz z cesty uložené v konfigurančním souboru
 ##### check_perimeter()
+Pokud budova z datasetu patří do okolí uživatele, tak načte předpočítané příznaky dané budovy. Pokud není v okolí žádná bude z databáze vrací *False*. V opačném případě jendé a více budov v okolí vrací *True*
 ##### match_features()
+Funkce vypočítá příznaky pro vstupní obraz a napáruje všechny budovy v okolí se vstupním snímkem.  
 ##### find_best_match()
+Vybere snímek budovy, který má nejlepší shodu. Nejlepší shoda je vybírána podle počtu dobrých shod. Dobrá shoda je každé napárování, které prošlo  poměrovým testem *ratio_test()*
 ##### find_best_keypoints()
+Vybere čtyři nejlepší klíčové body pro tvorbu transformační matice. Čtyři body jsou vybírány na základě jejich vzdáleností v rámci párování a vzdálensoti vůči ostatním. V rámci testování bylo zjištěno, že je dosahováno přesnějších výsledků, pokud jsou body vzdálenější od sebe. Vzdálenost bodů je zatím možné ovlivnit minimálním prahem. Tento prah je možné nastavit v konfiguračním souboru *config.json*
 ##### show_matches()
+Ukáže všechny napárování mezi vstupním snímkem a snímky budov v okolí  
 ##### warp_image()
-##### visualization()
+Získá transformační matici pro vytvoření následné vizualizace výsledné umístění budovy do scény  
+##### visualization(homography)
+Tato metoda slouží pro vizualici výsledné transformace  
+
 ------------------------------------------------------------------------------------------------   
