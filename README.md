@@ -45,8 +45,10 @@ Skript **config.py** je určený pro generování config souboru
 Skript **extract_features_db.py** je určený pro výpočet příznaků všech budov v datasetu.
 Skript **json_data.py** je určený pro přegenerování JSON metadat všech budov.
 
-# FAQ
+# Info
 ## Jak přidat novou budovu do databáze?  
+
+## Průběh
 
 **TODO: další možné otázky**  
 
@@ -116,11 +118,11 @@ Ukáže načtený vstupní obraz v novém okně.
 **data** - načtená data ze souboru ve formátu json  
 #### Metody
 ##### __init__(path)
-Konstruktor potřebuje cestu k souboru config.json a poté z něj načte danná data.
+Konstruktor potřebuje cestu k souboru *config.json* a poté z něj načte danná data.
 ##### load()
 Načte data ze souboru
 ##### get_metadata()
-Metoda vrací cestu k souboru s metadaty budov (data.json)
+Metoda vrací cestu k souboru s metadaty budov *data.json*
 ##### get_input_image()
 Metoda vrací cestu ke vtupnímu snímku  
 ##### get_gps_radius()
@@ -133,7 +135,20 @@ Metoda vrací slovník, který obsahuje prahy pro nalezení nejlepší shody a 4
 ------------------------------------------------------------------------------------------------     
 ### Visualization
 #### Metody
-##### create_mask()
+##### @ create_mask(img)
+Vytvoří masku obrázku *img*. Maska reprezentuje oddělení objektu od černého pozadí
+```python
+    def create_mask(img):
+        _, mask_bool = cv2.threshold(img, 1, 255, cv2.THRESH_BINARY)
+        # Morphology
+        kernel = np.ones((5, 5), np.uint8)
+        mask_bool = cv2.morphologyEx(img, cv2.MORPH_OPEN, kernel)
+        _, mask_bool = cv2.threshold(mask_bool, 1, 255, cv2.THRESH_BINARY)
+        return mask_bool
+```
+
+![mask](doc_images/mask.png)
+
 ------------------------------------------------------------------------------------------------    
 ### Homography
 #### Parametry
@@ -156,8 +171,19 @@ Transformace obrázku2 do obrázku1. Výsledný obrázek má rozměry obrázku1 
 **path** - cesta ke složce budovy, kde jsou uložené jednotlivé snímky dané budovy
 #### Metody
 ##### set_from_json()
+Načtení metadat o budově z json souboru
+```python
+    def set_from_json(self, data):
+        self.id = data['id']
+        self.location = GPSLocation(data['latitude'], data['longtitude'])
+        self.name = data['name']
+        self.path = data['path']
+```
 ##### get_longtitude()
+Vrací zeměpisnou délku
 ##### get_latitude()
+Vrací zeměpisnou šířku
+
 ------------------------------------------------------------------------------------------------   
 ### BuildingFeature
 #### Parametry
@@ -169,21 +195,27 @@ Transformace obrázku2 do obrázku1. Výsledný obrázek má rozměry obrázku1 
 **descriptor** - vektor příznaků  
 **matches** - 
 #### Metody
+##### __init__(name, path, path_org)
 ##### load_image()
+Načte snímek budovy a převede ho do odstínu šedi
 ##### set_keypoints()
 ##### set_descriptor()
 ##### update_matches()
+Nastaví nebo updatuje 
 ##### get_num_of_matches()
-##### get_sum_of_matches()
+##### get_sum_of_matches(count=10)
+Sečte např. 10 prvních (nejlepších) napárování 
 ##### sort_matches_by_distance()
+Seřadí napárované příznaky podle vzdálenosti (kratší vzdálenost => lepší)
+
 ------------------------------------------------------------------------------------------------    
 ### BuildingRepository 
 Třída obsahuje metody pro načítání dat budov např. metadat a jejich předpočítaných příznaků
 #### Metody
-##### @ get_all_buildings()
-
-##### @ get_building_features()
-
+##### @ get_all_buildings(path)
+Načte metadata budov ze soubor *data.json*
+##### @ get_building_features(folder)
+Načte klíčové body a vektory příznaků každé budovy dle parametru *folder*
 
 ------------------------------------------------------------------------------------------------    
 ### FeatureExtractor
@@ -191,6 +223,12 @@ Třída se stará o výpočet příznaků. Momentálně je možné vypočítáva
 #### Metody
 ##### @ extract_sift(img)
 Vypočítá SIFT příznaky obrazu (img). Používá se pro výpočet příznaků vstupního obrazu.
+```python
+    def extract_sift(img):
+        sift = cv2.xfeatures2d.SIFT_create()
+        keypoint, descriptor = sift.detectAndCompute(img, None)
+        return keypoint, descriptor
+```  
 
 ------------------------------------------------------------------------------------------------   
 ### Matcher
@@ -198,14 +236,42 @@ Třída implementuje všechny metody, které se týkají párování příznaků
 #### Parametry
 **matcher**
 #### Metody
-##### set_sift_match()
+##### set_sift_match(flann_data)
+Vytvoří cv2.FlannBasedMatcher() na základě nastavení dle parametrů v *flann_data*  
+```python
+    def set_sift_match(self, flann_data):
+        index_params = dict(algorithm=flann_data['flann_index'], trees=flann_data['flann_trees'])
+        search_params = dict(checks=flann_data['flann_checks'])   # or pass empty dictionary
+        self.matcher = cv2.FlannBasedMatcher(index_params, search_params)
+```  
 ##### match_sift()
-##### show_matches()
-##### @ ratio_test()
+Napáruje všechny snímky budov v okolí se vstupním snímkem. Vybere pouze dobrá spojení, která projdou poměrovým testem. Výsledná napárování jsou uložena v parametru objektu BuildingFeature.matches.  
+##### show_matches()  
+Metoda vrací list obrazů se zobrazenými body, které byly napárovány.  
+##### @ ratio_test(matches, ratio=0.6)
+Metoda odstraní špatné napárování podle poměrového testu
+```python
+def show_matches(self, img_in, dataset):
+        matches = list()
+        for building in dataset:
+            for img in dataset[building]:
+                img.load_image(img.path)
+                img_matches = self.draw_matches(img_in.img, img.img, img_in.keypoints, img.keypoints, img.matches)
+                matches.append(img_matches)
+        return matches 
+```  
 ##### @ draw_matches()
+Metoda vytvoří nový obraz, kde je vstupní snímek a snímek budovy vedle sebe. Nalezené páry jsou poté propojeny barevnými čarami. Způsob vizualizace např. ukázat i nenepárované body lze měnit pomocí *flag*.
+
+![draw_matches() result](doc_images/draw_matches.PNG)  
+
 ##### @ best_match()
+Metoda nejde nejlepší obrázek z databáze, na základě počtu dobrých napárování.
 ##### @ check_distances()
-##### @ filter_out_close_keypoints()
+Metoda kontroluje zda jsou klíčové body od sebe vzdálené minimálně dle hodnoty *threshold['pixel_distance']*. Tuto hodnotu lze upravit v konfiguračním souboru.
+##### @ filter_out_close_keypoints(matches, kp, threshold)
+Metoda projde všechny napárování v *matches* a pokud danný bod projde metodou *check_distances* tak je přidán do výsledné čtvrřice bodů, které budou použity pro tvorbu transformační matice. Prvním bodem přidaným do čtveřice je bod s nejmenší vzdáleností (nejpřesnějším napárováním). Body jsou testovány postupně podle jejich vzdáleností.
+
 ------------------------------------------------------------------------------------------------    
 ### App
 Třída představuje jeden běh výsledné aplikace
@@ -239,6 +305,8 @@ Ukáže všechny napárování mezi vstupním snímkem a snímky budov v okolí
 ##### warp_image()
 Získá transformační matici pro vytvoření následné vizualizace výsledné umístění budovy do scény  
 ##### visualization(homography)
-Tato metoda slouží pro vizualici výsledné transformace  
+Tato metoda slouží pro vizualici výsledné transformace. Jsou zde vypočítány masky pro obraz z databáze a vstupní snímek aby mohli být následně spojeny do jednoho.  
+
+![masks](doc_images/masks.png)
 
 ------------------------------------------------------------------------------------------------   
