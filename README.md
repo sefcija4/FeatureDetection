@@ -11,13 +11,12 @@ Tento nástroj vznikl jako součást bakalářské práce. Jedná se o program, 
 Zdůvodu patentovaných metod SURF a SIFT je potřeba si naistalovat i OpenCV contribution verzi [link](https://pypi.org/project/opencv-contrib-python/). Případně je možné přejít na starší verzi OpenCV.
 
 # Config
-Soubor config.json obsahuje nastavitelné proměnné pro celou aplikaci. Je možné zde nastavit cesty vstupního obrazu, metadat a dalších parametrů. Soubor je generován skriptem [config.py](./config.py)
+Soubor config.json obsahuje nastavitelné proměnné pro celou aplikaci. Je možné zde nastavit cesty vstupního obrazu, metadat a dalších parametrů. Soubor je generován skriptem [config.py](./config.py)  
+Pro práci s konfiguračním souborem je určená třída ``Config``, kde po přidání nového parametru stačí naimplementovat novou metodu. Doporučuji napsat metody i samotné dělení dat v konfiračním souboru na logiké malé části, aby dále předávaná data nebyla zbytečně velká...   
 
 # Dataset
 ## Tvorba
-Fotografie budov by měli být pořizovány za dobrých světelných podmínke s minimem stínů a rušivých elementů např. cedule, auta apod.
-
-**TODO obrázek dobrých  a špatných fotek**
+Fotografie budov by měli být pořizovány za dobrých světelných podmínek s minimem stínů a rušivých elementů např. cedule, auta apod. Dobré je také se vyvarovat ostrým stínům.  
 
 ## Struktura
 Ukázka složkové struktury pro uchování předpočítaných příznaků a snímků budov
@@ -41,16 +40,18 @@ Pro výpočet příznaků je použit deskritor SIFT. Příznaky pro budovy v dat
 ### JSON
 
 ### Skripty
-Skript **config.py** je určený pro generování config souboru
-Skript **extract_features_db.py** je určený pro výpočet příznaků všech budov v datasetu.
-Skript **json_data.py** je určený pro přegenerování JSON metadat všech budov.
+Skripty používají cesty, načtené z konfiguračního souboru.
+
+Skript [config.py](./config.py)   je určený pro generování config souboru  
+Skript [extract_features_db.py](./extract_features_db.py) je určený pro výpočet příznaků všech budov v datasetu.  
+Skript [json_data.py](./json_data.py) je určený pro přegenerování JSON metadat všech budov.  
 
 # Info
 ## Jak přidat novou budovu do databáze?  
 
-## Průběh
+## Diagram aktivit
 
-**TODO: další možné otázky**  
+![masks](doc_images/flow_chart.jpg)  
 
 # Dokumentace
 **@** - u názvu metody značí, že se jedná o statickou metodu
@@ -136,18 +137,41 @@ Metoda vrací slovník, který obsahuje prahy pro nalezení nejlepší shody a 4
 ### Visualization
 #### Metody
 ##### @ create_mask(img)
-Vytvoří masku obrázku *img*. Maska reprezentuje oddělení objektu od černého pozadí
+Vytvoří masku obrázku *img*. Maska reprezentuje oddělení objektu od černého pozadí. Morfologie (otevření a uzavření) je použitá pro odstranění okolních samotných pixelů a uzavření děr po metodě prahování.
 ```python
     def create_mask(img):
         _, mask_bool = cv2.threshold(img, 1, 255, cv2.THRESH_BINARY)
         # Morphology
-        kernel = np.ones((5, 5), np.uint8)
-        mask_bool = cv2.morphologyEx(img, cv2.MORPH_OPEN, kernel)
+        kernel_open = np.ones((3, 3), np.uint8)
+        kernel_close = np.ones((2, 2), np.uint8)
+        mask_bool = cv2.morphologyEx(img, cv2.MORPH_OPEN, kernel_open)
+        mask_bool = cv2.morphologyEx(mask_bool, cv2.MORPH_CLOSE, kernel_close)
         _, mask_bool = cv2.threshold(mask_bool, 1, 255, cv2.THRESH_BINARY)
         return mask_bool
 ```
-
 ![mask](doc_images/mask.png)
+
+##### @ merge_images(img1, path2, homography)
+Spojí dva obrazy. Používá se pro vizualizace výsledného umístění do scény.  
+```python
+    def merge_images(img1, path2, homography):
+        img2 = cv2.imread(path2)
+        
+        fg = homography.warp_image(img1, img2.copy())  # Warped Foreground image
+        bg = cv2.cvtColor(img1, cv2.COLOR_GRAY2BGR)  # Background image
+        # Mask
+        fg_mask = Visualization.create_mask(fg)
+        bg_mask = cv2.bitwise_not(fg_mask)
+        
+        bg = cv2.bitwise_or(bg, bg, mask=bg_mask[:, :, 0])
+        fg = cv2.bitwise_or(fg, fg, mask=fg_mask[:, :, 0])
+
+        return cv2.bitwise_or(fg, bg)
+```
+
+Na obrázku je možné vidět hrubý postup práce s maskami pro složení výsleného obrazu.  
+
+![masks](doc_images/img_merge.jpg) 
 
 ------------------------------------------------------------------------------------------------    
 ### Homography
