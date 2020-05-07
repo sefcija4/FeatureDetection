@@ -49,8 +49,9 @@ class BuildingRepository(object):
             if img.endswith('.txt'):
                 continue
 
-            tmp_b = BuildingFeature(img[:-4], str(f'{folder}\{img}'), str(f'{folder}_original\{img[:-4]}_small.jpg'))
-            path = str(f'{folder}\{img[:-4]}')
+            tmp_b = BuildingFeature(img[:-4], os.path.join(folder, img),
+                                    os.path.join(str(f'{folder}_original'), str(f'{img[:-4]}_small.jpg')))
+            path = os.path.join(folder, img[:-4])
 
             # KEYPOINTS
             kp_load = list()

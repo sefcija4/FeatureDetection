@@ -18,11 +18,15 @@ class Visualization(object):
         :param img: image
         :return: mask - binary 2D image
         """
+        img = cv2.cvtColor(img, cv2.COLOR_RGB2GRAY)
+        img = cv2.cvtColor(img, cv2.COLOR_GRAY2BGR)
         _, mask_bool = cv2.threshold(img, 1, 255, cv2.THRESH_BINARY)
 
         # Morphology
-        kernel = np.ones((5, 5), np.uint8)
-        mask_bool = cv2.morphologyEx(img, cv2.MORPH_OPEN, kernel)
+        kernel_open = np.ones((3, 3), np.uint8)
+        kernel_close = np.ones((2, 2), np.uint8)
+        mask_bool = cv2.morphologyEx(img, cv2.MORPH_OPEN, kernel_open)
+        mask_bool = cv2.morphologyEx(mask_bool, cv2.MORPH_CLOSE, kernel_close)
 
         _, mask_bool = cv2.threshold(mask_bool, 1, 255, cv2.THRESH_BINARY)
 
@@ -57,7 +61,19 @@ class Visualization(object):
         fg_mask = Visualization.create_mask(fg)
         bg_mask = cv2.bitwise_not(fg_mask)
 
+        cv2.imshow('Final', fg_mask)
+        cv2.waitKey(0)
+
+        cv2.imshow('Final', bg_mask)
+        cv2.waitKey(0)
+
         bg = cv2.bitwise_or(bg, bg, mask=bg_mask[:, :, 0])
         fg = cv2.bitwise_or(fg, fg, mask=fg_mask[:, :, 0])
+
+        cv2.imshow('Final', fg)
+        cv2.waitKey(0)
+
+        cv2.imshow('Final', bg)
+        cv2.waitKey(0)
 
         return cv2.bitwise_or(fg, bg)

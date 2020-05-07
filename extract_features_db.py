@@ -5,10 +5,8 @@
 import os
 from config_handler import *
 from opencv_serializer import *
-import matcher
+import extractor
 import pickle
-
-PATH = 'data'
 
 data = list()
 
@@ -28,24 +26,17 @@ Script for pre-compute features for dataset images
 
 
 def main():
-
-    # TODO: tak folder path as parameter
-
     config = Config('config.json')
-
-    # Load building files from metadata
-    # TODO: load folders from metadata!
-
-    extractor = matcher.FeatureExtractor()
+    ex = extractor.FeatureExtractor()
     dir_name = os.path.dirname(__file__)
 
     for folder in data:
-        for img in os.listdir(str(f'{dir_name}\\{PATH}\\{folder}\\')):
+        for img in os.listdir(os.path.join(dir_name, config.get_folder_name(), folder)):
             # Check if file has extension .jpg
             if not img.endswith('.jpg'):
                 continue
 
-            path = str(f'{dir_name}\\{PATH}\\{folder}\\{img}')
+            path = os.path.join(dir_name, config.get_folder_name(), folder, img)
 
             print(path)
 
@@ -57,7 +48,7 @@ def main():
                 tmp_img = cv2.cvtColor(tmp_img, cv2.COLOR_BGR2GRAY)
                 tmp_img = clahe.apply(tmp_img)
 
-                tmp_kp, tmp_des = extractor.extract_sift(tmp_img)
+                tmp_kp, tmp_des = ex.extract_sift(tmp_img)
             except:
                 print("Something went wrong with:" + img)
                 continue
@@ -68,19 +59,19 @@ def main():
             for kp in tmp_kp:
                 tmp_kp_dict.append(CVSerializer.cv_keypoint_to_dict(kp))
 
-            with open(str(f'{dir_name}\\{PATH}\\{folder}\\{img[:-4]}_keypoints.txt'), 'wb+') as file:
+            with open(os.path.join(dir_name, config.get_folder_name(), folder, str(f'{img[:-4]}_keypoints.txt')),
+                      'wb+') as file:
                 pickle.dump(tmp_kp_dict, file, protocol=pickle.HIGHEST_PROTOCOL)
 
-                print("KP : Ok")
-
+                # print("KP : Ok")
                 file.close()
 
             # DESCRIPTORS
-            with open(str(f'{dir_name}\\{PATH}\\{folder}\\{img[:-4]}_descriptor.txt'), 'wb+') as file:
+            with open(os.path.join(dir_name, config.get_folder_name(), folder,str(f'{img[:-4]}_descriptor.txt')),
+                      'wb+') as file:
                 pickle.dump(tmp_des, file, protocol=pickle.HIGHEST_PROTOCOL)
 
-                print("DES: Ok")
-
+                # print("DES: Ok")
                 file.close()
 
 

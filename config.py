@@ -9,6 +9,7 @@ Script for generating json config file
 
 data = dict()
 data['metadata'] = []
+data['buildings'] = []
 data['input_img'] = []
 data['gps'] = []
 data['flann_matching'] = []
@@ -18,6 +19,11 @@ PATH = 'config.json'
 # METADATA
 data['metadata'].append({
     'metadata_path': 'data.json'
+})
+
+# METADATA
+data['buildings'].append({
+    'path': 'data'
 })
 
 # INPUT IMAGE

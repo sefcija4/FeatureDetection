@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
-import json
+from config_handler import *
 
 """
 Script for generating metadata json
@@ -16,7 +16,7 @@ longtitude - longtitude in degrees
 data_b = dict()
 data_b['buildings'] = []
 
-PATH = 'data.json'
+config = Config('config.json')
 
 # Dům u kamenného zvonu
 data_b['buildings'].append({
@@ -66,7 +66,7 @@ data_b['buildings'].append({
 
 data_b['buildings'].append({
     'id': '6',
-    'name': 'Liberec - zelený domek',
+    'name': 'Liberec - Zelený domek',
     'path': 'data\\b7',
     'latitude':   '50.7608511',
     'longtitude': '15.0634765',
@@ -91,5 +91,5 @@ data_b['buildings'].append({
     'features': 'None'
 })
 
-with open(PATH, 'w') as file:
+with open(config.get_metadata(), 'w') as file:
     json.dump(data_b, file)

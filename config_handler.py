@@ -35,6 +35,17 @@ class Config(object):
         # print(metadata)
         return metadata
 
+    def get_folder_name(self):
+        """
+        Get metadata from config file
+        :return: (string) metadata
+        """
+        for p in self.data['buildings']:
+            path = p['path']
+
+        # print(metadata)
+        return path
+
     def get_input_image(self):
         """
         Get path to input image from config file
