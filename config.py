@@ -22,7 +22,7 @@ data['metadata'].append({
 
 # INPUT IMAGE
 data['input_img'].append({
-    'path': 'data\\_p\\test.jpg'
+    'path': 'data\\_p\\test_b_5.jpg'
 })
 
 # GPS

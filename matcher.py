@@ -34,7 +34,7 @@ class Matcher(object):
         # Match each building (in surroundings) witch input image
         for building in dataset:
             # print(type(dataset))
-            for img in dataset[building]:
+            for img in dataset[building]:  # img -> BuildingFeature
 
                 img.matches = self.matcher.knnMatch(in_img_descriptor, img.descriptor, k=2)
                 img.update_matches(self.ratio_test(img.matches))
@@ -91,7 +91,7 @@ class Matcher(object):
     def draw_matches(img1, img2, keypoints1, keypoints2, matches,
                      flag=cv2.DrawMatchesFlags_NOT_DRAW_SINGLE_POINTS):
         """
-
+        Create new image with img1 and img2 and draw lines between matched keypoints
         :param img1: input_image
         :param img2: building (dataset) image
         :param keypoints1: input_image keypoints
@@ -100,7 +100,6 @@ class Matcher(object):
         :param flag: cv2.flag for cv2.drawMatches()
         :return: image with visualized mathes
         """
-
         img_matches = np.empty((max(img1.shape[0], img2.shape[0]), img1.shape[1] + img2.shape[1], 3), dtype=np.uint8)
         # drawMatchesNkk for list
         # drawMatches for cv::DMatch
@@ -186,5 +185,9 @@ class Matcher(object):
                 break
             if Matcher.check_distances(kp, best_four, m, threshold):
                 best_four.append(m)
+
+        if len(best_four) < 4:
+            print('Keypoints are not far enough')
+            return None
 
         return best_four

@@ -78,16 +78,17 @@ class BuildingFeature(object):
     def get_num_of_matches(self):
         return len(self.matches)
 
-    def get_sum_of_matches(self):
+    def get_sum_of_matches(self, count=10):
         """
         Sum distances of 10 best matches
+        :param count: how many distances will be summed
         :return: sum of all distances
         """
         total_distance = 0
 
         self.sort_matches_by_distance()
 
-        for m in self.matches[:10]:
+        for m in self.matches[:count]:
             total_distance += m.distance
 
         return total_distance

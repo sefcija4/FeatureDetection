@@ -6,6 +6,7 @@ from building_repository import *
 from input_image import *
 from matcher import *
 from homography import *
+from visualization import *
 
 
 class App(str):
@@ -23,12 +24,6 @@ class App(str):
         self.buildings = list()
         self.buildings_features = dict()
         self.matcher = None
-        self.matches = None
-        self.warped_img = None
-
-        self.sift = None
-        self.orb = None
-        self.surf = None
 
         self.best_match = None
 
@@ -80,8 +75,7 @@ class App(str):
 
     def match_features(self):
         """
-        Match features using selected matcher #TODO: volba příznaku
-        :return:
+        Match features using FLANN matcher for SIFT #TODO: volba příznaku
         """
         self.img_in.extract_features()
 
@@ -92,7 +86,7 @@ class App(str):
 
     def find_best_match(self):
         """
-
+        Get best match from all matches
         :return:
         """
         self.best_match = self.matcher.best_match(self.buildings_features, self.config.get_filter_features())
@@ -108,8 +102,9 @@ class App(str):
 
     def find_best_keypoints(self):
         """
-
-        :return:
+        Get 4 keypoints from the best match. Keypoints must be far enough from each other.
+        -
+        More about the distance threshold: matcher.py or written documentation
         """
         # Find best 4 keypoints from best match
         self.best_match.matches = Matcher.filter_out_close_keypoints(self.best_match.matches, self.img_in.keypoints,
@@ -117,8 +112,7 @@ class App(str):
 
     def show_matches(self):
         """
-
-        :return:
+        Show matches of all buildings nearby in new window
         """
         matches = self.matcher.show_matches(self.img_in, self.buildings_features)
 
@@ -129,82 +123,30 @@ class App(str):
 
     def warp_image(self):
         """
-
-        :return:
+        Get transformation matrix from best four keypoints
         """
         homography = Homography()
         homography.find_matrix(self.best_match.matches, self.img_in.keypoints, self.best_match.keypoints)
         self.best_match.load_image(self.best_match.path)
 
-        # print(self.best_match.img.shape)
-
-        # warped_img = homography.warp_image(self.img_in.img, self.best_match.img.copy())
-
         # VISUALIZATION
-
         self.visualization(homography)
-
-        #merged_img = self.img_in.merge_image(warped_img)
-
-        # cv2.imshow('Warped', merged_img)
-        # cv2.waitKey(0)
-        # cv2.destroyAllWindows()
-
-        # get keypoints, matches and img1, im2 to Homography
-        # maybe try using Building_features?
 
     def visualization(self, homography):
         """
-
-        :param homography:
-        :return:
+        Visualize final transformation using original input image and final dataset cropped image
+        :param homography: (Homography)
         """
         # ORIGINAL IMAGE
-        print(self.best_match.original)
-        original_img = cv2.imread(self.best_match.original)
-        # original_img = cv2.cvtColor(original_img, cv2.COLOR_BGR2GRAY)
+        original_photo = Visualization.merge_images(self.img_in.img, self.best_match.original, homography)
 
-        print(original_img.shape)
-
-        warped_original_img = homography.warp_image(self.img_in.img, original_img.copy())
-        original_bg = cv2.cvtColor(self.img_in.img, cv2.COLOR_GRAY2BGR)
-
-        # masks
-        original_mask = Visualization.create_mask(warped_original_img)
-        bg_original_mask = cv2.bitwise_not(original_mask)
-
-        print(warped_original_img.shape, original_mask.shape)
-
-        original_img = cv2.bitwise_or(warped_original_img, warped_original_img, mask=original_mask[:, :, 0])
-        original_bg = cv2.bitwise_or(original_bg, original_bg, mask=bg_original_mask[:, :, 0])
-
-        print(original_bg.shape, original_img.shape)
-
-        original_final = cv2.bitwise_or(original_img, original_bg)
-
-        cv2.imshow('Warped original', original_final)
+        cv2.imshow('Warped original', original_photo)
         cv2.waitKey(0)
 
-        # MERGING
-        img_mask = Visualization.create_mask(self.best_match.img)
-        img_to_merge = cv2.imread(self.best_match.original)
-        building_rgba = cv2.bitwise_or(img_to_merge, img_to_merge, mask=img_mask)
-        building_rgba = homography.warp_image(self.img_in.img, building_rgba.copy())
+        # FINAL
+        final_photo = Visualization.merge_images(self.img_in.img, self.best_match.path, homography)
 
-        # warp mask, etc.
-        bg_mask = homography.warp_image(self.img_in.img, img_mask.copy())
-        bg_mask = cv2.bitwise_not(bg_mask)
-
-        bk = cv2.bitwise_or(self.img_in.img, self.img_in.img, mask=bg_mask)
-
-        # combine foreground+background
-        bk = cv2.cvtColor(bk, cv2.COLOR_GRAY2BGR)
-
-        print(bk.shape, building_rgba.shape)
-
-        final = cv2.bitwise_or(building_rgba, bk)
-
-        cv2.imshow('Final', final)
+        cv2.imshow('Final', final_photo)
         cv2.waitKey(0)
         cv2.destroyAllWindows()
 
@@ -236,8 +178,8 @@ if __name__ == "__main__":
 
         if app.find_best_match():
 
-            app.find_best_keypoints()
+            if app.find_best_keypoints() is None:
 
-            app.warp_image()
+                app.warp_image()
 
-            app.show_matches()
+                app.show_matches()

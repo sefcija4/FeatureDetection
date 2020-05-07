@@ -2,25 +2,15 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="bef42cae-bb29-408b-9993-f3f98d0867f5" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/building.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/building_repository.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/extractor.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/venv/gps_location.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/dictionaries/Sefci.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dictionaries/Sefci.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/visualization.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app.py" beforeDir="false" afterPath="$PROJECT_DIR$/app.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/building.py" beforeDir="false" afterPath="$PROJECT_DIR$/building.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/building_repository.py" beforeDir="false" afterPath="$PROJECT_DIR$/building_repository.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/config.json" beforeDir="false" afterPath="$PROJECT_DIR$/config.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/config.py" beforeDir="false" afterPath="$PROJECT_DIR$/config.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/config.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/config_handler.py" beforeDir="false" afterPath="$PROJECT_DIR$/config_handler.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/data.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/extract_features_db.py" beforeDir="false" afterPath="$PROJECT_DIR$/extract_features_db.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/extract_gps.py" beforeDir="false" afterPath="$PROJECT_DIR$/extract_gps.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/extractor_and_matcher.py" beforeDir="false" afterPath="$PROJECT_DIR$/matcher.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/homography.py" beforeDir="false" afterPath="$PROJECT_DIR$/homography.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/input_image.py" beforeDir="false" afterPath="$PROJECT_DIR$/input_image.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/json_data" beforeDir="false" afterPath="$PROJECT_DIR$/json_data" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/json_handler.py" beforeDir="false" afterPath="$PROJECT_DIR$/app.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/opencv_serializer.py" beforeDir="false" afterPath="$PROJECT_DIR$/opencv_serializer.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/matcher.py" beforeDir="false" afterPath="$PROJECT_DIR$/matcher.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -32,51 +22,51 @@
     <session id="-1677598718">
       <usages-collector id="statistics.lifecycle.project">
         <counts>
-          <entry key="project.closed" value="71" />
+          <entry key="project.closed" value="75" />
           <entry key="project.open.time.1" value="1" />
-          <entry key="project.open.time.10" value="5" />
+          <entry key="project.open.time.10" value="6" />
           <entry key="project.open.time.11" value="2" />
           <entry key="project.open.time.4" value="1" />
           <entry key="project.open.time.5" value="7" />
           <entry key="project.open.time.6" value="17" />
-          <entry key="project.open.time.7" value="16" />
-          <entry key="project.open.time.8" value="14" />
+          <entry key="project.open.time.7" value="18" />
+          <entry key="project.open.time.8" value="15" />
           <entry key="project.open.time.9" value="10" />
-          <entry key="project.opened" value="73" />
+          <entry key="project.opened" value="77" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.open">
         <counts>
-          <entry key="jpg" value="1" />
+          <entry key="jpg" value="2" />
           <entry key="json" value="4" />
           <entry key="json_data" value="1" />
-          <entry key="png" value="1" />
-          <entry key="py" value="73" />
+          <entry key="png" value="5" />
+          <entry key="py" value="85" />
           <entry key="txt" value="5" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.open">
         <counts>
-          <entry key="Image" value="2" />
+          <entry key="Image" value="7" />
           <entry key="JSON" value="4" />
           <entry key="PLAIN_TEXT" value="5" />
-          <entry key="Python" value="74" />
+          <entry key="Python" value="86" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.edit">
         <counts>
-          <entry key="dummy" value="28" />
+          <entry key="dummy" value="35" />
           <entry key="json" value="4" />
           <entry key="json_data" value="480" />
-          <entry key="py" value="38046" />
+          <entry key="py" value="39905" />
           <entry key="txt" value="40" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
         <counts>
           <entry key="JSON" value="4" />
-          <entry key="PLAIN_TEXT" value="68" />
-          <entry key="Python" value="38526" />
+          <entry key="PLAIN_TEXT" value="75" />
+          <entry key="Python" value="40385" />
         </counts>
       </usages-collector>
     </session>
@@ -85,14 +75,14 @@
     <favorites_list name="FeatureDetection" />
   </component>
   <component name="FileEditorManager">
-    <splitter split-orientation="horizontal" split-proportion="0.52742857">
+    <splitter split-orientation="horizontal" split-proportion="0.5620023">
       <split-first>
         <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
           <file pinned="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/extract_features_db.py">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="782">
-                  <caret line="46" lean-forward="true" selection-start-line="46" selection-end-line="46" />
+                <state relative-caret-position="650">
+                  <caret line="46" selection-start-line="46" selection-end-line="46" />
                   <folding>
                     <element signature="e#48#57#0" expanded="true" />
                   </folding>
@@ -103,10 +93,22 @@
           <file pinned="false" current-in-tab="true">
             <entry file="file://$PROJECT_DIR$/app.py">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="347">
-                  <caret line="231" lean-forward="true" selection-start-line="231" selection-end-line="231" />
+                <state relative-caret-position="149">
+                  <caret line="133" lean-forward="true" selection-start-line="133" selection-end-line="133" />
                   <folding>
-                    <element signature="e#48#76#0" expanded="true" />
+                    <element signature="e#47#75#0" expanded="true" />
+                  </folding>
+                </state>
+              </provider>
+            </entry>
+          </file>
+          <file pinned="false" current-in-tab="false">
+            <entry file="file://$PROJECT_DIR$/config.py">
+              <provider selected="true" editor-type-id="text-editor">
+                <state relative-caret-position="408">
+                  <caret line="24" column="31" selection-start-line="24" selection-start-column="31" selection-end-line="24" selection-end-column="31" />
+                  <folding>
+                    <marker date="1588834939969" expanded="true" signature="107:108" ph="..." />
                   </folding>
                 </state>
               </provider>
@@ -115,8 +117,8 @@
           <file pinned="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/building_repository.py">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="136">
-                  <caret line="8" column="31" selection-start-line="8" selection-start-column="31" selection-end-line="8" selection-end-column="31" />
+                <state relative-caret-position="1156">
+                  <caret line="73" selection-start-line="73" selection-end-line="73" />
                   <folding>
                     <element signature="e#47#58#0" expanded="true" />
                   </folding>
@@ -125,10 +127,19 @@
             </entry>
           </file>
           <file pinned="false" current-in-tab="false">
+            <entry file="file://$PROJECT_DIR$/extractor.py">
+              <provider selected="true" editor-type-id="text-editor">
+                <state relative-caret-position="357">
+                  <caret line="21" column="17" selection-start-line="21" selection-start-column="17" selection-end-line="21" selection-end-column="17" />
+                </state>
+              </provider>
+            </entry>
+          </file>
+          <file pinned="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/building.py">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="68">
-                  <caret line="4" column="24" selection-start-line="4" selection-start-column="24" selection-end-line="4" selection-end-column="24" />
+                <state relative-caret-position="1513">
+                  <caret line="90" column="38" selection-start-line="90" selection-start-column="38" selection-end-line="90" selection-end-column="38" />
                   <folding>
                     <element signature="e#47#72#0" expanded="true" />
                   </folding>
@@ -143,8 +154,8 @@
           <file pinned="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/input_image.py">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="850">
-                  <caret line="50" column="11" selection-start-line="50" selection-start-column="11" selection-end-line="50" selection-end-column="11" />
+                <state relative-caret-position="51">
+                  <caret line="3" column="17" selection-start-line="3" selection-start-column="5" selection-end-line="3" selection-end-column="17" />
                   <folding>
                     <marker date="1588517377913" expanded="true" signature="96:98" ph="..." />
                   </folding>
@@ -152,19 +163,44 @@
               </provider>
             </entry>
           </file>
-          <file pinned="false" current-in-tab="true">
+          <file pinned="false" current-in-tab="false">
+            <entry file="file://$PROJECT_DIR$/venv/gps_location.py">
+              <provider selected="true" editor-type-id="text-editor">
+                <state relative-caret-position="153">
+                  <caret line="10" selection-start-line="10" selection-end-line="10" />
+                </state>
+              </provider>
+            </entry>
+          </file>
+          <file pinned="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/homography.py">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="89">
-                  <caret line="77" column="7" lean-forward="true" selection-start-line="77" selection-start-column="7" selection-end-line="77" selection-end-column="7" />
+                <state relative-caret-position="425">
+                  <caret line="25" selection-start-line="25" selection-end-line="25" />
                   <folding>
                     <element signature="e#47#57#0" expanded="true" />
-                    <marker date="1588448054059" expanded="true" signature="104:105" ph="..." />
-                    <marker date="1588448054059" expanded="true" signature="129:418" ph="..." />
-                    <marker date="1588448054059" expanded="true" signature="464:469" ph="..." />
-                    <marker date="1588448054059" expanded="true" signature="2078:2084" ph="..." />
-                    <marker date="1588448054059" expanded="true" signature="2425:2431" ph="..." />
+                    <marker date="1588606849252" expanded="true" signature="104:105" ph="..." />
+                    <marker date="1588606849252" expanded="true" signature="206:586" ph="..." />
+                    <marker date="1588606849252" expanded="true" signature="632:637" ph="..." />
                   </folding>
+                </state>
+              </provider>
+            </entry>
+          </file>
+          <file pinned="false" current-in-tab="false">
+            <entry file="file://$PROJECT_DIR$/matcher.py">
+              <provider selected="true" editor-type-id="text-editor">
+                <state relative-caret-position="170">
+                  <caret line="168" column="34" selection-start-line="168" selection-start-column="8" selection-end-line="168" selection-end-column="34" />
+                </state>
+              </provider>
+            </entry>
+          </file>
+          <file pinned="false" current-in-tab="true">
+            <entry file="file://$PROJECT_DIR$/visualization.py">
+              <provider selected="true" editor-type-id="text-editor">
+                <state relative-caret-position="517">
+                  <caret line="48" column="11" lean-forward="true" selection-start-line="48" selection-start-column="11" selection-end-line="48" selection-end-column="11" />
                 </state>
               </provider>
             </entry>
@@ -198,12 +234,17 @@
       <find>self.best_match.original</find>
       <find>prepro</find>
       <find>check_if_</find>
-      <find>filter_out_close_keypoints</find>
       <find>filter</find>
       <find>data.txt</find>
       <find>get_building_features</find>
       <find>building.path</find>
       <find>extract_</find>
+      <find>self.matches</find>
+      <find>self.sift</find>
+      <find>best_match</find>
+      <find>warped_img</find>
+      <find>filter_out_close_keypoints</find>
+      <find>find_best_keypoints</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -216,29 +257,31 @@
         <option value="$PROJECT_DIR$/feature_detection.py" />
         <option value="$PROJECT_DIR$/Homography.py" />
         <option value="$PROJECT_DIR$/load_images.py" />
-        <option value="$PROJECT_DIR$/homography.py" />
         <option value="$PROJECT_DIR$/extract_features_db.py" />
         <option value="$PROJECT_DIR$/config.json" />
-        <option value="$PROJECT_DIR$/config.py" />
         <option value="$PROJECT_DIR$/json_data" />
         <option value="$PROJECT_DIR$/config_handler.py" />
         <option value="$PROJECT_DIR$/extract_gps.py" />
         <option value="$PROJECT_DIR$/extractor_and_matcher.py" />
         <option value="$PROJECT_DIR$/extractor.py" />
-        <option value="$PROJECT_DIR$/matcher.py" />
         <option value="$PROJECT_DIR$/venv/gps_location.py" />
         <option value="$PROJECT_DIR$/input_image.py" />
         <option value="$PROJECT_DIR$/opencv_serializer.py" />
-        <option value="$PROJECT_DIR$/building.py" />
-        <option value="$PROJECT_DIR$/building_repository.py" />
         <option value="$PROJECT_DIR$/json_handler.py" />
+        <option value="$PROJECT_DIR$/Vizualization.py" />
+        <option value="$PROJECT_DIR$/homography.py" />
+        <option value="$PROJECT_DIR$/matcher.py" />
+        <option value="$PROJECT_DIR$/building_repository.py" />
+        <option value="$PROJECT_DIR$/building.py" />
+        <option value="$PROJECT_DIR$/config.py" />
+        <option value="$PROJECT_DIR$/visualization.py" />
         <option value="$PROJECT_DIR$/app.py" />
       </list>
     </option>
   </component>
-  <component name="ProjectFrameBounds" extendedState="7">
-    <option name="x" value="131" />
-    <option name="y" value="-19" />
+  <component name="ProjectFrameBounds" extendedState="6">
+    <option name="x" value="620" />
+    <option name="y" value="-16" />
     <option name="width" value="1936" />
     <option name="height" value="1056" />
   </component>
@@ -248,6 +291,7 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -255,11 +299,15 @@
               <item name="FeatureDetection" type="b2602c69:ProjectViewProjectNode" />
               <item name="FeatureDetection" type="462c0819:PsiDirectoryNode" />
             </path>
+            <path>
+              <item name="FeatureDetection" type="b2602c69:ProjectViewProjectNode" />
+              <item name="FeatureDetection" type="462c0819:PsiDirectoryNode" />
+              <item name="venv" type="462c0819:PsiDirectoryNode" />
+            </path>
           </expand>
           <select />
         </subPane>
       </pane>
-      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -394,10 +442,10 @@
     <recent_temporary>
       <list>
         <item itemvalue="Python.app" />
-        <item itemvalue="Python.json_handler" />
-        <item itemvalue="Python.json_data" />
         <item itemvalue="Python.config" />
         <item itemvalue="Python.config_handler" />
+        <item itemvalue="Python.json_handler" />
+        <item itemvalue="Python.json_data" />
       </list>
     </recent_temporary>
   </component>
@@ -447,14 +495,13 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
-    <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.49838188" visible="true" weight="0.077976815" />
+      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.49838188" visible="true" weight="0.07376186" />
       <window_info id="Structure" order="1" sideWeight="0.50161815" side_tool="true" weight="0.115911484" />
       <window_info id="Favorites" order="2" sideWeight="0.50161815" side_tool="true" weight="0.115911484" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" weight="0.329718" />
-      <window_info active="true" anchor="bottom" id="Run" order="2" sideWeight="0.9072708" visible="true" weight="0.20607375" />
+      <window_info anchor="bottom" id="Run" order="2" sideWeight="0.9072708" weight="0.20607375" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.3991323" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
@@ -467,25 +514,6 @@
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
     </layout>
-    <layout-to-restore>
-      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.49838188" visible="true" weight="0.07692308" />
-      <window_info id="Structure" order="1" sideWeight="0.50161815" side_tool="true" weight="0.115911484" />
-      <window_info id="Favorites" order="2" sideWeight="0.50161815" side_tool="true" weight="0.115911484" />
-      <window_info anchor="bottom" id="Message" order="0" />
-      <window_info anchor="bottom" id="Find" order="1" />
-      <window_info active="true" anchor="bottom" id="Run" order="2" sideWeight="0.9072708" visible="true" weight="0.25813448" />
-      <window_info anchor="bottom" id="Debug" order="3" weight="0.3991323" />
-      <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
-      <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
-      <window_info anchor="bottom" id="TODO" order="6" sideWeight="0.49894625" weight="0.329718" />
-      <window_info anchor="bottom" id="Version Control" order="7" sideWeight="0.49947312" weight="0.18112798" />
-      <window_info anchor="bottom" id="Terminal" order="8" sideWeight="0.49894625" weight="0.329718" />
-      <window_info anchor="bottom" id="Event Log" order="9" sideWeight="0.09272919" side_tool="true" visible="true" weight="0.25813448" />
-      <window_info anchor="bottom" id="Python Console" order="10" weight="0.329718" />
-      <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
-      <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
-      <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
-    </layout-to-restore>
   </component>
   <component name="VcsContentAnnotationSettings">
     <option name="myLimit" value="2678400000" />
@@ -499,19 +527,10 @@
     <entry file="file://$USER_HOME$/Documents/_FIT/BI-PGA/_cviko10/logger.py" />
     <entry file="file://$USER_HOME$/Documents/_FIT/BI-PGA/_cviko11/simple_textured_material.py" />
     <entry file="file://$USER_HOME$/Documents/_FIT/BI-PGA/_cviko11/array_export.py" />
-    <entry file="file://$PROJECT_DIR$/warped.jpg">
-      <provider selected="true" editor-type-id="images" />
-    </entry>
     <entry file="file://$PROJECT_DIR$/features_data.txt">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
-    <entry file="file://$PROJECT_DIR$/data.txt">
-      <provider selected="true" editor-type-id="text-editor">
-        <state>
-          <caret column="40" selection-start-column="40" selection-end-column="40" />
-        </state>
-      </provider>
-    </entry>
+    <entry file="file://$PROJECT_DIR$/data.txt" />
     <entry file="file://$PROJECT_DIR$/venv/Lib/site-packages/scipy/spatial/distance.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="199">
@@ -539,78 +558,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/config_handler.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-880">
-          <caret line="10" lean-forward="true" selection-start-line="10" selection-end-line="10" />
-          <folding>
-            <marker date="1588515481443" expanded="true" signature="82:83" ph="..." />
-            <marker date="1588515481443" expanded="true" signature="82:1984" ph="..." />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/config.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="221">
-          <caret line="13" column="20" selection-start-line="13" selection-start-column="20" selection-end-line="13" selection-end-column="20" />
-          <folding>
-            <marker date="1588514731545" expanded="true" signature="107:108" ph="..." />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/extract_gps.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="85">
-          <caret line="5" column="3" lean-forward="true" selection-start-line="5" selection-start-column="3" selection-end-line="5" selection-end-column="3" />
-          <folding>
-            <element signature="e#134#155#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/extractor.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="153">
-          <caret line="9" lean-forward="true" selection-start-line="9" selection-end-line="9" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/matcher.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2584">
-          <caret line="152" lean-forward="true" selection-start-line="152" selection-end-line="152" />
-          <folding>
-            <element signature="e#47#57#0" expanded="true" />
-            <marker date="1588517192863" expanded="true" signature="220:254" ph="..." />
-            <marker date="1588517192863" expanded="true" signature="666:672" ph="..." />
-            <marker date="1588517192863" expanded="true" signature="3452:3453" ph="..." />
-            <marker date="1588517192863" expanded="true" signature="4293:4294" ph="..." />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/venv/gps_location.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="170">
-          <caret line="10" lean-forward="true" selection-start-line="10" selection-end-line="10" />
-          <folding>
-            <element signature="e#47#72#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/input_image.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="850">
-          <caret line="50" column="11" selection-start-line="50" selection-start-column="11" selection-end-line="50" selection-end-column="11" />
-          <folding>
-            <marker date="1588517377913" expanded="true" signature="96:98" ph="..." />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/load_images.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="238">
@@ -625,64 +572,139 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/opencv_serializer.py">
+    <entry file="file://$PROJECT_DIR$/extract_gps.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="119">
+          <caret line="8" column="38" lean-forward="true" selection-start-line="8" selection-start-column="38" selection-end-line="8" selection-end-column="38" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/config_handler.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="170">
-          <caret line="10" lean-forward="true" selection-start-line="10" selection-end-line="10" />
+          <caret line="10" selection-start-line="10" selection-end-line="10" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/homography.py">
+    <entry file="file://$PROJECT_DIR$/opencv_serializer.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="89">
-          <caret line="77" column="7" lean-forward="true" selection-start-line="77" selection-start-column="7" selection-end-line="77" selection-end-column="7" />
-          <folding>
-            <element signature="e#47#57#0" expanded="true" />
-            <marker date="1588448054059" expanded="true" signature="104:105" ph="..." />
-            <marker date="1588448054059" expanded="true" signature="129:418" ph="..." />
-            <marker date="1588448054059" expanded="true" signature="464:469" ph="..." />
-            <marker date="1588448054059" expanded="true" signature="2078:2084" ph="..." />
-            <marker date="1588448054059" expanded="true" signature="2425:2431" ph="..." />
-          </folding>
+        <state relative-caret-position="731">
+          <caret line="43" selection-start-line="43" selection-end-line="43" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/building.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="68">
-          <caret line="4" column="24" selection-start-line="4" selection-start-column="24" selection-end-line="4" selection-end-column="24" />
-          <folding>
-            <element signature="e#47#72#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
+    <entry file="file://$PROJECT_DIR$/warped.jpg">
+      <provider selected="true" editor-type-id="images" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/warped2.png">
+      <provider selected="true" editor-type-id="images" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/warped_img.png">
+      <provider selected="true" editor-type-id="images" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/warped3.png">
+      <provider selected="true" editor-type-id="images" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/warped1.png">
+      <provider selected="true" editor-type-id="images" />
     </entry>
     <entry file="file://$PROJECT_DIR$/building_repository.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="136">
-          <caret line="8" column="31" selection-start-line="8" selection-start-column="31" selection-end-line="8" selection-end-column="31" />
+        <state relative-caret-position="1156">
+          <caret line="73" selection-start-line="73" selection-end-line="73" />
           <folding>
             <element signature="e#47#58#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/extractor.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="357">
+          <caret line="21" column="17" selection-start-line="21" selection-start-column="17" selection-end-line="21" selection-end-column="17" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/building.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1513">
+          <caret line="90" column="38" selection-start-line="90" selection-start-column="38" selection-end-line="90" selection-end-column="38" />
+          <folding>
+            <element signature="e#47#72#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/input_image.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="51">
+          <caret line="3" column="17" selection-start-line="3" selection-start-column="5" selection-end-line="3" selection-end-column="17" />
+          <folding>
+            <marker date="1588517377913" expanded="true" signature="96:98" ph="..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/venv/gps_location.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="153">
+          <caret line="10" selection-start-line="10" selection-end-line="10" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/homography.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="425">
+          <caret line="25" selection-start-line="25" selection-end-line="25" />
+          <folding>
+            <element signature="e#47#57#0" expanded="true" />
+            <marker date="1588606849252" expanded="true" signature="104:105" ph="..." />
+            <marker date="1588606849252" expanded="true" signature="206:586" ph="..." />
+            <marker date="1588606849252" expanded="true" signature="632:637" ph="..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/config.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="408">
+          <caret line="24" column="31" selection-start-line="24" selection-start-column="31" selection-end-line="24" selection-end-column="31" />
+          <folding>
+            <marker date="1588834939969" expanded="true" signature="107:108" ph="..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/matcher.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="170">
+          <caret line="168" column="34" selection-start-line="168" selection-start-column="8" selection-end-line="168" selection-end-column="34" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/extract_features_db.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="782">
-          <caret line="46" lean-forward="true" selection-start-line="46" selection-end-line="46" />
+        <state relative-caret-position="650">
+          <caret line="46" selection-start-line="46" selection-end-line="46" />
           <folding>
             <element signature="e#48#57#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/visualization.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="517">
+          <caret line="48" column="11" lean-forward="true" selection-start-line="48" selection-start-column="11" selection-end-line="48" selection-end-column="11" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/app.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="347">
-          <caret line="231" lean-forward="true" selection-start-line="231" selection-end-line="231" />
+        <state relative-caret-position="149">
+          <caret line="133" lean-forward="true" selection-start-line="133" selection-end-line="133" />
           <folding>
-            <element signature="e#48#76#0" expanded="true" />
+            <element signature="e#47#75#0" expanded="true" />
           </folding>
         </state>
       </provider>
