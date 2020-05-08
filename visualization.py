@@ -61,19 +61,7 @@ class Visualization(object):
         fg_mask = Visualization.create_mask(fg)
         bg_mask = cv2.bitwise_not(fg_mask)
 
-        cv2.imshow('Final', fg_mask)
-        cv2.waitKey(0)
-
-        cv2.imshow('Final', bg_mask)
-        cv2.waitKey(0)
-
         bg = cv2.bitwise_or(bg, bg, mask=bg_mask[:, :, 0])
         fg = cv2.bitwise_or(fg, fg, mask=fg_mask[:, :, 0])
-
-        cv2.imshow('Final', fg)
-        cv2.waitKey(0)
-
-        cv2.imshow('Final', bg)
-        cv2.waitKey(0)
 
         return cv2.bitwise_or(fg, bg)
