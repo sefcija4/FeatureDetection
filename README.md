@@ -48,6 +48,7 @@ Skript [json_data.py](./json_data.py) je určený pro přegenerování JSON meta
 
 # Info
 ## Jak přidat novou budovu do databáze?  
+Je potřeba oříznout fotografie, tak aby mohli být použité pro rozpoznání. Pro novou budovu vytvořete složku b(číslo budovy) např. b11. Do této složky uložte upravené fotografie. Dále je potřeba vytvořit metadata budovy ve skriptu [json_data.py](./json_data.py). Pokud chcete i zobraz samotnou transformaci fotky z databáze je potřeba vytvořit složku např. b_11_original a zde uložit soubor s originální fotkou o stejném rozměru jako ten upravený snímek v databázi. Posledním krokem je potřeba spustit výše zmíněné skripty pro přegenerování souborů a poté ještě předpočítat příznaky po danou budovu pomocí [extract_features_db.py](./extract_features_db.py)
 
 ## Diagram aktivit
 
