@@ -92,5 +92,23 @@ data_b['buildings'].append({
     'features': 'None'
 })
 
-with open(config.get_metadata(), 'w') as file:
+data_b['buildings'].append({
+    'id': '9',
+    'name': 'Chrastava - Radnice',
+    'path': os.path.join(config.get_folder_name(), 'b10'),
+    'latitude':   '50.8169181',
+    'longtitude': '14.969265',
+    'features': 'None'
+})
+
+data_b['buildings'].append({
+    'id': '10',
+    'name': 'Chrastava - Hnědý dům',
+    'path': os.path.join(config.get_folder_name(), 'b11'),
+    'latitude':   '50.8162457',
+    'longtitude': '14.9672913',
+    'features': 'None'
+})
+
+with open(config.get_metadata(), 'w+') as file:
     json.dump(data_b, file)

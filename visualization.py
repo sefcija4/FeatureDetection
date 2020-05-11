@@ -54,6 +54,7 @@ class Visualization(object):
         # Load images
         img2 = cv2.imread(path2)
         #
+
         fg = homography.warp_image(img1, img2.copy())  # Warped Foreground image
         bg = cv2.cvtColor(img1, cv2.COLOR_GRAY2BGR)  # Background image
 

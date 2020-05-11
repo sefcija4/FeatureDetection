@@ -7,6 +7,7 @@ from input_image import *
 from matcher import *
 from homography import *
 from visualization import *
+import config
 
 
 class App(str):
@@ -110,6 +111,8 @@ class App(str):
         self.best_match.matches = Matcher.filter_out_close_keypoints(self.best_match.matches, self.img_in.keypoints,
                                                                      self.config.get_filter_features())
 
+        return self.best_match.matches
+
     def show_matches(self):
         """
         Show matches of all buildings nearby in new window
@@ -157,18 +160,13 @@ class App(str):
 
 if __name__ == "__main__":
 
+    # update config
+    config.main()
+
     app = App('config.json')
     app.load_buildings()
 
     app.load_image()
-
-    # app.load_image('data\\_p\\test.jpg')
-    # app.load_image('data\\_p\\test_b_4.jpg') # lepší dataset
-    # app.load_image('data\\_p\\test_b_5.jpg')
-    # app.load_image('data\\_p\\test_b_7.jpg')
-    # app.load_image('data\\_p\\test_b_8.jpg')
-    # app.load_image('data\\_p\\test_b_9.jpg') # stíny/lampa atd.
-    # app.load_image('data\\_p\\IMG_3513.jpg')
     app.img_in.preprocess()
     app.img_in.print()
 
@@ -178,7 +176,7 @@ if __name__ == "__main__":
 
         if app.find_best_match():
 
-            if app.find_best_keypoints() is None:
+            if app.find_best_keypoints() is not None:
 
                 app.warp_image()
 
