@@ -1,0 +1,22 @@
+Ratio test nastavený na 0.6
+CLACHE - on
+výběr bodů - 100px
+
+ID   rozpoznání   warp   přesnost
+01       Y         Y        good     
+02 - nemá vstupní snímek
+03 - nemá vstupní snímek
+04       Y         N        fail                            
+05       Y         Y       perfect                           
+06 - nemá vst. snímek 
+07       Y         Y        very good                               
+08       Y         Y          good                               
+09       Y         N            fail   
+10       Y         Y          good                                        
+11       Y         Y          very good
+12       Y         Y          not good           
+
+Legenda:
+Y - Správně
+N - Špatně
+- - Neproběhlo     

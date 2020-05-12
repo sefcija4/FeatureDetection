@@ -34,13 +34,14 @@ def main():
         # 'path': 'data\\_p\\test.jpg'         # OK
         # 'path': 'data\\_p\\test_b_4.jpg'     # BAD example
         # 'path': 'data\\_p\\test_b_5.jpg'     # OK
-        'path': 'data\\_p\\test_b_7.jpg'     # OK
+        # 'path': 'data\\_p\\test_b_7.jpg'     # OK
         # 'path': 'data\\_p\\test_b_8.jpg'     # OK
         # 'path': 'data\\_p\\test_b_9.jpg'     # BAD example - hard shadows, signs
-        # 'path': 'data\\_p\\test_b_10_1.jpg'  # OK - for 87 pixel distance
+        # 'path': 'data\\_p\\test_b_10_1.jpg'    # OK
         # 'path': 'data\\_p\\test_b_10_2.jpg'  # Total miss
-        # 'path': 'data\\_p\\test_b_11_1.jpg'    # Totally disaster
-        # 'path': 'data\\_p\\test_b_11_2.jpg'  # Too far
+        'path': 'data\\_p\\test_b_11_1.jpg'  # OK - not perfect
+        # 'path': 'data\\_p\\test_b_11_2.jpg'  # Keypoints are too close
+        # 'path': 'data\\_p\\test_b_12.jpg'    # OK - not perfect
         # 'path': 'data\\_p\\IMG_3513.jpg'
     })
 
@@ -51,11 +52,11 @@ def main():
 
     # MATCHING
     data['flann_matching'].append({
-        'pixel_distance': '87',
+        'pixel_distance': '100',
         'min_number_of_matches': '10',
         'flann_index': '1',
         'flann_trees': '5',
-        'flann_checks': '50'  # 100
+        'flann_checks': '100'
     })
 
     with open(PATH, 'w+') as file:

@@ -125,7 +125,7 @@ class Matcher(object):
 
         if len(results) == 0:
             print("No match!")
-            return None
+            return False, matches  # used later: show_matches()
 
         results = sorted(results, key=lambda x: x.get_sum_of_matches(), reverse=False)
 
@@ -134,7 +134,7 @@ class Matcher(object):
 
         print("Best match:", results[0].path)
 
-        return results[0]
+        return True, results[0]
 
     @staticmethod
     def check_distances(kp, prev_match, cur_match, threshold):
@@ -188,6 +188,6 @@ class Matcher(object):
 
         if len(best_four) < 4:
             print('Keypoints are not far enough')
-            return None
+            return False, matches  # used later: show_matches()
 
-        return best_four
+        return True, best_four

@@ -35,11 +35,11 @@ class App(str):
 
         self.buildings = BuildingRepository.get_all_buildings(self.db_path)
 
-        print("Loaded buildings:")
+        # print("Loaded buildings:")
 
-        for x in self.buildings:
-            x.print_id_name()
-        print("-----------------------")
+        # for x in self.buildings:
+        #     x.print_id_name()
+        # print("-----------------------")
 
     def load_features(self, building):
         """
@@ -62,11 +62,11 @@ class App(str):
         num_of_loaded = 0
         for building in self.buildings:
             if GPSLocation.check_if_belongs(self.img_in, building):
-                print(building.path, "Patří do okolí")
+                # print(building.path, "Patří do okolí")
                 self.load_features(building)
                 num_of_loaded += 1
-            else:
-                print(building.path, "Nepatří do okolí")
+            # else:
+                # print(building.path, "Nepatří do okolí")
 
         if num_of_loaded == 0:
             print("No building has been found in your perimeter")
@@ -90,10 +90,10 @@ class App(str):
         Get best match from all matches
         :return:
         """
-        self.best_match = self.matcher.best_match(self.buildings_features, self.config.get_filter_features())
+        found_success, self.best_match = self.matcher.best_match(self.buildings_features, self.config.get_filter_features())
         # print("Best match img:", self.best_match.path)
 
-        if self.best_match is None:
+        if not found_success:
             print("No building has good match. You should change your viewing angle and position")
             return False
 
@@ -108,10 +108,13 @@ class App(str):
         More about the distance threshold: matcher.py or written documentation
         """
         # Find best 4 keypoints from best match
-        self.best_match.matches = Matcher.filter_out_close_keypoints(self.best_match.matches, self.img_in.keypoints,
+        filter_success, self.best_match.matches = Matcher.filter_out_close_keypoints(self.best_match.matches, self.img_in.keypoints,
                                                                      self.config.get_filter_features())
 
-        return self.best_match.matches
+        if not filter_success:
+            return None
+        else:
+            return self.best_match.matches
 
     def show_matches(self):
         """
@@ -141,13 +144,19 @@ class App(str):
         :param homography: (Homography)
         """
         # ORIGINAL IMAGE
-        original_photo = Visualization.merge_images(self.img_in.img, self.best_match.original, homography)
+        # original_photo = Visualization.merge_images(self.img_in.img, self.best_match.original, homography)
 
-        cv2.imshow('Warped original', original_photo)
-        cv2.waitKey(0)
+        # cv2.imshow('Warped original', original_photo)
+        # cv2.waitKey(0)
 
         # FINAL
         final_photo = Visualization.merge_images(self.img_in.img, self.best_match.path, homography)
+
+        test_path = os.path.join('test', str(f'{self.best_match.path[5:-4]}_ratio_test_06.jpg'))
+
+        print(test_path)
+
+        cv2.imwrite(test_path, final_photo)
 
         cv2.imshow('Final', final_photo)
         cv2.waitKey(0)
@@ -158,17 +167,16 @@ class App(str):
             print(x.data['name'])
 
 
-if __name__ == "__main__":
-
+def main(path='config.json'):
     # update config
     config.main()
 
-    app = App('config.json')
+    app = App(path)
     app.load_buildings()
 
     app.load_image()
     app.img_in.preprocess()
-    app.img_in.print()
+    # app.img_in.print()
 
     if app.check_perimeter():
 
@@ -180,4 +188,8 @@ if __name__ == "__main__":
 
                 app.warp_image()
 
-                app.show_matches()
+        # app.show_matches()
+
+
+if __name__ == "__main__":
+    main()

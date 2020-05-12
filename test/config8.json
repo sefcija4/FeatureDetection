@@ -1,0 +1,1 @@
+{"metadata": [{"metadata_path": "data.json"}], "buildings": [{"path": "data"}], "input_img": [{"path": "data\\_p\\test_b_8.jpg"}], "gps": [{"radius": "0.0250"}], "flann_matching": [{"pixel_distance": "100", "min_number_of_matches": "10", "flann_index": "1", "flann_trees": "5", "flann_checks": "100"}]}
