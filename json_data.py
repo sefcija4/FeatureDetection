@@ -112,7 +112,7 @@ data_b['buildings'].append({
 
 data_b['buildings'].append({
     'id': '11',
-    'name': 'Chrastava - Hrázděný dům',
+    'name': 'Chrastava - Podstávkový dům',
     'path': os.path.join(config.get_folder_name(), 'b12'),
     'latitude':   '50.8183335',
     'longtitude': '14.9667979',

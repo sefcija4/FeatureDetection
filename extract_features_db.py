@@ -42,6 +42,7 @@ def main():
             try:
                 tmp_img = cv2.imread(path)
                 tmp_img = cv2.cvtColor(tmp_img, cv2.COLOR_BGR2GRAY)
+                # tmp_img = cv2.equalizeHist(tmp_img)
                 tmp_img = clahe.apply(tmp_img)
 
                 tmp_kp, tmp_des = ex.extract_sift(tmp_img)

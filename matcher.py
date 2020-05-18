@@ -146,7 +146,7 @@ class Matcher(object):
         :param threshold: minimal distance between two keypoints
         :return: (boolean) if keypoints are further than threshold value
         """
-        min_distance = threshold['pixel_distance']  # in pixels TODO: relative to img size
+        min_distance = threshold['pixel_distance']  # in pixels
 
         curr = cur_match.queryIdx
 
@@ -176,6 +176,9 @@ class Matcher(object):
         """
 
         best_four = list()
+
+        # if len(matches) >= 4:
+        #     return True, matches
 
         start = matches[0]
         best_four.append(start)

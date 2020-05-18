@@ -3,18 +3,18 @@ CLACHE - on
 výběr bodů - 100px
 
 ID   rozpoznání   warp   přesnost
-01       Y         Y        good     
+01       Y         Y        2
 02 - nemá vstupní snímek
 03 - nemá vstupní snímek
-04       Y         N        fail                            
-05       Y         N        fail                        
+04       Y         N        4
+05       Y         N        4
 06 - nemá vst. snímek 
-07       Y         N        fail                              
-08       Y         Y        good                               
-09       Y         N        fail   
-10       Y         Y        good                                        
-11       Y         N        fail
-12       Y         Y        not good        
+07       Y         N        4
+08       Y         Y        2
+09       Y         N        4
+10       Y         Y        2
+11       Y         -        -
+12       Y         Y        3       
 
 Legenda:
 Y - Správně

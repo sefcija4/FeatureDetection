@@ -152,11 +152,10 @@ class App(str):
         # FINAL
         final_photo = Visualization.merge_images(self.img_in.img, self.best_match.path, homography)
 
-        test_path = os.path.join('test', str(f'{self.best_match.path[5:-4]}_ratio_test_06.jpg'))
-
+        # TEST
+        test_path = os.path.join('test', str(f'{self.best_match.path[5:-4]}_distance_100.jpg'))
         print(test_path)
-
-        cv2.imwrite(test_path, final_photo)
+        # cv2.imwrite(test_path, final_photo)
 
         cv2.imshow('Final', final_photo)
         cv2.waitKey(0)

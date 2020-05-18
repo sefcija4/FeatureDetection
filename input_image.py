@@ -50,7 +50,7 @@ class Image(object):
         Convert image to grayscale than equalize it's histogram and resize
         """
         self.img = cv2.cvtColor(self.img, cv2.COLOR_BGR2GRAY)
-        #self.img = cv2.equalizeHist(self.img)
+        # self.img = cv2.equalizeHist(self.img)
 
         # CLAHE
         clahe = cv2.createCLAHE(clipLimit=2, tileGridSize=(8, 8))
