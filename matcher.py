@@ -38,8 +38,6 @@ class Matcher(object):
 
                 img.matches = self.matcher.knnMatch(in_img_descriptor, img.descriptor, k=2)
                 img.update_matches(self.ratio_test(img.matches))
-                # print(len(img.matches))
-                # print(f'Number of matches {img.id}: {len(img.matches)}')
 
     def match_surf(self):
         # TODO
@@ -176,9 +174,6 @@ class Matcher(object):
         """
 
         best_four = list()
-
-        # if len(matches) >= 4:
-        #     return True, matches
 
         start = matches[0]
         best_four.append(start)

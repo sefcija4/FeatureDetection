@@ -46,6 +46,7 @@ class BuildingRepository(object):
 
         for img in os.listdir(folder):
 
+            # skip keypoints.txt and descriptors.txt files
             if img.endswith('.txt'):
                 continue
 

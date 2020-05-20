@@ -55,5 +55,4 @@ class Homography(object):
         :param img2: image2
         :return: Warped image2
         """
-        # print(img1.shape, img2.shape)
         return cv2.warpPerspective(img2, self.H, dsize=(img1.shape[1], img1.shape[0]))

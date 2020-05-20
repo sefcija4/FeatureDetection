@@ -11,6 +11,9 @@ import config
 
 
 class App(str):
+    """
+    Main (application) class
+    """
 
     def __init__(self, path):
         """
@@ -32,14 +35,7 @@ class App(str):
         """
         Load all buildings metadata
         """
-
         self.buildings = BuildingRepository.get_all_buildings(self.db_path)
-
-        # print("Loaded buildings:")
-
-        # for x in self.buildings:
-        #     x.print_id_name()
-        # print("-----------------------")
 
     def load_features(self, building):
         """
@@ -50,8 +46,7 @@ class App(str):
 
     def load_image(self):
         """
-        Load image from path
-        :param path: (str)
+        Load input image from config file
         """
         self.img_in = Image(self.config.get_input_image())
 
@@ -62,11 +57,8 @@ class App(str):
         num_of_loaded = 0
         for building in self.buildings:
             if GPSLocation.check_if_belongs(self.img_in, building):
-                # print(building.path, "Patří do okolí")
                 self.load_features(building)
                 num_of_loaded += 1
-            # else:
-                # print(building.path, "Nepatří do okolí")
 
         if num_of_loaded == 0:
             print("No building has been found in your perimeter")
@@ -90,8 +82,8 @@ class App(str):
         Get best match from all matches
         :return:
         """
-        found_success, self.best_match = self.matcher.best_match(self.buildings_features, self.config.get_filter_features())
-        # print("Best match img:", self.best_match.path)
+        found_success, self.best_match = self.matcher.best_match(self.buildings_features,
+                                                                 self.config.get_filter_features())
 
         if not found_success:
             print("No building has good match. You should change your viewing angle and position")
@@ -108,9 +100,9 @@ class App(str):
         More about the distance threshold: matcher.py or written documentation
         """
         # Find best 4 keypoints from best match
-        filter_success, self.best_match.matches = Matcher.filter_out_close_keypoints(self.best_match.matches, self.img_in.keypoints,
-                                                                     self.config.get_filter_features())
-
+        filter_success, self.best_match.matches = Matcher.filter_out_close_keypoints(self.best_match.matches,
+                                                                                     self.img_in.keypoints,
+                                                                                     self.config.get_filter_features())
         if not filter_success:
             return None
         else:
@@ -144,20 +136,19 @@ class App(str):
         :param homography: (Homography)
         """
         # ORIGINAL IMAGE
+        # For visualize transformation of original image you need to check if the building has it's XX_small.jpg
         # original_photo = Visualization.merge_images(self.img_in.img, self.best_match.original, homography)
-
         # cv2.imshow('Warped original', original_photo)
         # cv2.waitKey(0)
 
         # FINAL
         final_photo = Visualization.merge_images(self.img_in.img, self.best_match.path, homography)
 
-        # TEST
-        test_path = os.path.join('test', str(f'{self.best_match.path[5:-4]}_distance_100.jpg'))
-        print(test_path)
+        # TEST - img export
+        # test_path = os.path.join('test', str(f'{self.best_match.path[5:-4]}_distance_100.jpg'))
         # cv2.imwrite(test_path, final_photo)
 
-        cv2.imshow('Final', final_photo)
+        cv2.imshow('Results', final_photo)
         cv2.waitKey(0)
         cv2.destroyAllWindows()
 

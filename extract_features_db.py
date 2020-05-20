@@ -19,7 +19,7 @@ def main():
     dir_name = os.path.dirname(__file__)
     metadata_path = os.path.join(dir_name, config.get_metadata())
 
-    data = list()  # list with buildings folders
+    data = list()  # list for buildings folders
 
     buildings = building_repository.BuildingRepository.get_all_buildings(metadata_path)
 
@@ -60,7 +60,6 @@ def main():
                       'wb+') as file:
                 pickle.dump(tmp_kp_dict, file, protocol=pickle.HIGHEST_PROTOCOL)
 
-                # print("KP : Ok")
                 file.close()
 
             # DESCRIPTORS
@@ -68,7 +67,6 @@ def main():
                       'wb+') as file:
                 pickle.dump(tmp_des, file, protocol=pickle.HIGHEST_PROTOCOL)
 
-                # print("DES: Ok")
                 file.close()
 
 

@@ -17,10 +17,6 @@ class Image(object):
         self.img = cv2.imread(self.path)
         self.location = self.load_location()
 
-        # self.img = cv2.imread(path, cv2.IMREAD_COLOR)
-        # get GPS
-        # load img? maybe later
-
         self.keypoints = None
         self.descriptor = None
 
@@ -36,7 +32,6 @@ class Image(object):
         meta_data = gps.ImageMetaData(self.path)
         coords = meta_data.get_lat_lng()
         location = GPSLocation(coords[0], coords[1])
-        # print(self.location)
         return location
 
     def get_longtitude(self):
@@ -57,7 +52,6 @@ class Image(object):
         self.img = clahe.apply(self.img)
 
         self.resize()
-        # resize, ekvalization of histogram
 
     def resize(self, max_dimension=960):
         """

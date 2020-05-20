@@ -32,7 +32,6 @@ class Config(object):
         for p in self.data['metadata']:
             metadata = p['metadata_path']
 
-        # print(metadata)
         return metadata
 
     def get_folder_name(self):
@@ -43,7 +42,6 @@ class Config(object):
         for p in self.data['buildings']:
             path = p['path']
 
-        # print(metadata)
         return path
 
     def get_input_image(self):
@@ -54,7 +52,6 @@ class Config(object):
         for p in self.data['input_img']:
             path = p['path']
 
-        # print(path)
         return path
 
     def get_gps_radius(self):
@@ -65,7 +62,6 @@ class Config(object):
         for p in self.data['gps']:
             radius = float(p['radius'])
 
-        # print(radius)
         return radius
 
     def get_flann_matching_setup(self):
@@ -83,9 +79,6 @@ class Config(object):
             data['flann_index'] = int(p['flann_index'])
             data['flann_trees'] = int(p['flann_trees'])
             data['flann_checks'] = int(p['flann_checks'])
-
-        # print(data['pixel_distance'], data['min_number_of_matches'], data['flann_index'], data['flann_trees'],
-        # data['flann_checks'])
 
         return data
 

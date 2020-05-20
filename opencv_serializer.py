@@ -39,6 +39,3 @@ class CVSerializer(object):
         tmp = cv2.KeyPoint(x=kp['point'][0], y=kp['point'][1], _size=kp['size'], _angle=kp['angle'],
                            _response=kp['response'], _octave=kp['octave'], _class_id=kp['id'])
         return tmp
-
-
-

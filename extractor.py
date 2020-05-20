@@ -6,8 +6,6 @@ import cv2
 
 class FeatureExtractor(object):
 
-    # TODO: pick feature descriptor (SIFT, ORB, SURF)
-
     @staticmethod
     def extract_sift(img):
         """

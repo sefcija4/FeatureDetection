@@ -17,7 +17,7 @@ def main():
     data['gps'] = []
     data['flann_matching'] = []
 
-    PATH = 'config.json'
+    path = 'config.json'
 
     # METADATA
     data['metadata'].append({
@@ -37,12 +37,11 @@ def main():
         # 'path': 'data\\_p\\test_b_7.jpg'     # OK
         # 'path': 'data\\_p\\test_b_8.jpg'     # OK
         # 'path': 'data\\_p\\test_b_9.jpg'     # BAD example - hard shadows, signs
-        # 'path': 'data\\_p\\test_b_10_1.jpg'    # OK
-        # 'path': 'data\\_p\\test_b_10_2.jpg'  # Total miss
+        # 'path': 'data\\_p\\test_b_10_1.jpg'  # OK
+        # 'path': 'data\\_p\\test_b_10_2.jpg'  # fail
         # 'path': 'data\\_p\\test_b_11_1.jpg'  # OK - not perfect
         # 'path': 'data\\_p\\test_b_11_2.jpg'  # Keypoints are too close
         # 'path': 'data\\_p\\test_b_12.jpg'    # OK - not perfect
-        # 'path': 'data\\_p\\IMG_3513.jpg'
     })
 
     # GPS
@@ -59,7 +58,7 @@ def main():
         'flann_checks': '100'
     })
 
-    with open(PATH, 'w+') as file:
+    with open(path, 'w+') as file:
         json.dump(data, file)
 
 

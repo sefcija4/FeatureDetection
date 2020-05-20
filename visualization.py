@@ -33,14 +33,6 @@ class Visualization(object):
         return mask_bool
 
     @staticmethod
-    def merge_images(path1, path2):
-        pass
-
-    def warp_original_image(self):
-        # warp + merge originálního obrázku, tak aby byla vidět transformace z původního
-        pass
-
-    @staticmethod
     def merge_images(img1, path2, homography):
         """
         Merge two images using binary masks

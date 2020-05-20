@@ -37,10 +37,7 @@ class Building(object):
         self.location.print()
         print(self.name)
         print(self.path)
-
-    def print_id_name(self):
         print("---------------------------")
-        print(self.id, self.name)
 
 
 class BuildingFeature(object):
@@ -59,12 +56,10 @@ class BuildingFeature(object):
 
     def load_image(self, path):
         """
-        Load image from path and convert it to grayscale
+        Load image from path
         :param path:
         """
         self.img = cv2.imread(path)
-        # print(self.img.shape)
-        self.img = cv2.cvtColor(self.img, cv2.COLOR_BGR2GRAY)
 
     def set_keypoints(self, kp):
         self.keypoints = kp
@@ -85,7 +80,6 @@ class BuildingFeature(object):
         :return: sum of all distances
         """
         total_distance = 0
-
         self.sort_matches_by_distance()
 
         for m in self.matches[:count]:
