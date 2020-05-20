@@ -8,7 +8,9 @@ Tento nástroj vznikl jako součást bakalářské práce. Jedná se o program, 
 - [Numpy](https://numpy.org/)
 - [Pickle](https://docs.python.org/3/library/pickle.html)
 
-Zdůvodu patentovaných metod SURF a SIFT je potřeba si naistalovat i OpenCV contribution verzi [link](https://pypi.org/project/opencv-contrib-python/). Případně je možné přejít na starší verzi OpenCV.
+Zdůvodu patentovaných metod SURF a SIFT je potřeba si naistalovat i OpenCV contribution [verzi](https://pypi.org/project/opencv-contrib-python/). Případně je možné přejít na starší verzi OpenCV.
+
+Nakonec můžete spustit hlavní skript [app.py](./app.py) 
 
 # Config
 Soubor config.json obsahuje nastavitelné proměnné pro celou aplikaci. Je možné zde nastavit cesty vstupního obrazu, metadat a dalších parametrů. Soubor je generován skriptem [config.py](./config.py)  
