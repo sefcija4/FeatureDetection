@@ -3,10 +3,10 @@ Tento nástroj vznikl jako součást bakalářské práce. Jedná se o program, 
 
 # Instalace
 **potřebné knihovny**
-- OpenCV [link](https://opencv.org/)
-- Pillow [link](https://pypi.org/project/Pillow/)
-- Numpy [link](https://numpy.org/)
-- Pickle [link](https://docs.python.org/3/library/pickle.html)
+- [OpenCV](https://opencv.org/)
+- [Pillow](https://pypi.org/project/Pillow/)
+- [Numpy](https://numpy.org/)
+- [Pickle](https://docs.python.org/3/library/pickle.html)
 
 Zdůvodu patentovaných metod SURF a SIFT je potřeba si naistalovat i OpenCV contribution verzi [link](https://pypi.org/project/opencv-contrib-python/). Případně je možné přejít na starší verzi OpenCV.
 
@@ -16,7 +16,7 @@ Pro práci s konfiguračním souborem je určená třída ``Config``, kde po př
 
 # Dataset
 ## Tvorba
-Fotografie budov by měli být pořizovány za dobrých světelných podmínek s minimem stínů a rušivých elementů např. cedule, auta apod. Dobré je také se vyvarovat ostrým stínům.  
+Fotografie budov by měli být pořizovány za dobrých světelných podmínek s minimem stínů a rušivých elementů např. cedule, auta apod. Dobré je také se vyvarovat ostrým stínům. Snímky použité v datasetu a jako vstupní snímku **musí být ve formátu .jpg** 
 
 ## Struktura
 Ukázka složkové struktury pro uchování předpočítaných příznaků a snímků budov
@@ -38,6 +38,7 @@ Ukázka složkové struktury pro uchování předpočítaných příznaků a sn�
 Pro výpočet příznaků je použit deskritor SIFT. Příznaky pro budovy v databázi jsou předpočítány pomocí skriptu [extract_features_db.py](./extract_features_db.py). Příznaky pro vstupní snímek jsou vypočítány v rámci běhu aplikace. O výpočet se stará třída **FeatureExtractor**
 
 ### JSON
+Skript vygeneruje soubory *X_descriptotrs.txt* a *X_keypoints.txt* pro každý obrázek v datasetu.
 
 ### Skripty
 Skripty používají cesty, načtené z konfiguračního souboru.
@@ -298,6 +299,17 @@ Metoda kontroluje zda jsou klíčové body od sebe vzdálené minimálně dle ho
 Metoda projde všechny napárování v *matches* a pokud danný bod projde metodou *check_distances* tak je přidán do výsledné čtvrřice bodů, které budou použity pro tvorbu transformační matice. Prvním bodem přidaným do čtveřice je bod s nejmenší vzdáleností (nejpřesnějším napárováním). Body jsou testovány postupně podle jejich vzdáleností.
 
 ------------------------------------------------------------------------------------------------    
+### Visualization 
+Třída obsahuje metody pro vizualizaci výsledků transformace do vstupního obrázku
+#### Metody
+##### @ create_massk(img)
+Vytvoří masku z upraveného obrázku z databáze (odstraní černé pozadí)
+##### @ get_building_features(img1, path2, homography)
+Spojí dva obrázky na základě jejich binárních masek
+
+![masks](doc_images/masks.png)
+
+------------------------------------------------------------------------------------------------    
 ### App
 Třída představuje jeden běh výsledné aplikace
 #### Parametry
@@ -331,7 +343,5 @@ Ukáže všechny napárování mezi vstupním snímkem a snímky budov v okolí
 Získá transformační matici pro vytvoření následné vizualizace výsledné umístění budovy do scény  
 ##### visualization(homography)
 Tato metoda slouží pro vizualici výsledné transformace. Jsou zde vypočítány masky pro obraz z databáze a vstupní snímek aby mohli být následně spojeny do jednoho.  
-
-![masks](doc_images/masks.png)
 
 ------------------------------------------------------------------------------------------------   
