@@ -31,17 +31,17 @@ def main():
 
     # INPUT IMAGE
     data['input_img'].append({
-        # 'path': 'data\\_p\\test.jpg'         # OK
-        # 'path': 'data\\_p\\test_b_4.jpg'     # BAD example
-        'path': 'data\\_p\\test_b_5.jpg'     # OK
-        # 'path': 'data\\_p\\test_b_7.jpg'     # OK
-        # 'path': 'data\\_p\\test_b_8.jpg'     # OK
-        # 'path': 'data\\_p\\test_b_9.jpg'     # BAD example - hard shadows, signs
-        # 'path': 'data\\_p\\test_b_10_1.jpg'  # OK
-        # 'path': 'data\\_p\\test_b_10_2.jpg'  # fail
-        # 'path': 'data\\_p\\test_b_11_1.jpg'  # OK - not perfect
-        # 'path': 'data\\_p\\test_b_11_2.jpg'  # Keypoints are too close
-        # 'path': 'data\\_p\\test_b_12.jpg'    # OK - not perfect
+        'path': 'data\\_p\\test.jpg'
+        # 'path': 'data\\_p\\test_b_4.jpg'
+        # 'path': 'data\\_p\\test_b_5.jpg'
+        # 'path': 'data\\_p\\test_b_7.jpg'
+        # 'path': 'data\\_p\\test_b_8.jpg'
+        # 'path': 'data\\_p\\test_b_9.jpg'
+        # 'path': 'data\\_p\\test_b_10_1.jpg'
+        # 'path': 'data\\_p\\test_b_10_2.jpg'
+        # 'path': 'data\\_p\\test_b_11_1.jpg'
+        # 'path': 'data\\_p\\test_b_11_2.jpg'
+        # 'path': 'data\\_p\\test_b_12.jpg'
     })
 
     # GPS

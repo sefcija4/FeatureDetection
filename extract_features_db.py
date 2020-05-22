@@ -23,12 +23,13 @@ def main():
 
     buildings = building_repository.BuildingRepository.get_all_buildings(metadata_path)
 
+    # load buildings folder paths
     for b in buildings:
         data.append(b.path)
 
     for folder in data:
         for img in os.listdir(os.path.join(dir_name, folder)):
-            # Check if file has extension .jpg
+            # Check if file in building's folder has extension .jpg
             if not img.endswith('.jpg'):
                 continue
 

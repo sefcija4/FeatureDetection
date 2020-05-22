@@ -68,7 +68,7 @@ class App(str):
 
     def match_features(self):
         """
-        Match features using FLANN matcher for SIFT #TODO: volba příznaku
+        Match features using FLANN matcher for SIFT
         """
         self.img_in.extract_features()
 
@@ -166,7 +166,6 @@ def main(path='config.json'):
 
     app.load_image()
     app.img_in.preprocess()
-    # app.img_in.print()
 
     if app.check_perimeter():
 

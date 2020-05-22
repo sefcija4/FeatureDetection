@@ -18,6 +18,10 @@ class ImageMetaData(object):
     image = None
 
     def __init__(self, img_path):
+        """
+        Load image and extract exif data
+        :param img_path: image path
+        """
         self.image = Image.open(img_path)
         self.get_exif_data()
         super(ImageMetaData, self).__init__()
@@ -43,12 +47,14 @@ class ImageMetaData(object):
         self.exif_data = exif_data
         return exif_data
 
-    def get_if_exist(self, data, key):
+    @staticmethod
+    def get_if_exist(data, key):
         if key in data:
             return data[key]
         return None
 
-    def convert_to_degress(self, value):
+    @staticmethod
+    def convert_to_degress(value):
         """
         Helper function to convert the GPS coordinates
         stored in the EXIF to degress in float format
