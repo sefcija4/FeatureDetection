@@ -1,5 +1,5 @@
 # Nástroj pro detekci urbanistické scény
-Tento nástroj vznikl jako součást bakalářské práce. Jedná se o program, který rozezná budovu na snímku a umístí na něj snímek budovy z databáze.
+Tento nástroj vznikl jako praktický výstup bakalářské práce. Jedná se o program, který rozezná budovu na snímku a umístí na něj snímek budovy z databáze. Pro výpočet příznaků je použitý SIFT, pro jejich párování je použitý FLANN matcher a poté jsou vybrány dobré spojení pomocí poměrového testu.
 
 # Instalace
 **potřebné knihovny**
@@ -284,7 +284,24 @@ Napáruje všechny snímky budov v okolí se vstupním snímkem. Vybere pouze do
 ##### show_matches()  
 Metoda vrací list obrazů se zobrazenými body, které byly napárovány.  
 ##### @ ratio_test(matches, ratio=0.6)
-Metoda odstraní špatné napárování podle poměrového testu
+Metoda porovnává vzdálenosti mezi nejbližšímy sousedy a pokud je nejkratší vzdálenost menší jak *ratio* × druhá nejkratší vzdálenost, tak se jedná o dobrý pár. Předpokládá se, že pokud je spojení dobré, tak to druhé musí být chybné, tudiž se vzdálenost musí značně lišit viz [článek](https://www.cs.ubc.ca/~lowe/papers/ijcv04.pdf) D. Loweho
+
+```python
+    @staticmethod
+    def ratio_test(matches, ratio=0.6):
+        good_matches = list()
+        count = 0
+
+        for m, n in matches:
+            if m.distance < ratio * n.distance:
+                good_matches.append(m)
+                count += 1
+
+        # matches are sorted by euclid's distance (lower=better)
+        return sorted(good_matches, key=lambda x: x.distance)
+```
+##### show_matches(img_in, dataset)
+Metoda dostane vstupní obrázek a dataset s příznaky. Metoda vrací list s obrázky vstupní obrázek vlevo a snímek z datasetu vlevo, a příznaky jsou spojené barevnými čarami. V kódu je nastaveno, že ukazují pouze 4 nejlepší, je to nastaveno proto, aby bylo vidět jaké body se používali pro tvorbu transformační matice.
 ```python
 def show_matches(self, img_in, dataset):
         matches = list()
@@ -312,7 +329,7 @@ Metoda projde všechny napárování v *matches* a pokud danný bod projde metod
 Třída obsahuje metody pro vizualizaci výsledků transformace do vstupního obrázku
 #### Metody
 ##### @ create_massk(img)
-Vytvoří masku z upraveného obrázku z databáze (odstraní černé pozadí)
+Vytvoří masku z upraveného obrázku z databáze (odstraní černé pozadí). Metoda používá morfologické uzavření pro uzavřený možných děr vzniklých při prahování černé barvy.
 ##### @ get_building_features(img1, path2, homography)
 Spojí dva obrázky na základě jejich binárních masek
 
@@ -351,6 +368,6 @@ Ukáže všechny napárování mezi vstupním snímkem a snímky budov v okolí
 ##### warp_image()
 Získá transformační matici pro vytvoření následné vizualizace výsledné umístění budovy do scény  
 ##### visualization(homography)
-Tato metoda slouží pro vizualici výsledné transformace. Jsou zde vypočítány masky pro obraz z databáze a vstupní snímek aby mohli být následně spojeny do jednoho.  
+Tato metoda slouží pro vizualici výsledné transformace. Jsou zde vypočítány masky pro obraz z databáze a vstupní snímek aby mohli být následně spojeny do jednoho. Je možné použít i originální obrázky pro ukázku transformace. Pro každou budovu je připravený parametr *original*, kde může být nastavená cesta k originální obrázku (ze kterého je výřez v datasetu).
 
 ------------------------------------------------------------------------------------------------   
