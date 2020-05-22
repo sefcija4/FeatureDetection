@@ -36,8 +36,7 @@ class Homography(object):
             img1_idx = m.queryIdx
             img2_idx = m.trainIdx
 
-            # x - columns
-            # y - rows
+            # x - columns, y - rows
             # Get the keypoint's coordinates
             (x1, y1) = kp1[img1_idx].pt
             (x2, y2) = kp2[img2_idx].pt

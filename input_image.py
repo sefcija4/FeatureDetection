@@ -96,6 +96,5 @@ class Image(object):
         cv2.destroyAllWindows()
 
     def print(self):
-        print("----  IMG  ----")
         print(self.path)
         self.location.print()

@@ -3,140 +3,13 @@
   <component name="ChangeListManager">
     <list default="true" id="bef42cae-bb29-408b-9993-f3f98d0867f5" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app.py" beforeDir="false" afterPath="$PROJECT_DIR$/app.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/config.json" beforeDir="false" afterPath="$PROJECT_DIR$/config.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/building.py" beforeDir="false" afterPath="$PROJECT_DIR$/building.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/config.py" beforeDir="false" afterPath="$PROJECT_DIR$/config.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/data.json" beforeDir="false" afterPath="$PROJECT_DIR$/data.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/extract_features_db.py" beforeDir="false" afterPath="$PROJECT_DIR$/extract_features_db.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/extract_gps.py" beforeDir="false" afterPath="$PROJECT_DIR$/extract_gps.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/test.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/b1/01_b_ratio_test_04.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/b1/01_b_ratio_test_05.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/b1/02_b_distance.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/b1/02_b_distance_.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/b1/02_b_distance_100.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/b1/02_b_distance_120.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/b1/02_b_distance_80.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/b1/02_b_preprocessing_CLAHE.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/b1/02_b_preprocessing_EQ.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/b1/02_b_preprocessing_n.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/b1/02_b_ratio_test_06.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/b1/02_b_ratio_test_07.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/b1/02_b_ratio_test_08.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/b10/02_b_preprocessing_EQ.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/b10/04_b_distance.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/b10/04_b_distance_.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/b10/04_b_distance_100.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/b10/04_b_distance_120.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/b10/04_b_distance_80.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/b10/04_b_preprocessing_CLAHE.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/b10/04_b_preprocessing_n.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/b10/04_b_ratio_test_04.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/b10/04_b_ratio_test_05.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/b10/04_b_ratio_test_06.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/b10/04_b_ratio_test_07.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/b10/04_b_ratio_test_08.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/b11/03_b_distance.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/b11/03_b_distance_.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/b11/03_b_distance_100.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/b11/03_b_distance_80.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/b11/03_b_preprocessing_CLAHE.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/b11/03_b_preprocessing_EQ.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/b11/03_b_preprocessing_n.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/b11/03_b_ratio_test_06.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/b11/04_b_ratio_test_08.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/b12/02_b_distance.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/b12/02_b_distance_100.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/b12/02_b_distance_120.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/b12/02_b_distance_80.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/b12/02_b_preprocessing_CLAHE.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/b12/02_b_ratio_test_05.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/b12/02_b_ratio_test_06.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/b12/02_b_ratio_test_07.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/b12/02_b_ratio_test_08.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/b12/03_b_distance_.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/b12/03_b_distance_80.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/b12/03_b_preprocessing_EQ.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/b12/03_b_preprocessing_n.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/b4/01_b_preprocessing_EQ.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/b4/01_b_ratio_test_05.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/b4/01_b_ratio_test_06.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/b4/01_b_ratio_test_07.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/b4/01_b_ratio_test_08.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/b4/05_b_distance.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/b4/05_b_distance_.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/b4/05_b_distance_100.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/b4/05_b_distance_120.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/b4/05_b_distance_80.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/b4/05_b_preprocessing_CLAHE.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/b4/05_b_preprocessing_n.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/b4/05_b_ratio_test_06.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/b5/01_b_distance.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/b5/01_b_distance_.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/b5/01_b_distance_100.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/b5/01_b_distance_120.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/b5/01_b_distance_80.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/b5/01_b_preprocessing_CLAHE.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/b5/01_b_preprocessing_EQ.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/b5/01_b_preprocessing_n.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/b5/01_b_ratio_test_05.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/b5/01_b_ratio_test_06.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/b5/01_b_ratio_test_07.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/b5/01_b_ratio_test_08.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/b7/01_b_distance.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/b7/01_b_distance_.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/b7/01_b_distance_100.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/b7/01_b_distance_120.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/b7/01_b_distance_80.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/b7/01_b_preprocessing_CLAHE.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/b7/01_b_preprocessing_EQ.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/b7/01_b_preprocessing_n.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/b7/01_b_ratio_test_04.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/b7/01_b_ratio_test_05.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/b7/01_b_ratio_test_06.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/b7/01_b_ratio_test_07.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/b7/01_b_ratio_test_08.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/b8/02_b_distance.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/b8/02_b_distance_.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/b8/02_b_distance_100.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/b8/02_b_distance_120.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/b8/02_b_distance_80.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/b8/02_b_preprocessing_CLAHE.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/b8/02_b_preprocessing_EQ.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/b8/02_b_preprocessing_n.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/b8/02_b_ratio_test_04.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/b8/02_b_ratio_test_05.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/b8/02_b_ratio_test_06.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/b8/02_b_ratio_test_07.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/b8/02_b_ratio_test_08.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/b9/02_b_distance.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/b9/02_b_distance_.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/b9/02_b_distance_100.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/b9/02_b_distance_120.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/b9/02_b_distance_80.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/b9/02_b_preprocessing_CLAHE.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/b9/02_b_preprocessing_EQ.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/b9/02_b_preprocessing_n.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/b9/02_b_ratio_test_06.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/b9/02_b_ratio_test_07.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/b9/02_b_ratio_test_08.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/config1.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/config10.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/config11.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/config12.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/config2.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/config3.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/config4.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/config5.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/config6.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/config7.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/config8.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/config9.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/ratio_test_04.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/ratio_test_05.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/ratio_test_06.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/ratio_test_07.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/ratio_test_08.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/_p/test_b_10_2.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/data/_p/test_b_10_2.jpg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/extractor.py" beforeDir="false" afterPath="$PROJECT_DIR$/extractor.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/homography.py" beforeDir="false" afterPath="$PROJECT_DIR$/homography.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/input_image.py" beforeDir="false" afterPath="$PROJECT_DIR$/input_image.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/matcher.py" beforeDir="false" afterPath="$PROJECT_DIR$/matcher.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -148,7 +21,7 @@
     <session id="-1677598718">
       <usages-collector id="statistics.lifecycle.project">
         <counts>
-          <entry key="project.closed" value="92" />
+          <entry key="project.closed" value="95" />
           <entry key="project.open.time.1" value="1" />
           <entry key="project.open.time.10" value="8" />
           <entry key="project.open.time.11" value="3" />
@@ -156,9 +29,9 @@
           <entry key="project.open.time.5" value="7" />
           <entry key="project.open.time.6" value="17" />
           <entry key="project.open.time.7" value="20" />
-          <entry key="project.open.time.8" value="26" />
-          <entry key="project.open.time.9" value="12" />
-          <entry key="project.opened" value="95" />
+          <entry key="project.open.time.8" value="28" />
+          <entry key="project.open.time.9" value="13" />
+          <entry key="project.opened" value="98" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.open">
@@ -184,7 +57,7 @@
           <entry key="dummy" value="38" />
           <entry key="json" value="4" />
           <entry key="json_data" value="520" />
-          <entry key="py" value="42903" />
+          <entry key="py" value="43343" />
           <entry key="txt" value="40" />
         </counts>
       </usages-collector>
@@ -192,7 +65,7 @@
         <counts>
           <entry key="JSON" value="4" />
           <entry key="PLAIN_TEXT" value="78" />
-          <entry key="Python" value="43423" />
+          <entry key="Python" value="43863" />
         </counts>
       </usages-collector>
     </session>
@@ -207,8 +80,8 @@
           <file pinned="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/building.py">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="602">
-                  <caret line="81" column="26" selection-start-line="81" selection-start-column="26" selection-end-line="81" selection-end-column="26" />
+                <state relative-caret-position="571">
+                  <caret line="86" column="10" selection-start-line="86" selection-start-column="10" selection-end-line="86" selection-end-column="10" />
                 </state>
               </provider>
             </entry>
@@ -216,8 +89,8 @@
           <file pinned="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/extract_gps.py">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="340">
-                  <caret line="21" column="40" selection-start-line="21" selection-start-column="40" selection-end-line="21" selection-end-column="40" />
+                <state relative-caret-position="10">
+                  <caret line="53" column="19" lean-forward="true" selection-start-line="53" selection-start-column="19" selection-end-line="53" selection-end-column="19" />
                 </state>
               </provider>
             </entry>
@@ -225,8 +98,8 @@
           <file pinned="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/extractor.py">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="374">
-                  <caret line="22" column="12" selection-start-line="22" selection-start-column="12" selection-end-line="22" selection-end-column="12" />
+                <state relative-caret-position="119">
+                  <caret line="7" lean-forward="true" selection-start-line="7" selection-end-line="7" />
                 </state>
               </provider>
             </entry>
@@ -234,7 +107,7 @@
           <file pinned="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/json_data.py">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="289">
+                <state relative-caret-position="258">
                   <caret line="17" column="24" selection-start-line="17" selection-start-column="24" selection-end-line="17" selection-end-column="24" />
                   <folding>
                     <element signature="e#47#56#0" expanded="true" />
@@ -243,14 +116,14 @@
               </provider>
             </entry>
           </file>
-          <file pinned="false" current-in-tab="true">
+          <file pinned="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/app.py">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="1343">
-                  <caret line="79" column="30" selection-start-line="79" selection-start-column="30" selection-end-line="79" selection-end-column="30" />
+                <state relative-caret-position="281">
+                  <caret line="138" column="68" selection-start-line="138" selection-start-column="68" selection-end-line="138" selection-end-column="68" />
                   <folding>
                     <element signature="e#47#75#0" expanded="true" />
-                    <marker date="1590132847992" expanded="true" signature="5219:5571" ph="..." />
+                    <marker date="1590139821595" expanded="true" signature="5219:5571" ph="..." />
                   </folding>
                 </state>
               </provider>
@@ -265,11 +138,11 @@
               </provider>
             </entry>
           </file>
-          <file pinned="false" current-in-tab="false">
+          <file pinned="false" current-in-tab="true">
             <entry file="file://$PROJECT_DIR$/extract_features_db.py">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="75">
-                  <caret line="34" selection-start-line="34" selection-end-line="34" />
+                <state relative-caret-position="493">
+                  <caret line="34" lean-forward="true" selection-start-line="34" selection-end-line="34" />
                 </state>
               </provider>
             </entry>
@@ -278,14 +151,14 @@
       </split-first>
       <split-second>
         <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-          <file pinned="false" current-in-tab="true">
+          <file pinned="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/config.py">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="245">
-                  <caret line="35" column="10" selection-start-line="35" selection-start-column="10" selection-end-line="35" selection-end-column="10" />
+                <state relative-caret-position="228">
+                  <caret line="33" column="8" selection-start-line="33" selection-start-column="8" selection-end-line="33" selection-end-column="8" />
                   <folding>
-                    <marker date="1590133771173" expanded="true" signature="120:122" ph="..." />
-                    <marker date="1590133771173" expanded="true" signature="121:122" ph="..." />
+                    <marker date="1590139829796" expanded="true" signature="120:122" ph="..." />
+                    <marker date="1590139829796" expanded="true" signature="121:122" ph="..." />
                   </folding>
                 </state>
               </provider>
@@ -294,7 +167,7 @@
           <file pinned="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/building_repository.py">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="901">
+                <state relative-caret-position="452">
                   <caret line="58" selection-start-line="58" selection-end-line="58" />
                 </state>
               </provider>
@@ -303,10 +176,10 @@
           <file pinned="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/input_image.py">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="-61">
-                  <caret line="52" selection-start-line="52" selection-end-line="52" />
+                <state relative-caret-position="1635">
+                  <caret line="98" column="24" lean-forward="true" selection-start-line="98" selection-start-column="24" selection-end-line="98" selection-end-column="24" />
                   <folding>
-                    <marker date="1589962867723" expanded="true" signature="96:98" ph="..." />
+                    <marker date="1590160642111" expanded="true" signature="96:98" ph="..." />
                   </folding>
                 </state>
               </provider>
@@ -324,23 +197,23 @@
           <file pinned="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/homography.py">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="738">
-                  <caret line="56" column="11" selection-start-line="56" selection-start-column="11" selection-end-line="56" selection-end-column="11" />
+                <state relative-caret-position="449">
+                  <caret line="38" column="27" selection-start-line="38" selection-start-column="27" selection-end-line="38" selection-end-column="27" />
                   <folding>
                     <element signature="e#47#57#0" expanded="true" />
-                    <marker date="1589962837492" expanded="true" signature="104:105" ph="..." />
-                    <marker date="1589962837492" expanded="true" signature="206:586" ph="..." />
-                    <marker date="1589962837492" expanded="true" signature="632:637" ph="..." />
+                    <marker date="1590160642104" expanded="true" signature="104:105" ph="..." />
+                    <marker date="1590160642104" expanded="true" signature="206:586" ph="..." />
+                    <marker date="1590160642104" expanded="true" signature="632:637" ph="..." />
                   </folding>
                 </state>
               </provider>
             </entry>
           </file>
-          <file pinned="false" current-in-tab="false">
+          <file pinned="false" current-in-tab="true">
             <entry file="file://$PROJECT_DIR$/matcher.py">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="571">
-                  <caret line="180" column="25" selection-start-line="180" selection-start-column="25" selection-end-line="180" selection-end-column="25" />
+                <state relative-caret-position="517">
+                  <caret line="146" lean-forward="true" selection-start-line="146" selection-end-line="146" />
                 </state>
               </provider>
             </entry>
@@ -399,12 +272,13 @@
       <find>extract_</find>
       <find>self.matches</find>
       <find>self.sift</find>
-      <find>best_match</find>
       <find>warped_img</find>
       <find>filter_out_close_keypoints</find>
       <find>find_best_keypoints</find>
       <find>best</find>
       <find>prep</find>
+      <find>best_match</find>
+      <find>TODO</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -425,25 +299,25 @@
         <option value="$PROJECT_DIR$/json_data" />
         <option value="$PROJECT_DIR$/json_data.py" />
         <option value="$PROJECT_DIR$/test.py" />
-        <option value="$PROJECT_DIR$/building.py" />
         <option value="$PROJECT_DIR$/building_repository.py" />
         <option value="$PROJECT_DIR$/config_handler.py" />
-        <option value="$PROJECT_DIR$/extractor.py" />
-        <option value="$PROJECT_DIR$/homography.py" />
-        <option value="$PROJECT_DIR$/input_image.py" />
-        <option value="$PROJECT_DIR$/matcher.py" />
         <option value="$PROJECT_DIR$/opencv_serializer.py" />
         <option value="$PROJECT_DIR$/visualization.py" />
-        <option value="$PROJECT_DIR$/app.py" />
         <option value="$PROJECT_DIR$/extract_features_db.py" />
         <option value="$PROJECT_DIR$/extract_gps.py" />
+        <option value="$PROJECT_DIR$/building.py" />
+        <option value="$PROJECT_DIR$/app.py" />
         <option value="$PROJECT_DIR$/config.py" />
+        <option value="$PROJECT_DIR$/matcher.py" />
+        <option value="$PROJECT_DIR$/homography.py" />
+        <option value="$PROJECT_DIR$/input_image.py" />
+        <option value="$PROJECT_DIR$/extractor.py" />
       </list>
     </option>
   </component>
   <component name="ProjectFrameBounds" extendedState="6">
-    <option name="x" value="-509" />
-    <option name="y" value="-18" />
+    <option name="x" value="-8" />
+    <option name="y" value="-8" />
     <option name="width" value="1936" />
     <option name="height" value="1056" />
   </component>
@@ -452,20 +326,7 @@
     <navigator proportions="" version="1">
       <foldersAlwaysOnTop value="true" />
     </navigator>
-    <panes>
-      <pane id="Scope" />
-      <pane id="ProjectPane">
-        <subPane>
-          <expand>
-            <path>
-              <item name="FeatureDetection" type="b2602c69:ProjectViewProjectNode" />
-              <item name="FeatureDetection" type="462c0819:PsiDirectoryNode" />
-            </path>
-          </expand>
-          <select />
-        </subPane>
-      </pane>
-    </panes>
+    <panes />
   </component>
   <component name="PropertiesComponent">
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
@@ -599,9 +460,9 @@
     <recent_temporary>
       <list>
         <item itemvalue="Python.app" />
+        <item itemvalue="Python.config" />
         <item itemvalue="Python.extract_features_db" />
         <item itemvalue="Python.json_data (1)" />
-        <item itemvalue="Python.config" />
         <item itemvalue="Python.test" />
       </list>
     </recent_temporary>
@@ -653,7 +514,7 @@
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.49838188" visible="true" weight="0.09957851" />
+      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.49838188" weight="0.09957851" />
       <window_info id="Structure" order="1" sideWeight="0.50161815" side_tool="true" weight="0.115911484" />
       <window_info id="Favorites" order="2" sideWeight="0.50161815" side_tool="true" weight="0.115911484" />
       <window_info anchor="bottom" id="Message" order="0" />
@@ -731,88 +592,7 @@
     <entry file="file://$PROJECT_DIR$/data_test.jpg" />
     <entry file="file://$PROJECT_DIR$/feature_detection.py" />
     <entry file="file://$PROJECT_DIR$/load_images.py" />
-    <entry file="file://$PROJECT_DIR$/test.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="119">
-          <caret line="8" selection-start-line="8" selection-end-line="8" />
-          <folding>
-            <element signature="e#47#56#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/venv/gps_location.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="153">
-          <caret line="10" selection-start-line="10" selection-end-line="10" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/building.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="602">
-          <caret line="81" column="26" selection-start-line="81" selection-start-column="26" selection-end-line="81" selection-end-column="26" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/config_handler.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-367">
-          <caret line="33" selection-start-line="33" selection-end-line="33" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/extract_gps.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="340">
-          <caret line="21" column="40" selection-start-line="21" selection-start-column="40" selection-end-line="21" selection-end-column="40" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/building_repository.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="901">
-          <caret line="58" selection-start-line="58" selection-end-line="58" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/homography.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="738">
-          <caret line="56" column="11" selection-start-line="56" selection-start-column="11" selection-end-line="56" selection-end-column="11" />
-          <folding>
-            <element signature="e#47#57#0" expanded="true" />
-            <marker date="1589962837492" expanded="true" signature="104:105" ph="..." />
-            <marker date="1589962837492" expanded="true" signature="206:586" ph="..." />
-            <marker date="1589962837492" expanded="true" signature="632:637" ph="..." />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/extractor.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="374">
-          <caret line="22" column="12" selection-start-line="22" selection-start-column="12" selection-end-line="22" selection-end-column="12" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/input_image.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-61">
-          <caret line="52" selection-start-line="52" selection-end-line="52" />
-          <folding>
-            <marker date="1589962867723" expanded="true" signature="96:98" ph="..." />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/matcher.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="571">
-          <caret line="180" column="25" selection-start-line="180" selection-start-column="25" selection-end-line="180" selection-end-column="25" />
-        </state>
-      </provider>
-    </entry>
+    <entry file="file://$PROJECT_DIR$/test.py" />
     <entry file="file://$PROJECT_DIR$/opencv_serializer.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="697">
@@ -827,20 +607,30 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/config.py">
+    <entry file="file://$PROJECT_DIR$/building.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="245">
-          <caret line="35" column="10" selection-start-line="35" selection-start-column="10" selection-end-line="35" selection-end-column="10" />
-          <folding>
-            <marker date="1590133771173" expanded="true" signature="120:122" ph="..." />
-            <marker date="1590133771173" expanded="true" signature="121:122" ph="..." />
-          </folding>
+        <state relative-caret-position="571">
+          <caret line="86" column="10" selection-start-line="86" selection-start-column="10" selection-end-line="86" selection-end-column="10" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/extract_gps.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="10">
+          <caret line="53" column="19" lean-forward="true" selection-start-line="53" selection-start-column="19" selection-end-line="53" selection-end-column="19" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/extractor.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="119">
+          <caret line="7" lean-forward="true" selection-start-line="7" selection-end-line="7" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/json_data.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="289">
+        <state relative-caret-position="258">
           <caret line="17" column="24" selection-start-line="17" selection-start-column="24" selection-end-line="17" selection-end-column="24" />
           <folding>
             <element signature="e#47#56#0" expanded="true" />
@@ -848,21 +638,83 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/extract_features_db.py">
+    <entry file="file://$PROJECT_DIR$/app.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="75">
-          <caret line="34" selection-start-line="34" selection-end-line="34" />
+        <state relative-caret-position="281">
+          <caret line="138" column="68" selection-start-line="138" selection-start-column="68" selection-end-line="138" selection-end-column="68" />
+          <folding>
+            <element signature="e#47#75#0" expanded="true" />
+            <marker date="1590139821595" expanded="true" signature="5219:5571" ph="..." />
+          </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app.py">
+    <entry file="file://$PROJECT_DIR$/config_handler.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1343">
-          <caret line="79" column="30" selection-start-line="79" selection-start-column="30" selection-end-line="79" selection-end-column="30" />
+        <state relative-caret-position="-367">
+          <caret line="33" selection-start-line="33" selection-end-line="33" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/config.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="228">
+          <caret line="33" column="8" selection-start-line="33" selection-start-column="8" selection-end-line="33" selection-end-column="8" />
           <folding>
-            <element signature="e#47#75#0" expanded="true" />
-            <marker date="1590132847992" expanded="true" signature="5219:5571" ph="..." />
+            <marker date="1590139829796" expanded="true" signature="120:122" ph="..." />
+            <marker date="1590139829796" expanded="true" signature="121:122" ph="..." />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/building_repository.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="452">
+          <caret line="58" selection-start-line="58" selection-end-line="58" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/input_image.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1635">
+          <caret line="98" column="24" lean-forward="true" selection-start-line="98" selection-start-column="24" selection-end-line="98" selection-end-column="24" />
+          <folding>
+            <marker date="1590160642111" expanded="true" signature="96:98" ph="..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/venv/gps_location.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="153">
+          <caret line="10" selection-start-line="10" selection-end-line="10" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/homography.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="449">
+          <caret line="38" column="27" selection-start-line="38" selection-start-column="27" selection-end-line="38" selection-end-column="27" />
+          <folding>
+            <element signature="e#47#57#0" expanded="true" />
+            <marker date="1590160642104" expanded="true" signature="104:105" ph="..." />
+            <marker date="1590160642104" expanded="true" signature="206:586" ph="..." />
+            <marker date="1590160642104" expanded="true" signature="632:637" ph="..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/matcher.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="517">
+          <caret line="146" lean-forward="true" selection-start-line="146" selection-end-line="146" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/extract_features_db.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="493">
+          <caret line="34" lean-forward="true" selection-start-line="34" selection-end-line="34" />
         </state>
       </provider>
     </entry>

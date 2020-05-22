@@ -46,6 +46,11 @@ class BuildingFeature(object):
     """
 
     def __init__(self, name, path, path_org):
+        """
+        :param name: name
+        :param path: dataset image path
+        :param path_org: path to original image, used to show result of transformation on whole image
+        """
         self.id = name
         self.path = path
         self.original = path_org

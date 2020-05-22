@@ -16,13 +16,3 @@ class FeatureExtractor(object):
         sift = cv2.xfeatures2d.SIFT_create()
         keypoint, descriptor = sift.detectAndCompute(img, None)
         return keypoint, descriptor
-
-    @staticmethod
-    def extract_surf(img):
-        # TODO
-        pass
-
-    @staticmethod
-    def extract_orb(img):
-        # TODO
-        pass

@@ -36,11 +36,10 @@ def main():
         # 'path': 'data\\_p\\test_b_5.jpg'
         # 'path': 'data\\_p\\test_b_7.jpg'
         # 'path': 'data\\_p\\test_b_8.jpg'
+        # 'path': 'data\\_p\\test_b_8_2.jpg'
         # 'path': 'data\\_p\\test_b_9.jpg'
         # 'path': 'data\\_p\\test_b_10_1.jpg'
-        # 'path': 'data\\_p\\test_b_10_2.jpg'
         # 'path': 'data\\_p\\test_b_11_1.jpg'
-        # 'path': 'data\\_p\\test_b_11_2.jpg'
         # 'path': 'data\\_p\\test_b_12.jpg'
     })
 

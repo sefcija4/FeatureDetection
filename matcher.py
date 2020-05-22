@@ -25,27 +25,18 @@ class Matcher(object):
 
     def match_sift(self, in_img_descriptor, dataset):
         """
-
-        :param in_img_descriptor:
-        :param dataset:
+        Match each image from dataset with input image using SIFT
+        :param in_img_descriptor: () input image descriptor
+        :param dataset: (BuildingFeature) list of buildings
         :return:
         """
 
         # Match each building (in surroundings) witch input image
         for building in dataset:
-            # print(type(dataset))
-            for img in dataset[building]:  # img -> BuildingFeature
+            for img in dataset[building]:  # img type (BuildingFeature)
 
                 img.matches = self.matcher.knnMatch(in_img_descriptor, img.descriptor, k=2)
                 img.update_matches(self.ratio_test(img.matches))
-
-    def match_surf(self):
-        # TODO
-        pass
-
-    def match_orb(self):
-        # TODO
-        pass
 
     @staticmethod
     def ratio_test(matches, ratio=0.6):
@@ -78,11 +69,10 @@ class Matcher(object):
 
         for building in dataset:
             for img in dataset[building]:
-                # print(img.path)
                 img.load_image(img.path)
                 img_matches = self.draw_matches(img_in.img, img.img, img_in.keypoints, img.keypoints, img.matches)
-
                 matches.append(img_matches)
+
         return matches
 
     @staticmethod
@@ -152,10 +142,8 @@ class Matcher(object):
             prev = p_m.queryIdx
 
             # x - columns, y - rows
-            # x - columns, y - rows
-            # Get the coordinates
-            (x1, y1) = kp[curr].pt
-            (x2, y2) = kp[prev].pt
+            (x1, y1) = kp[curr].pt  # previous keypoint's coordinates
+            (x2, y2) = kp[prev].pt  # current  keypoint's coordinates
 
             if distance.euclidean((x1, y1), (x2, y2)) <= min_distance:
                 return False
