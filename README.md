@@ -10,7 +10,18 @@ Tento nástroj vznikl jako součást bakalářské práce. Jedná se o program, 
 
 Zdůvodu patentovaných metod SURF a SIFT je potřeba si naistalovat i OpenCV contribution [verzi](https://pypi.org/project/opencv-contrib-python/). Případně je možné přejít na starší verzi OpenCV.
 
-Nakonec můžete spustit hlavní skript [app.py](./app.py) 
+Před prvním spuštěním je potřeba zkontrolovat, zda jsou vygenerované potřebné soubory viz Info/První spuštění   
+
+# Info
+## První spuštění
+Předpokládá se, že není vygenerovaný config, metadata budov a předpočítané příznaky.
+0) Generování konfiguračního souboru pomocí [config.py](./config.py) (před způštěním *app.py* se vždy config automaticky přegeneruje, aby se nemusel pořád manuálně aktualizovat)
+1) Generování metadat pomocí skriptu [json_data.py](./json_data.py)
+2) Poté mohou být předpočítané příznaky pomocí [extract_features_db.py](./extract_features_db.py)
+3) Spuštění nástroje: [app.py](./app.py)
+
+## Jak přidat novou budovu do databáze?  
+Je potřeba oříznout fotografie, tak aby mohli být použité pro rozpoznání. Pro novou budovu vytvořete složku b(číslo budovy) např. b11. Do této složky uložte upravené fotografie. Dále je potřeba vytvořit metadata budovy ve skriptu [json_data.py](./json_data.py). Pokud chcete i zobraz samotnou transformaci fotky z databáze je potřeba vytvořit složku např. b_11_original a zde uložit soubor s originální fotkou o stejném rozměru jako ten upravený snímek v databázi. Posledním krokem je potřeba spustit výše zmíněné skripty pro přegenerování souborů a poté ještě předpočítat příznaky po danou budovu pomocí [extract_features_db.py](./extract_features_db.py)
 
 # Config
 Soubor config.json obsahuje nastavitelné proměnné pro celou aplikaci. Je možné zde nastavit cesty vstupního obrazu, metadat a dalších parametrů. Soubor je generován skriptem [config.py](./config.py)  
@@ -48,10 +59,6 @@ Skripty používají cesty, načtené z konfiguračního souboru.
 Skript [config.py](./config.py)   je určený pro generování config souboru  
 Skript [extract_features_db.py](./extract_features_db.py) je určený pro výpočet příznaků všech budov v datasetu.  
 Skript [json_data.py](./json_data.py) je určený pro přegenerování JSON metadat všech budov.  
-
-# Info
-## Jak přidat novou budovu do databáze?  
-Je potřeba oříznout fotografie, tak aby mohli být použité pro rozpoznání. Pro novou budovu vytvořete složku b(číslo budovy) např. b11. Do této složky uložte upravené fotografie. Dále je potřeba vytvořit metadata budovy ve skriptu [json_data.py](./json_data.py). Pokud chcete i zobraz samotnou transformaci fotky z databáze je potřeba vytvořit složku např. b_11_original a zde uložit soubor s originální fotkou o stejném rozměru jako ten upravený snímek v databázi. Posledním krokem je potřeba spustit výše zmíněné skripty pro přegenerování souborů a poté ještě předpočítat příznaky po danou budovu pomocí [extract_features_db.py](./extract_features_db.py)
 
 ## Diagram aktivit
 
