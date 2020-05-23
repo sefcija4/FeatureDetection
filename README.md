@@ -7,6 +7,8 @@ Tento nástroj vznikl jako praktický výstup bakalářské práce. Jedná se o 
 - [Pillow](https://pypi.org/project/Pillow/) - PIL==7.0.0
 - [Numpy](https://numpy.org/) - numpy==1.17.4
 
+Doporučuji instalovat moduly jako správce/administrátor  
+
 ``pip install opencv-python==3.4.2.16``  
 ``pip install opencv-contrib-python==3.4.2.16``  
 ``pip install pillow numpy``  
