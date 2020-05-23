@@ -2,7 +2,7 @@
 # -*- coding: utf-8 -*-
 
 import json
-from pathlib import Path
+import os
 
 """
 Script for generating json config file
@@ -32,7 +32,7 @@ def main():
 
     # INPUT IMAGE
     data['input_img'].append({
-        'path': str(Path('data/_p/test.jpg'))
+        'path': str(os.path.join('data', '_p', 'test.jpg'))
         # 'path': str(os.path.join('data', '_p', 'test_b_4.jpg'))  # fail
         # 'path': str(os.path.join('data', '_p', 'test_b_5.jpg'))
         # 'path': str(os.path.join('data', '_p', 'test_b_7.jpg'))

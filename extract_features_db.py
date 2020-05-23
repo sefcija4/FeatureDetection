@@ -17,8 +17,8 @@ Script for pre-compute features for dataset images
 def main():
     config = Config('config.json')
     ex = extractor.FeatureExtractor()
-    dir_name = Path(__file__).parent.absolute()
-    metadata_path = Path(f'{dir_name}/{config.get_metadata()}')
+    dir_name = os.path.dirname(__file__)
+    metadata_path = os.path.join(dir_name, config.get_metadata())
 
     data = list()  # list for buildings folders
 
@@ -29,12 +29,12 @@ def main():
         data.append(b.path)
 
     for folder in data:
-        for img in os.listdir(Path(f'{dir_name}/{folder}')):
+        for img in os.listdir(Path(f'{folder}')):
             # Check if file in building's folder has extension .jpg
             if not img.endswith('.jpg'):
                 continue
 
-            path = str(Path(f'{dir_name}/{folder}/{img}'))
+            path = str(Path(f'{folder}/{img}'))
 
             print(path)
 
@@ -58,13 +58,13 @@ def main():
             for kp in tmp_kp:
                 tmp_kp_dict.append(CVSerializer.cv_keypoint_to_dict(kp))
 
-            with open(Path(f'{dir_name}/{folder}/{img[:-4]}_keypoints.txt'), 'wb+') as file:
+            with open(str(Path(f'{folder}/{img[:-4]}_keypoints.txt')), 'wb+') as file:
                 pickle.dump(tmp_kp_dict, file, protocol=pickle.HIGHEST_PROTOCOL)
 
                 file.close()
 
             # DESCRIPTORS
-            with open(Path(f'{dir_name}/{folder}/{img[:-4]}_descriptor.txt'), 'wb+') as file:
+            with open(str(Path(f'{folder}/{img[:-4]}_descriptor.txt')), 'wb+') as file:
                 pickle.dump(tmp_des, file, protocol=pickle.HIGHEST_PROTOCOL)
 
                 file.close()
