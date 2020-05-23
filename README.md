@@ -14,7 +14,7 @@ Doporučuji instalovat moduly jako správce/administrátor
 ``pip install opencv-contrib-python==3.4.2.16``  
 ``pip install pillow numpy``  
 
-Dále jsou používané moduly, které jsou součástí standardní kníhovny: os, json, pickle, math  
+Dále jsou používané moduly, které jsou součástí standardní kníhovny: os, json, pickle, math, pathlib
 
 Zdůvodu patentovaných metod SURF a SIFT je potřeba si naistalovat i OpenCV contribution [verzi](https://pypi.org/project/opencv-contrib-python/). V práci jsem používal verzi **opencv-contrib-python==3.4.2.16**. Pokud nainstakujete novější/vyšší verzi, než je verze 3.4.2.16, tak při spuštění obdržíte tento error: ``This algorithm is patented and is excluded in this configuration; Set OPENCV_ENABLE_NONFREE CMake option and rebuild the library in function 'cv::xfeatures2d::SIFT::create'``
 
