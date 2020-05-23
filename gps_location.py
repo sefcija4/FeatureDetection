@@ -9,8 +9,8 @@ import math
 
 class GPSLocation(object):
     """
-    GPS location data
-
+    GPS location data format in degrees
+    -
     Parameters:
     :param self.latitude (float)
     :param self.longtitude (float)
@@ -31,6 +31,7 @@ class GPSLocation(object):
         Check if building (latitude, longtitude) belongs in perimeter of input image
         :param input_img: (object) Image
         :param db_building: (object) Building
+        :param radius_size: (float) radius size
         :return: (boolean)
         """
         # (x - center_x)^2 + (y - center_y)^2 < radius^2
