@@ -117,10 +117,7 @@ class Matcher(object):
 
         results = sorted(results, key=lambda x: x.get_sum_of_matches(), reverse=False)
 
-        for res in results:
-            print(res.get_sum_of_matches())
-
-        print("Best match:", results[0].path)
+        print(f'Best match: {results[0].name} ({results[0].path})')
 
         return True, results[0]
 
@@ -158,7 +155,7 @@ class Matcher(object):
             if Matcher.euclidean_distance((x1, y1), (x2, y2)) <= min_distance:
                 return False
 
-        print("Add keypoint:", (x2, y2))
+        # print("Add keypoint:", (x2, y2))
         return True
 
     @staticmethod

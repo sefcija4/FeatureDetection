@@ -45,13 +45,14 @@ class BuildingFeature(object):
     Building for feature computation
     """
 
-    def __init__(self, name, path, path_org):
+    def __init__(self, filename, name, path, path_org):
         """
         :param name: name
         :param path: dataset image path
         :param path_org: path to original image, used to show result of transformation on whole image
         """
-        self.id = name
+        self.id = filename
+        self.name = name
         self.path = path
         self.original = path_org
         self.img = None

@@ -36,7 +36,7 @@ class BuildingRepository(object):
         return buildings
 
     @staticmethod
-    def get_building_features(folder):
+    def get_building_features(folder, name):
         """
         Load keypoints and descriptors from each image of building's file and return them.
         :param folder: (str) folder in db of specific building
@@ -50,7 +50,7 @@ class BuildingRepository(object):
             if img.endswith('.txt'):
                 continue
 
-            tmp_b = BuildingFeature(img[:-4], os.path.join(folder, img),
+            tmp_b = BuildingFeature(img[:-4], name, os.path.join(folder, img),
                                     os.path.join(str(f'{folder}_original'), str(f'{img[:-4]}_small.jpg')))
             path = os.path.join(folder, img[:-4])
 

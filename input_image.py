@@ -77,7 +77,7 @@ class Image(object):
         :return:
         """
         self.keypoints, self.descriptor = FeatureExtractor.extract_sift(self.img)
-        print("IMG features extracted")
+        print("Input image features have been extracted")
 
     def merge_image(self, img):
         """

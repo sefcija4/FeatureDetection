@@ -6,6 +6,7 @@ from extractor import *
 
 import math
 
+
 class GPSLocation(object):
     """
     GPS location data

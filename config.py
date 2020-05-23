@@ -32,12 +32,12 @@ def main():
 
     # INPUT IMAGE
     data['input_img'].append({
-        # 'path': str(os.path.join('data', '_p', 'test.jpg'))
-        # 'path': str(os.path.join('data', '_p', 'test_b_4.jpg'))
+        'path': str(os.path.join('data', '_p', 'test.jpg'))
+        # 'path': str(os.path.join('data', '_p', 'test_b_4.jpg'))  # fail
         # 'path': str(os.path.join('data', '_p', 'test_b_5.jpg'))
         # 'path': str(os.path.join('data', '_p', 'test_b_7.jpg'))
-        'path': str(os.path.join('data', '_p', 'test_b_8.jpg'))
-        # 'path': str(os.path.join('data', '_p', 'test_b_9.jpg'))
+        # 'path': str(os.path.join('data', '_p', 'test_b_8.jpg'))
+        # 'path': str(os.path.join('data', '_p', 'test_b_9.jpg'))  # fail
         # 'path': str(os.path.join('data', '_p', 'test_b_10_1.jpg'))
         # 'path': str(os.path.join('data', '_p', 'test_b_11_1.jpg'))
         # 'path': str(os.path.join('data', '_p', 'test_b_12.jpg'))
@@ -45,7 +45,7 @@ def main():
 
     # GPS
     data['gps'].append({
-        'radius': '0.003'
+        'radius': '0.0025'
     })
 
     # MATCHING
@@ -54,7 +54,7 @@ def main():
         'min_number_of_matches': '10',
         'flann_index': '1',
         'flann_trees': '5',
-        'flann_checks': '50'
+        'flann_checks': '10'
     })
 
     with open(path, 'w+') as file:

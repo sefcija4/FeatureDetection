@@ -42,7 +42,7 @@ class App(str):
         Load keypoints and descriptors from specific building
         :param building: (object) Building
         """
-        self.buildings_features[building.id] = BuildingRepository.get_building_features(building.path)
+        self.buildings_features[building.id] = BuildingRepository.get_building_features(building.path, building.name)
 
     def load_image(self):
         """
@@ -80,11 +80,10 @@ class App(str):
     def find_best_match(self):
         """
         Get best match from all matches
-        :return:
+        :return: (bool)
         """
         found_success, self.best_match = self.matcher.best_match(self.buildings_features,
                                                                  self.config.get_filter_features())
-
         if not found_success:
             print("No building has good match. You should change your viewing angle and position")
             return False
@@ -97,7 +96,7 @@ class App(str):
         """
         Get 4 keypoints from the best match. Keypoints must be far enough from each other.
         -
-        More about the distance threshold: matcher.py or written documentation
+        More about the distance threshold: matcher.py or written documentation on github
         """
         # Find best 4 keypoints from best match
         filter_success, self.best_match.matches = Matcher.filter_out_close_keypoints(self.best_match.matches,
