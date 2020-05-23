@@ -24,7 +24,7 @@ class App(str):
 
         self.img_in = None
         self.dir_name = os.path.dirname(__file__)
-        self.db_path = os.path.join(self.dir_name, self.config.get_metadata())
+        self.db_path = Path(f'{self.dir_name}/{self.config.get_metadata()}')
         self.buildings = list()
         self.buildings_features = dict()
         self.matcher = None
@@ -144,7 +144,7 @@ class App(str):
         final_photo = Visualization.merge_images(self.img_in.img, self.best_match.path, homography)
 
         # TEST - img export
-        # test_path = os.path.join('test', str(f'{self.best_match.path[5:-4]}_distance_100.jpg'))
+        # test_path = Path(f'test/{self.best_match.path[5:-4]}_distance_100.jpg'))
         # cv2.imwrite(test_path, final_photo)
 
         cv2.imshow('Results', final_photo)

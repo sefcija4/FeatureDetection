@@ -4,6 +4,7 @@
 import json
 import os
 import pickle
+from pathlib import Path
 
 from building import *
 from opencv_serializer import *
@@ -40,6 +41,7 @@ class BuildingRepository(object):
         """
         Load keypoints and descriptors from each image of building's file and return them.
         :param folder: (str) folder in db of specific building
+        :param name (str) name of building
         :return: (object) list of BuildingFeatures
         """
         buildings = list()
@@ -51,7 +53,7 @@ class BuildingRepository(object):
                 continue
 
             tmp_b = BuildingFeature(img[:-4], name, os.path.join(folder, img),
-                                    os.path.join(str(f'{folder}_original'), str(f'{img[:-4]}_small.jpg')))
+                                    Path(str(f'{folder}_original/{img[:-4]}_small.jpg')))
             path = os.path.join(folder, img[:-4])
 
             # KEYPOINTS
