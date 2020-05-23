@@ -1,11 +1,13 @@
 # Nástroj pro detekci urbanistické scény
-Tento nástroj vznikl jako praktický výstup bakalářské práce. Jedná se o program, který rozezná budovu na snímku a umístí na něj snímek budovy z databáze. Pro výpočet příznaků je použitý SIFT, pro jejich párování je použitý FLANN matcher a poté jsou vybrány dobré spojení pomocí poměrového testu.
+Tento nástroj vznikl jako praktický výstup bakalářské práce. Jedná se o program, který rozezná budovu na snímku a umístí na něj snímek budovy z databáze. Pro výpočet příznaků je použitý SIFT, pro jejich párování je použitý FLANN matcher a poté jsou vybrány dobré spojení pomocí poměrového testu. Pro vývoj bylo použito IDe Pycharm a OS Windows.
 
 # Instalace
 **potřebné knihovny/moduly** a verze, které byly použity při vývoji
 - [OpenCV](https://opencv.org/) - opencv-python==3.4.2.16, opencv-contrib-python==3.4.2.16
 - [Pillow](https://pypi.org/project/Pillow/) - PIL==7.0.0
 - [Numpy](https://numpy.org/) - numpy==1.17.4
+
+Doporučuji instalovat moduly jako správce/administrátor  
 
 ``pip install opencv-python==3.4.2.16``  
 ``pip install opencv-contrib-python==3.4.2.16``  
