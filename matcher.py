@@ -3,7 +3,7 @@
 
 import cv2
 import numpy as np
-from scipy.spatial import distance
+import math
 
 
 class Matcher(object):
@@ -125,6 +125,16 @@ class Matcher(object):
         return True, results[0]
 
     @staticmethod
+    def euclidean_distance(p1, p2):
+        """
+        Euclidean distance between two points
+        :param p1: (tuple) point 1
+        :param p2: (tuple) point 2
+        :return: distance
+        """
+        return math.sqrt(((p1[0]-p2[0])**2)+((p1[1]-p2[1])**2))
+
+    @staticmethod
     def check_distances(kp, prev_match, cur_match, threshold):
         """
         Check distance between two keypoints in input image
@@ -145,7 +155,7 @@ class Matcher(object):
             (x1, y1) = kp[curr].pt  # previous keypoint's coordinates
             (x2, y2) = kp[prev].pt  # current  keypoint's coordinates
 
-            if distance.euclidean((x1, y1), (x2, y2)) <= min_distance:
+            if Matcher.euclidean_distance((x1, y1), (x2, y2)) <= min_distance:
                 return False
 
         print("Add keypoint:", (x2, y2))

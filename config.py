@@ -2,6 +2,7 @@
 # -*- coding: utf-8 -*-
 
 import json
+import os
 
 """
 Script for generating json config file
@@ -24,28 +25,27 @@ def main():
         'metadata_path': 'data.json'
     })
 
-    # PATH TO FOLDER WITH BUILDINGS
+    # PATH TO FOLDER WITH BUILDINGS FOLDERS
     data['buildings'].append({
         'path': 'data'
     })
 
     # INPUT IMAGE
     data['input_img'].append({
-        'path': 'data\\_p\\test.jpg'
-        # 'path': 'data\\_p\\test_b_4.jpg'
-        # 'path': 'data\\_p\\test_b_5.jpg'
-        # 'path': 'data\\_p\\test_b_7.jpg'
-        # 'path': 'data\\_p\\test_b_8.jpg'
-        # 'path': 'data\\_p\\test_b_8_2.jpg'
-        # 'path': 'data\\_p\\test_b_9.jpg'
-        # 'path': 'data\\_p\\test_b_10_1.jpg'
-        # 'path': 'data\\_p\\test_b_11_1.jpg'
-        # 'path': 'data\\_p\\test_b_12.jpg'
+        # 'path': str(os.path.join('data', '_p', 'test.jpg'))
+        # 'path': str(os.path.join('data', '_p', 'test_b_4.jpg'))
+        # 'path': str(os.path.join('data', '_p', 'test_b_5.jpg'))
+        # 'path': str(os.path.join('data', '_p', 'test_b_7.jpg'))
+        'path': str(os.path.join('data', '_p', 'test_b_8.jpg'))
+        # 'path': str(os.path.join('data', '_p', 'test_b_9.jpg'))
+        # 'path': str(os.path.join('data', '_p', 'test_b_10_1.jpg'))
+        # 'path': str(os.path.join('data', '_p', 'test_b_11_1.jpg'))
+        # 'path': str(os.path.join('data', '_p', 'test_b_12.jpg'))
     })
 
     # GPS
     data['gps'].append({
-        'radius': '0.0250'
+        'radius': '0.003'
     })
 
     # MATCHING
@@ -54,7 +54,7 @@ def main():
         'min_number_of_matches': '10',
         'flann_index': '1',
         'flann_trees': '5',
-        'flann_checks': '100'
+        'flann_checks': '50'
     })
 
     with open(path, 'w+') as file:

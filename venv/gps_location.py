@@ -4,6 +4,7 @@
 import extract_gps as gps
 from extractor import *
 
+import math
 
 class GPSLocation(object):
     """
@@ -24,19 +25,16 @@ class GPSLocation(object):
         return self.longtitude
 
     @staticmethod
-    def check_if_belongs(input_img, db_building):
+    def check_if_belongs(input_img, db_building, radius_size):
         """
         Check if building (latitude, longtitude) belongs in perimeter of input image
         :param input_img: (object) Image
         :param db_building: (object) Building
         :return: (boolean)
         """
-        radius = 0.003  # in degrees -> 200m
         # (x - center_x)^2 + (y - center_y)^2 < radius^2
-
-        if (pow(db_building.get_longtitude() - input_img.get_longtitude(), 2) + pow(db_building.get_latitude()
-                                                                                    - input_img.get_latitude(), 2)) <= (radius**2):
-
+        if ((db_building.get_longtitude() - input_img.get_longtitude())**2 +
+            (db_building.get_latitude() - input_img.get_latitude())**2) <= (radius_size**2):
             return True
         else:
             return False

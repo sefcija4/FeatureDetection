@@ -56,7 +56,7 @@ class App(str):
         """
         num_of_loaded = 0
         for building in self.buildings:
-            if GPSLocation.check_if_belongs(self.img_in, building):
+            if GPSLocation.check_if_belongs(self.img_in, building, self.config.get_gps_radius()):
                 self.load_features(building)
                 num_of_loaded += 1
 
