@@ -44,7 +44,7 @@ class Visualization(object):
         Images must have same dimension (img.shape)
         """
         # Load images
-        img2 = cv2.imread(path2)
+        img2 = cv2.imread(str(path2))
         #
 
         fg = homography.warp_image(img1, img2.copy())  # Warped Foreground image

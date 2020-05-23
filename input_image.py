@@ -14,7 +14,7 @@ class Image(object):
 
         self.path = path
 
-        self.img = cv2.imread(self.path)
+        self.img = cv2.imread(str(self.path))
         self.location = self.load_location()
 
         self.keypoints = None

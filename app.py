@@ -23,7 +23,7 @@ class App(str):
         self.config = Config(path)
 
         self.img_in = None
-        self.dir_name = os.path.dirname(__file__)
+        self.dir_name = Path(__file__).parent.absolute()
         self.db_path = Path(f'{self.dir_name}/{self.config.get_metadata()}')
         self.buildings = list()
         self.buildings_features = dict()

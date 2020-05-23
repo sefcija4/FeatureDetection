@@ -24,7 +24,7 @@ config = Config('config.json')
 data_b['buildings'].append({
     'id': '0',
     'name': 'Dům u kamenného zvonu',
-    'path': str(Path(f'{config.get_folder_name()}/b1')),
+    'path': str(Path(f'/{config.get_folder_name()}/b1')),
     'latitude':   '50.0877694',
     'longtitude': '14.4196813',
     'features': 'None'

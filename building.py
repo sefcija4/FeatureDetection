@@ -65,7 +65,7 @@ class BuildingFeature(object):
         Load image from path
         :param path:
         """
-        self.img = cv2.imread(path)
+        self.img = cv2.imread(str(path))
 
     def set_keypoints(self, kp):
         self.keypoints = kp
