@@ -2,19 +2,24 @@
 Tento nástroj vznikl jako praktický výstup bakalářské práce. Jedná se o program, který rozezná budovu na snímku a umístí na něj snímek budovy z databáze. Pro výpočet příznaků je použitý SIFT, pro jejich párování je použitý FLANN matcher a poté jsou vybrány dobré spojení pomocí poměrového testu.
 
 # Instalace
-**potřebné knihovny**
-- [OpenCV](https://opencv.org/)
-- [Pillow](https://pypi.org/project/Pillow/)
-- [Numpy](https://numpy.org/)
-- [Pickle](https://docs.python.org/3/library/pickle.html)
+**potřebné knihovny/moduly** a verze, které byly použity při vývoji
+- [OpenCV](https://opencv.org/) - opencv-python==3.4.2.16, opencv-contrib-python==3.4.2.16
+- [Pillow](https://pypi.org/project/Pillow/) - PIL==7.0.0
+- [Numpy](https://numpy.org/) - numpy==1.17.4
 
-Zdůvodu patentovaných metod SURF a SIFT je potřeba si naistalovat i OpenCV contribution [verzi](https://pypi.org/project/opencv-contrib-python/). Případně je možné přejít na starší verzi OpenCV.
+``pip install opencv-python==3.4.2.16``  
+``pip install opencv-contrib-python==3.4.2.16``  
+``pip install pillow numpy``  
 
-Před prvním spuštěním je potřeba zkontrolovat, zda jsou vygenerované potřebné soubory viz Info/První spuštění   
+Dále jsou používané moduly, které jsou součástí standardní kníhovny: os, json, pickle, math  
+
+Zdůvodu patentovaných metod SURF a SIFT je potřeba si naistalovat i OpenCV contribution [verzi](https://pypi.org/project/opencv-contrib-python/). V práci jsem používal verzi **opencv-contrib-python==3.4.2.16**. Pokud nainstakujete novější/vyšší verzi, než je verze 3.4.2.16, tak při spuštění obdržíte tento error: ``This algorithm is patented and is excluded in this configuration; Set OPENCV_ENABLE_NONFREE CMake option and rebuild the library in function 'cv::xfeatures2d::SIFT::create'``
+
+Před prvním spuštěním je potřeba zkontrolovat, zda jsou vygenerované potřebné soubory viz Info->První spuštění   
 
 # Info
 ## První spuštění
-Předpokládá se, že není vygenerovaný config, metadata budov a předpočítané příznaky.
+Předpokládá se, že není vygenerovaný config, metadata budov, předpočítané příznaky a klíčové body.
 0) Generování konfiguračního souboru pomocí [config.py](./config.py) (před způštěním *app.py* se vždy config automaticky přegeneruje, aby se nemusel pořád manuálně aktualizovat)
 1) Generování metadat pomocí skriptu [json_data.py](./json_data.py)
 2) Poté mohou být předpočítané příznaky pomocí [extract_features_db.py](./extract_features_db.py)
@@ -48,24 +53,20 @@ Ukázka složkové struktury pro uchování předpočítaných příznaků a sn�
 
 
 ## Výpočet příznaků
-Pro výpočet příznaků je použit deskritor SIFT. Příznaky pro budovy v databázi jsou předpočítány pomocí skriptu [extract_features_db.py](./extract_features_db.py). Příznaky pro vstupní snímek jsou vypočítány v rámci běhu aplikace. O výpočet se stará třída **FeatureExtractor**
-
-### JSON
-Skript vygeneruje soubory *X_descriptotrs.txt* a *X_keypoints.txt* pro každý obrázek v datasetu.
+Pro výpočet příznaků je použit deskritor SIFT. Příznaky pro budovy v databázi jsou předpočítány pomocí skriptu [extract_features_db.py](./extract_features_db.py). Příznaky pro vstupní snímek jsou vypočítány v rámci běhu aplikace. O výpočet se stará třída **FeatureExtractor**. Skript vygeneruje soubory *X_descriptotrs.txt* a *X_keypoints.txt* pro každý obrázek v datasetu.
 
 ### Skripty
 Skripty používají cesty, načtené z konfiguračního souboru.
 
-Skript [config.py](./config.py)   je určený pro generování config souboru  
+Skript [config.py](./config.py) je určený pro generování config souboru  
 Skript [extract_features_db.py](./extract_features_db.py) je určený pro výpočet příznaků všech budov v datasetu.  
 Skript [json_data.py](./json_data.py) je určený pro přegenerování JSON metadat všech budov.  
 
 ## Diagram aktivit
-
 ![masks](doc_images/flow_chart.jpg)  
 
 # Dokumentace
-**@** - u názvu metody značí, že se jedná o statickou metodu
+**@** - u názvu metody značí, že se jedná o statickou metodu. Parametry jednolivých metod a metody samotné jsou popsány v kódu.
 ## Třídy
 ------------------------------------------------------------------------------------------------  
 ### GPSLocation
@@ -77,17 +78,16 @@ Skript [json_data.py](./json_data.py) je určený pro přegenerování JSON meta
 ##### get_longtitude()  
 ##### @ check_if_belongs(Image, Building)
 Statická metoda, která zjistí, zda jde budova z databáze v okolí od místa pořízení fotografie. Návratová hodnota je boolean.
-Proměnná ``radius=0.003`` je velikost radiusu.
+Parametr ``radius_size`` je velikost radiusu načtená z konfiguračního souboru.
 ```python
-@staticmethod  
-def check_if_belongs(input_img, db_building):  
-    radius = 0.003  # in degrees => 300m radius
-    # (x - center_x)^2 + (y - center_y)^2 < radius^2  
-    if (pow(db_building.get_longtitude() - input_img.get_longtitude(), 2)
-        + pow(db_building.get_latitude() - input_img.get_latitude(), 2)) <= (radius**2):  
-        return True  
-    else:  
-        return False  
+    @staticmethod  
+    def check_if_belongs(input_img, db_building, radius_size):
+        # (x - center_x)^2 + (y - center_y)^2 < radius^2
+        if ((db_building.get_longtitude() - input_img.get_longtitude())**2 +
+            (db_building.get_latitude() - input_img.get_latitude())**2) <= (radius_size**2):
+            return True
+        else:
+            return False
 ```
 ------------------------------------------------------------------------------------------------  
 ### CVSerializer
@@ -236,12 +236,12 @@ Načte snímek budovy a převede ho do odstínu šedi
 ##### set_keypoints()
 ##### set_descriptor()
 ##### update_matches()
-Nastaví nebo updatuje 
+Nastaví nebo updatuje párování. Update je například po eliminaci nevhodných nepárování.
 ##### get_num_of_matches()
 ##### get_sum_of_matches(count=10)
-Sečte např. 10 prvních (nejlepších) napárování 
+Sečte např. 10 prvních (nejlepších->záleží na seřazení) napárování 
 ##### sort_matches_by_distance()
-Seřadí napárované příznaky podle vzdálenosti (kratší vzdálenost => lepší)
+Seřadí napárované příznaky podle euklidovské vzdálenosti (kratší vzdálenost => lepší)
 
 ------------------------------------------------------------------------------------------------    
 ### BuildingRepository 
