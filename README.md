@@ -2,6 +2,7 @@
 Tento nástroj vznikl jako praktický výstup bakalářské práce. Jedná se o program, který rozezná budovu na snímku a umístí na něj snímek budovy z databáze. Pro výpočet příznaků je použitý SIFT, pro jejich párování je použitý FLANN matcher a poté jsou vybrány dobré spojení pomocí poměrového testu. Pro vývoj bylo použito IDe Pycharm a OS Windows.
 
 # Instalace
+Python - 3.7.0
 **potřebné knihovny/moduly** a verze, které byly použity při vývoji
 - [OpenCV](https://opencv.org/) - opencv-python==3.4.2.16, opencv-contrib-python==3.4.2.16
 - [Pillow](https://pypi.org/project/Pillow/) - PIL==7.0.0
@@ -17,18 +18,17 @@ Dále jsou používané moduly, které jsou součástí standardní kníhovny: o
 
 Zdůvodu patentovaných metod SURF a SIFT je potřeba si naistalovat i OpenCV contribution [verzi](https://pypi.org/project/opencv-contrib-python/). V práci jsem používal verzi **opencv-contrib-python==3.4.2.16**. Pokud nainstakujete novější/vyšší verzi, než je verze 3.4.2.16, tak při spuštění obdržíte tento error: ``This algorithm is patented and is excluded in this configuration; Set OPENCV_ENABLE_NONFREE CMake option and rebuild the library in function 'cv::xfeatures2d::SIFT::create'``
 
-Před prvním spuštěním je potřeba zkontrolovat, zda jsou vygenerované potřebné soubory viz Info->První spuštění   
-
+Před prvním spuštěním je potřeba zkontrolovat, zda jsou vygenerované potřebné soubory viz **Info->První spuštění**. Pythnon skripty se ve windows terminálu spouští: ``py nazev_skriptu.py``.
 # Info
 ## První spuštění
-Předpokládá se, že není vygenerovaný config, metadata budov, předpočítané příznaky a klíčové body.
+Předpokládá se, že už máte nainstalované všechny moduly se správnými verzemi a není vygenerovaný config, metadata budov, předpočítané příznaky a klíčové body.
 0) Generování konfiguračního souboru pomocí [config.py](./config.py) (před způštěním *app.py* se vždy config automaticky přegeneruje, aby se nemusel pořád manuálně aktualizovat)
 1) Generování metadat pomocí skriptu [json_data.py](./json_data.py)
 2) Poté mohou být předpočítané příznaky pomocí [extract_features_db.py](./extract_features_db.py)
-3) Spuštění nástroje: [app.py](./app.py)
+3) Spuštění nástroje: [app.py](./app.py) *(konfigurační soubor se atomaticky vždy při spuštění přegeneruje)*
 
 ## Jak přidat novou budovu do databáze?  
-Je potřeba oříznout fotografie, tak aby mohli být použité pro rozpoznání. Pro novou budovu vytvořete složku b(číslo budovy) např. b11. Do této složky uložte upravené fotografie. Dále je potřeba vytvořit metadata budovy ve skriptu [json_data.py](./json_data.py). Pokud chcete i zobraz samotnou transformaci fotky z databáze je potřeba vytvořit složku např. b_11_original a zde uložit soubor s originální fotkou o stejném rozměru jako ten upravený snímek v databázi. Posledním krokem je potřeba spustit výše zmíněné skripty pro přegenerování souborů a poté ještě předpočítat příznaky po danou budovu pomocí [extract_features_db.py](./extract_features_db.py)
+Je potřeba oříznout fotografie, tak aby mohli být použité pro rozpoznání. Pro novou budovu vytvořete složku b(číslo budovy) např. b11. Do této složky uložte upravené fotografie doporučená velikost (960×720px). Dále je potřeba vytvořit záznam v souboru metadat budov ve skriptu [json_data.py](./json_data.py). Pokud chcete i zobrazit samotnou transformaci fotky z databáze je potřeba vytvořit složku např. b_11_original a zde uložit soubor s originální fotkou o stejném rozměru jako ten upravený snímek v databázi (aby mohla bát použita stejná transformační matice). Posledním krokem je potřeba spustit výše zmíněné skripty pro přegenerování souborů a poté ještě předpočítat příznaky po danou budovu pomocí [extract_features_db.py](./extract_features_db.py).
 
 # Config
 Soubor config.json obsahuje nastavitelné proměnné pro celou aplikaci. Je možné zde nastavit cesty vstupního obrazu, metadat a dalších parametrů. Soubor je generován skriptem [config.py](./config.py)  
@@ -68,18 +68,19 @@ Skript [json_data.py](./json_data.py) je určený pro přegenerování JSON meta
 ![masks](doc_images/flow_chart.jpg)  
 
 # Dokumentace
-**@** - u názvu metody značí, že se jedná o statickou metodu. Parametry jednolivých metod a metody samotné jsou popsány v kódu.
+**@** - u názvu metody značí, že se jedná o statickou metodu. Parametry jednolivých metod a metody samotné jsou popsány v kódu.  
 ## Třídy
 ------------------------------------------------------------------------------------------------  
 ### GPSLocation
+Zeměpisné souřadnice ve formátu stupňů
 #### Parametry
 **latitude** - zeměpisná výška (ve stupních)  
 **longtitude** - zeměpisná délka (ve stupních)  
 #### Metody
 ##### get_latitude()  
 ##### get_longtitude()  
-##### @ check_if_belongs(Image, Building)
-Statická metoda, která zjistí, zda jde budova z databáze v okolí od místa pořízení fotografie. Návratová hodnota je boolean.
+##### @ check_if_belongs(input_image, db_building, radius_size)
+Statická metoda, která zjistí, zda jde budova z databáze v okolí od místa pořízení fotografie. Návratová hodnota je boolean, zda budova leži, či neleží v okolí.
 Parametr ``radius_size`` je velikost radiusu načtená z konfiguračního souboru.
 ```python
     @staticmethod  
@@ -95,13 +96,14 @@ Parametr ``radius_size`` je velikost radiusu načtená z konfiguračního soubor
 ### CVSerializer
 Třída ``CVSerializer`` se stará o převod klíčových bodů z OpenCV třídy ``cv2.Keypoint`` na slovník (a zpět), který může být serializován např. pomocí knihovny pickle.
 #### Metody
-##### @ cv_keypoint_to_dict(keypoints)
+##### @ cv_keypoint_to_dict(kp)
 Keypoints (cv2.Keypoint) jsou serializovány/převedeny na slovník. Tato metoda se používá při exportu přepočítaných příznaků. Serializér Pickle ummí serializovat jen klasické objekty Pythonu.  
-##### @ dict_to_cv_keypoint(keypoints)
+##### @ dict_to_cv_keypoint(kp)
 Parametr Keypoints (dict) je načtený slovník ze souboru předpočítaných klíčových bodů. Pro další použití klíčových bodů je potřeba pravovat s objekty OpenCV (cv2.Keypoint).  
 
 ------------------------------------------------------------------------------------------------   
 ### Image
+Třída vstupního obrazu
 #### Parametry
 **path** - cesta ke snímku  
 **img** - načtený obraz pomocí ``cv2.imread``  
@@ -115,9 +117,9 @@ Načte gps data (zeměpisná šířka a délka) z metadat snímku. Metadata mus�
 ##### get_longtitude()
 ##### get_latitude()
 ##### preprocess()
-Provede předzpracování vstupního obrazu: ekvalizace histogramu (CLAHE) a změnšení snímku.  
+Provede předzpracování vstupního obrazu: převod snímku na stupně šedí, ekvalizace histogramu (CLAHE) a změnšení snímku.  
 ##### resize(max_dimension=960)
-Zmenší vstupní snímek, tak aby největší rozměr obrazu měl 960 pixelů.  
+Zmenší vstupní snímek, tak aby jeho největší rozměr měl 960 pixelů.  
 ##### extract_features()  
 Provede výpočet příznaků (SIFT) pro vstupní obraz.
 ##### merge_image(image)  
@@ -127,8 +129,9 @@ Ukáže načtený vstupní obraz v novém okně.
 
 ------------------------------------------------------------------------------------------------     
 ### Config
+Třída, které implemetuje načítání parametrů ze souboru *config.json*
 #### Parametry
-**path** - cesta k souboru (config.json)  
+**path** - cesta k souboru (*config.json*)
 **data** - načtená data ze souboru ve formátu json  
 #### Metody
 ##### __init__(path)
@@ -148,6 +151,7 @@ Metoda vrací slovník, který obsahuje prahy pro nalezení nejlepší shody a 4
 
 ------------------------------------------------------------------------------------------------     
 ### Visualization
+Tato třída slouží pouze pro implementaci vizualizačních metod
 #### Metody
 ##### @ create_mask(img)
 Vytvoří masku obrázku *img*. Maska reprezentuje oddělení objektu od černého pozadí. Morfologie (otevření a uzavření) je použitá pro odstranění okolních samotných pixelů a uzavření děr po metodě prahování.
@@ -165,7 +169,7 @@ Vytvoří masku obrázku *img*. Maska reprezentuje oddělení objektu od černé
 ![mask](doc_images/mask.png)
 
 ##### @ merge_images(img1, path2, homography)
-Spojí dva obrazy. Používá se pro vizualizace výsledného umístění do scény.  
+Spojí dva obrazy. Používá se pro vizualizace výsledného umístění do scény. Důležité je aby oba snímky měli **stejné rozměry i počet kanálů0!**  
 ```python
     def merge_images(img1, path2, homography):
         img2 = cv2.imread(path2)
@@ -281,10 +285,9 @@ Vytvoří cv2.FlannBasedMatcher() na základě nastavení dle parametrů v *flan
         search_params = dict(checks=flann_data['flann_checks'])   # or pass empty dictionary
         self.matcher = cv2.FlannBasedMatcher(index_params, search_params)
 ```  
-##### match_sift()
+##### match_sift(in_img_descriptor, dataset)
 Napáruje všechny snímky budov v okolí se vstupním snímkem. Vybere pouze dobrá spojení, která projdou poměrovým testem. Výsledná napárování jsou uložena v parametru objektu BuildingFeature.matches.  
-##### show_matches()  
-Metoda vrací list obrazů se zobrazenými body, které byly napárovány.  
+ 
 ##### @ ratio_test(matches, ratio=0.6)
 Metoda porovnává vzdálenosti mezi nejbližšímy sousedy a pokud je nejkratší vzdálenost menší jak *ratio* × druhá nejkratší vzdálenost, tak se jedná o dobrý pár. Předpokládá se, že pokud je spojení dobré, tak to druhé musí být chybné, tudiž se vzdálenost musí značně lišit viz [článek](https://www.cs.ubc.ca/~lowe/papers/ijcv04.pdf) D. Loweho
 
@@ -314,14 +317,16 @@ def show_matches(self, img_in, dataset):
                 matches.append(img_matches)
         return matches 
 ```  
-##### @ draw_matches()
+##### @ draw_matches(img1, img2, keypoints1, keypoints2, matches, flag=cv2.DrawMatchesFlags_NOT_DRAW_SINGLE_POINTS)
 Metoda vytvoří nový obraz, kde je vstupní snímek a snímek budovy vedle sebe. Nalezené páry jsou poté propojeny barevnými čarami. Způsob vizualizace např. ukázat i nenepárované body lze měnit pomocí *flag*.
 
 ![draw_matches() result](doc_images/draw_matches.PNG)  
 
-##### @ best_match()
+##### @ best_match(matches, threshold)
 Metoda nejde nejlepší obrázek z databáze, na základě počtu dobrých napárování.
-##### @ check_distances()
+##### @ euclidean_distance(p1, p2)
+Vypočítá euklidovskou vzdálensot mezi dvěma body
+##### @ check_distances(kp, prev_match, cur_match, threshold)
 Metoda kontroluje zda jsou klíčové body od sebe vzdálené minimálně dle hodnoty *threshold['pixel_distance']*. Tuto hodnotu lze upravit v konfiguračním souboru.
 ##### @ filter_out_close_keypoints(matches, kp, threshold)
 Metoda projde všechny napárování v *matches* a pokud danný bod projde metodou *check_distances* tak je přidán do výsledné čtvrřice bodů, které budou použity pro tvorbu transformační matice. Prvním bodem přidaným do čtveřice je bod s nejmenší vzdáleností (nejpřesnějším napárováním). Body jsou testovány postupně podle jejich vzdáleností.
