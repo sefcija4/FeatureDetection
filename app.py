@@ -101,7 +101,8 @@ class App(str):
         # Find best 4 keypoints from best match
         filter_success, self.best_match.matches = Matcher.filter_out_close_keypoints(self.best_match.matches,
                                                                                      self.img_in.keypoints,
-                                                                                     self.config.get_filter_features())
+                                                                                     self.config.get_filter_features(),
+                                                                                     ransac=True)
         if not filter_success:
             return None
         else:
@@ -123,7 +124,7 @@ class App(str):
         Get transformation matrix from best four keypoints
         """
         homography = Homography()
-        homography.find_matrix(self.best_match.matches, self.img_in.keypoints, self.best_match.keypoints)
+        homography.find_matrix(self.best_match.matches, self.img_in.keypoints, self.best_match.keypoints, ransac=True)
         self.best_match.load_image(self.best_match.path)
 
         # VISUALIZATION
@@ -144,7 +145,7 @@ class App(str):
         final_photo = Visualization.merge_images(self.img_in.img, self.best_match.path, homography)
 
         # TEST - img export
-        # test_path = Path(f'test/{self.best_match.path[5:-4]}_distance_100.jpg'))
+        # test_path = os.path.join('test', str(f'{str(self.best_match.path)[5:-4]}_ransak.jpg'))
         # cv2.imwrite(test_path, final_photo)
 
         cv2.imshow('Results', final_photo)

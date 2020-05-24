@@ -32,12 +32,12 @@ def main():
 
     # INPUT IMAGE
     data['input_img'].append({
-        'path': str(os.path.join('data', '_p', 'test.jpg'))
+        # 'path': str(os.path.join('data', '_p', 'test.jpg'))
         # 'path': str(os.path.join('data', '_p', 'test_b_4.jpg'))  # fail
         # 'path': str(os.path.join('data', '_p', 'test_b_5.jpg'))
         # 'path': str(os.path.join('data', '_p', 'test_b_7.jpg'))
         # 'path': str(os.path.join('data', '_p', 'test_b_8.jpg'))
-        # 'path': str(os.path.join('data', '_p', 'test_b_9.jpg'))  # fail
+        'path': str(os.path.join('data', '_p', 'test_b_9.jpg'))  # fail
         # 'path': str(os.path.join('data', '_p', 'test_b_10_1.jpg'))
         # 'path': str(os.path.join('data', '_p', 'test_b_11_1.jpg'))
         # 'path': str(os.path.join('data', '_p', 'test_b_12.jpg'))

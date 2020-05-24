@@ -159,28 +159,33 @@ class Matcher(object):
         return True
 
     @staticmethod
-    def filter_out_close_keypoints(matches, kp, threshold):
+    def filter_out_close_keypoints(matches, kp, threshold, ransac=False):
         """
         Find best four keypoints. Start from best keypoint and than check every other keypoint is far enough
         :param matches:
         :param kp: keypoints
         :param threshold: minimal distance between two points
+        :param ransac: (bool) while using RANSAC you do not need filtering out close keypoints
         :return: best four keypoints
         """
 
-        best_four = list()
+        if ransac:  # RANSAC
+            return True, matches
+        else:
+            best_four = list()
 
-        start = matches[0]
-        best_four.append(start)
+            start = matches[0]
+            best_four.append(start)
 
-        for m in matches:
-            if len(best_four) > 4:
-                break
-            if Matcher.check_distances(kp, best_four, m, threshold):
-                best_four.append(m)
+            for m in matches:
+                if len(best_four) > 4:
+                    break
+                if Matcher.check_distances(kp, best_four, m, threshold):
+                    best_four.append(m)
 
-        if len(best_four) < 4:
-            print('Keypoints are not far enough')
-            return False, matches  # used later: show_matches()
+            if len(best_four) < 4:
+                print('Keypoints are not far enough')
+                return False, matches  # used later: show_matches()
 
-        return True, best_four
+            return True, best_four
+
