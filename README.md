@@ -198,8 +198,8 @@ Na obrázku je možné vidět hrubý postup práce s maskami pro složení výsl
 **keypoints2** - (list) souřadnice klíčových body obrázku 2
 #### Metody
 ##### add_keypoints()
-##### find_matrix()
-Výpočet transformační matice pomocí ``cv2.fingHomography``
+##### find_matrix(matches, kp1, kp2, ransac=False)
+Výpočet transformační matice pomocí ``cv2.fingHomography``. Při nastavení ransac=True bude použita metoda ransac pro eliminaci odlehlých/špatných párů. Pokud používáte ransac je potřeba do něj posílat všechny páry, které prošli poměrovým testem. Pokud používáte ještě jinou metodu ne eliminaci/výběr párů, tak ransac nemusí fungovat (bude fongovat, ale nebudou dobré výsledky) pokud mu poskytnete malý soubor párů.
 ##### warp_image(img1, img2)
 Transformace obrázku2 do obrázku1. Výsledný obrázek má rozměry obrázku1 ale obsahuje transformovaný snímek2 a přípdané černé pozadí.
 
@@ -328,8 +328,8 @@ Metoda nejde nejlepší obrázek z databáze, na základě počtu dobrých napá
 Vypočítá euklidovskou vzdálensot mezi dvěma body
 ##### @ check_distances(kp, prev_match, cur_match, threshold)
 Metoda kontroluje zda jsou klíčové body od sebe vzdálené minimálně dle hodnoty *threshold['pixel_distance']*. Tuto hodnotu lze upravit v konfiguračním souboru.
-##### @ filter_out_close_keypoints(matches, kp, threshold)
-Metoda projde všechny napárování v *matches* a pokud danný bod projde metodou *check_distances* tak je přidán do výsledné čtvrřice bodů, které budou použity pro tvorbu transformační matice. Prvním bodem přidaným do čtveřice je bod s nejmenší vzdáleností (nejpřesnějším napárováním). Body jsou testovány postupně podle jejich vzdáleností.
+##### @ filter_out_close_keypoints(matches, kp, threshold, ransac=False)
+Metoda projde všechny napárování v *matches* a pokud danný bod projde metodou *check_distances* tak je přidán do výsledné čtvrřice bodů, které budou použity pro tvorbu transformační matice. Prvním bodem přidaným do čtveřice je bod s nejmenší vzdáleností (nejpřesnějším napárováním). Body jsou testovány postupně podle jejich vzdáleností. Při použití ransac=True nebudou eliminovány žádné páry.
 
 ------------------------------------------------------------------------------------------------    
 ### Visualization 
