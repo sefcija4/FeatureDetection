@@ -31,7 +31,7 @@ Předpokládá se, že už máte nainstalované všechny moduly se správnými v
 Je potřeba oříznout fotografie, tak aby mohli být použité pro rozpoznání. Pro novou budovu vytvořete složku b(číslo budovy) např. b11. Do této složky uložte upravené fotografie doporučená velikost (960×720px). Dále je potřeba vytvořit záznam v souboru metadat budov ve skriptu [json_data.py](./json_data.py). Pokud chcete i zobrazit samotnou transformaci fotky z databáze je potřeba vytvořit složku např. b_11_original a zde uložit soubor s originální fotkou o stejném rozměru jako ten upravený snímek v databázi (aby mohla bát použita stejná transformační matice). Posledním krokem je potřeba spustit výše zmíněné skripty pro přegenerování souborů a poté ještě předpočítat příznaky po danou budovu pomocí [extract_features_db.py](./extract_features_db.py).
 
 # Config
-Soubor config.json obsahuje nastavitelné proměnné pro celou aplikaci. Je možné zde nastavit cesty vstupního obrazu, metadat a dalších parametrů. Soubor je generován skriptem [config.py](./config.py)  
+Soubor config.json obsahuje nastavitelné proměnné pro celou aplikaci. Je možné zde nastavit cesty vstupního obrazu, metadat a dalších parametrů. Soubor je generován skriptem [config.py](./config.py). Pomocí parametru ransac.set je možné přepínat mezi použitím metody RANSAC a eliminací párů na základě vzdálenosti klíčových bodů.
 Pro práci s konfiguračním souborem je určená třída ``Config``, kde po přidání nového parametru stačí naimplementovat novou metodu. Doporučuji napsat metody i samotné dělení dat v konfiračním souboru na logiké malé části, aby dále předávaná data nebyla zbytečně velká...   
 
 # Dataset
