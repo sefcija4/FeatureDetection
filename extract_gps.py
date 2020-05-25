@@ -2,7 +2,7 @@
 # -*- coding: utf-8 -*-
 
 """
-source: https://www.codingforentrepreneurs.com/blog/extract-gps-exif-images-python/
+source/inspiration: https://www.codingforentrepreneurs.com/blog/extract-gps-exif-images-python/
 """
 
 from PIL import Image

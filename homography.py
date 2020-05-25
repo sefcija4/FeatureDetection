@@ -7,13 +7,13 @@ import numpy as np
 
 class Homography(object):
     """
-    Matrix for affine transformation, image warp perspective
+    Matrix for transformation, image warp perspective
     """
 
     def __init__(self):
         self.H = None  # Homography (transform) matrix
-        self.keypoints1 = list()  # Coordinates of keypoints1
-        self.keypoints2 = list()  # Coordinates of keypoints2
+        self.keypoints1 = list()  # Coordinates of keypoints1 (x,y)
+        self.keypoints2 = list()  # Coordinates of keypoints2 (x,y)
 
     def add_keypoints(self, kp1, kp2):
         """
@@ -31,6 +31,9 @@ class Homography(object):
         :param kp1: (list) keypoints from first image
         :param kp2: (list) keypoints from second image
         :param ransac (bool) while using RANSAC
+        -
+        If ransac=True means that part with picking up only best 4 keypoints is skipped.
+        Make sure that number of passing matches is reduced only by ratio test e.i. filter_out_keypoints()
         """
         if ransac:
             self.find_matrix_ransac(matches, kp1, kp2)
@@ -54,7 +57,7 @@ class Homography(object):
     def find_matrix_ransac(self, matches, kp1, kp2):
         """
         Ransac version of find_matrix()
-        :param matches:
+        :param matches: matches
         :param kp1: (list) keypoints from first image
         :param kp2: (list) keypoints from second image
         """

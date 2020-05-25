@@ -11,6 +11,10 @@ import building_repository
 
 """
 Script for pre-compute features for dataset images
+-
+image format: .jpg only!
+
+Load image -> preprocessing -> compute SIFT features -> export
 """
 
 

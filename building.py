@@ -32,12 +32,10 @@ class Building(object):
         return self.location.get_latitude()
 
     def print(self):
-        print("---------------------------")
         print(self.id)
         self.location.print()
         print(self.name)
         print(self.path)
-        print("---------------------------")
 
 
 class BuildingFeature(object):
@@ -66,6 +64,7 @@ class BuildingFeature(object):
         :param path:
         """
         self.img = cv2.imread(str(path))
+        self.img = cv2.cvtColor(self.img, cv2.COLOR_BGR2GRAY)
 
     def set_keypoints(self, kp):
         self.keypoints = kp

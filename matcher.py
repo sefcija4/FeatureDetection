@@ -58,11 +58,12 @@ class Matcher(object):
         # matches are sorted by euclid's distance (lower=better)
         return sorted(good_matches, key=lambda x: x.distance)
 
-    def show_matches(self, img_in, dataset):
+    def show_matches(self, img_in, dataset, num_of_matches):
         """
         Show mathes
         :param img_in: input image
         :param dataset: dataset of buildings
+        :param num_of_matches: (int) number of matches which will be drawn/displayed
         :return: list of images
         """
         matches = list()
@@ -70,13 +71,14 @@ class Matcher(object):
         for building in dataset:
             for img in dataset[building]:
                 img.load_image(img.path)
-                img_matches = self.draw_matches(img_in.img, img.img, img_in.keypoints, img.keypoints, img.matches)
+                img_matches = self.draw_matches(img_in.img, img.img, img_in.keypoints, img.keypoints, img.matches,
+                                                num_of_matches)
                 matches.append(img_matches)
 
         return matches
 
     @staticmethod
-    def draw_matches(img1, img2, keypoints1, keypoints2, matches,
+    def draw_matches(img1, img2, keypoints1, keypoints2, matches, num_of_matches,
                      flag=cv2.DrawMatchesFlags_NOT_DRAW_SINGLE_POINTS):
         """
         Create new image with img1 and img2 and draw lines between matched keypoints
@@ -85,13 +87,14 @@ class Matcher(object):
         :param keypoints1: input_image keypoints
         :param keypoints2: building's keypoints
         :param matches: matched features for img1 and image2
+        :param num_of_matches: (int) number of matches which will be drawn/displayed
         :param flag: cv2.flag for cv2.drawMatches()
         :return: image with visualized mathes
         """
         img_matches = np.empty((max(img1.shape[0], img2.shape[0]), img1.shape[1] + img2.shape[1], 3), dtype=np.uint8)
         # drawMatchesNkk for list
         # drawMatches for cv::DMatch
-        cv2.drawMatches(img1, keypoints1, img2, keypoints2, matches[:4], img_matches, flags=flag)
+        cv2.drawMatches(img1, keypoints1, img2, keypoints2, matches[:num_of_matches], img_matches, flags=flag)
         return img_matches
 
     @staticmethod
@@ -159,33 +162,29 @@ class Matcher(object):
         return True
 
     @staticmethod
-    def filter_out_close_keypoints(matches, kp, threshold, ransac=False):
+    def filter_out_close_keypoints(matches, kp, threshold):
         """
         Find best four keypoints. Start from best keypoint and than check every other keypoint is far enough
         :param matches:
         :param kp: keypoints
         :param threshold: minimal distance between two points
-        :param ransac: (bool) while using RANSAC you do not need filtering out close keypoints
         :return: best four keypoints
         """
 
-        if ransac:  # RANSAC
-            return True, matches
-        else:
-            best_four = list()
+        best_four = list()
 
-            start = matches[0]
-            best_four.append(start)
+        start = matches[0]
+        best_four.append(start)
 
-            for m in matches:
-                if len(best_four) > 4:
+        for m in matches:
+            if len(best_four) > 4:
                     break
-                if Matcher.check_distances(kp, best_four, m, threshold):
-                    best_four.append(m)
+            if Matcher.check_distances(kp, best_four, m, threshold):
+                best_four.append(m)
 
-            if len(best_four) < 4:
-                print('Keypoints are not far enough')
-                return False, matches  # used later: show_matches()
+        if len(best_four) < 4:
+            print('Keypoints are not far enough')
+            return False, matches  # used later: show_matches()
 
-            return True, best_four
+        return True, best_four
 

@@ -31,7 +31,7 @@ def main():
         'path': 'data'
     })
 
-    # INPUT IMAGE
+    # INPUT IMAGE + path to other input images
     data['input_img'].append({
         # 'path': str(os.path.join('data', '_p', 'test.jpg'))
         'path': str(os.path.join('data', '_p', 'test_b_4.jpg'))
@@ -46,21 +46,21 @@ def main():
 
     # GPS
     data['gps'].append({
-        'radius': '0.0025'
+        'radius': 0.0025
     })
 
     # MATCHING
     data['flann_matching'].append({
-        'pixel_distance': '100',
-        'min_number_of_matches': '10',
-        'flann_index': '1',
-        'flann_trees': '5',
-        'flann_checks': '10'
+        'pixel_distance': 100,
+        'min_number_of_matches': 10,
+        'flann_index': 1,
+        'flann_trees': 5,
+        'flann_checks': 10
     })
 
     # RANSAC
     data['ransac'].append({
-        'set': 'True'
+        'set': True
     })
 
     with open(path, 'w+') as file:
