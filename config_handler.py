@@ -82,6 +82,16 @@ class Config(object):
 
         return data
 
+    def get_ransac_settings(self):
+        """
+        Get gps radius from config file
+        :return: (float) radius
+        """
+        for p in self.data['ransac']:
+            val = bool(p['set'])
+
+        return val
+
     def get_filter_features(self):
         """
         Get thresholds for filter out bad features

@@ -17,6 +17,7 @@ def main():
     data['input_img'] = []
     data['gps'] = []
     data['flann_matching'] = []
+    data['ransac'] = []
 
     path = 'config.json'
 
@@ -33,11 +34,11 @@ def main():
     # INPUT IMAGE
     data['input_img'].append({
         # 'path': str(os.path.join('data', '_p', 'test.jpg'))
-        # 'path': str(os.path.join('data', '_p', 'test_b_4.jpg'))  # fail
+        'path': str(os.path.join('data', '_p', 'test_b_4.jpg'))
         # 'path': str(os.path.join('data', '_p', 'test_b_5.jpg'))
         # 'path': str(os.path.join('data', '_p', 'test_b_7.jpg'))
         # 'path': str(os.path.join('data', '_p', 'test_b_8.jpg'))
-        'path': str(os.path.join('data', '_p', 'test_b_9.jpg'))  # fail
+        # 'path': str(os.path.join('data', '_p', 'test_b_9.jpg'))
         # 'path': str(os.path.join('data', '_p', 'test_b_10_1.jpg'))
         # 'path': str(os.path.join('data', '_p', 'test_b_11_1.jpg'))
         # 'path': str(os.path.join('data', '_p', 'test_b_12.jpg'))
@@ -55,6 +56,11 @@ def main():
         'flann_index': '1',
         'flann_trees': '5',
         'flann_checks': '10'
+    })
+
+    # RANSAC
+    data['ransac'].append({
+        'set': 'True'
     })
 
     with open(path, 'w+') as file:

@@ -28,6 +28,7 @@ class App(str):
         self.buildings = list()
         self.buildings_features = dict()
         self.matcher = None
+        self.ransac = self.config.get_ransac_settings()
 
         self.best_match = None
 
@@ -102,7 +103,7 @@ class App(str):
         filter_success, self.best_match.matches = Matcher.filter_out_close_keypoints(self.best_match.matches,
                                                                                      self.img_in.keypoints,
                                                                                      self.config.get_filter_features(),
-                                                                                     ransac=True)
+                                                                                     ransac=self.ransac)
         if not filter_success:
             return None
         else:
@@ -124,7 +125,7 @@ class App(str):
         Get transformation matrix from best four keypoints
         """
         homography = Homography()
-        homography.find_matrix(self.best_match.matches, self.img_in.keypoints, self.best_match.keypoints, ransac=True)
+        homography.find_matrix(self.best_match.matches, self.img_in.keypoints, self.best_match.keypoints, ransac=self.ransac)
         self.best_match.load_image(self.best_match.path)
 
         # VISUALIZATION
@@ -146,6 +147,7 @@ class App(str):
 
         # TEST - img export
         # test_path = os.path.join('test', str(f'{str(self.best_match.path)[5:-4]}_ransak.jpg'))
+        # print(test_path)
         # cv2.imwrite(test_path, final_photo)
 
         cv2.imshow('Results', final_photo)
