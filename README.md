@@ -2,7 +2,7 @@
 Tento nástroj vznikl jako praktický výstup bakalářské práce. Jedná se o program, který rozezná budovu na snímku a umístí na něj snímek budovy z databáze. Pro výpočet příznaků je použitý SIFT, pro jejich párování je použitý FLANN matcher a poté jsou vybrány dobré spojení pomocí poměrového testu. Pro vývoj bylo použito IDe Pycharm a OS Windows.
 
 # Instalace
-Python - 3.7.0
+**Python - 3.7.5**
 **potřebné knihovny/moduly** a verze, které byly použity při vývoji
 - [OpenCV](https://opencv.org/) - opencv-python==3.4.2.16, opencv-contrib-python==3.4.2.16
 - [Pillow](https://pypi.org/project/Pillow/) - PIL==7.0.0
